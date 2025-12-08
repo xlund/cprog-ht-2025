@@ -2,13 +2,16 @@
 #define GAME_ENGINE_H
 
 #include "../include/Constants.h"
+#include "ScreenComponent.h"
 #include "Sprite.h"
 #include <SDL3/SDL.h>
+#include <vector>
 
 namespace GE {
 class GameEngine {
 public:
   GameEngine(int fps);
+  GameEngine();
   void start();
   void tick();
   void setFps(int fps);
@@ -17,12 +20,17 @@ public:
   bool spawnEntity(Sprite);
   SDL_Renderer *getRenderer();
   SDL_Window *getWindow();
+  std::vector<ScreenComponent *> getScreenComponents();
+  void addScreenComponent(ScreenComponent *);
+  void removeScreenComponent(ScreenComponent *);
+  void removeAllScreenComponents();
 
 private:
   int fps{60};
   int tickInterval{constants::clockSpeed / fps};
   SDL_Renderer *renderer;
   SDL_Window *window;
+  std::vector<ScreenComponent *> screenComponents;
 };
 } // namespace GE
 
