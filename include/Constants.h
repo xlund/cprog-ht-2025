@@ -13,6 +13,8 @@ const std::string gResPath{"./resources/"};
 const std::string bg_str{gResPath + "images/bg.jpg"};
 const std::string sample_str{gResPath + "sounds/sample.wav"};
 
+const std::string cool_link{gResPath + "images/sprite-link.jpg"};
+
 const int clockSpeed{1000};
 } // namespace constants
 

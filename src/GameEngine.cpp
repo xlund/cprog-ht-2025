@@ -1,6 +1,7 @@
 #include "GameEngine.h"
 #include "../include/Constants.h"
 #include "ScreenComponent.h"
+#include "Sprite.h"
 #include <SDL3/SDL.h>
 #include <algorithm>
 #include <list>
@@ -11,7 +12,7 @@ GE::GameEngine::GameEngine(int fps) : fps(fps) {
   renderer = SDL_CreateRenderer(window, "NELDA!");
 }
 GE::GameEngine::GameEngine() {
-  window = SDL_CreateWindow("Nelda!", 500, 500, 0);
+  window = SDL_CreateWindow("Nelda!", 1080, 1080, 0);
   renderer = SDL_CreateRenderer(window, "NELDA!");
 }
 
@@ -52,28 +53,20 @@ void GE::GameEngine::start() {
           SDL_Log("FPS: %d", this->getFps());
         }
         if (event.key.key == SDLK_C) {
-
-          SDL_Log("Creating scren component");
-          SDL_Log("Current components: %zu", screenComponents.size());
-          ScreenComponent *comp = new ScreenComponent();
-          addScreenComponent(comp);
-          SDL_Log("Current components (after addition): %zu",
-                  screenComponents.size());
+          SDL_Log("Creating screen component");
+          Sprite *sprite =
+              new GE::Sprite(renderer, constants::cool_link, 40, 40);
         }
         if (event.key.key == SDLK_D) {
-
-          SDL_Log("Deleting screen component");
-          ScreenComponent *comp = new ScreenComponent();
-          addScreenComponent(comp);
-          removeScreenComponent(comp);
-          SDL_Log("Current components (after addition): %zu",
-                  screenComponents.size());
         }
         if (event.key.key == SDLK_UP) {
           this->setFps(this->getFps() + 10);
         }
         if (event.key.key == SDLK_DOWN) {
           this->setFps(this->getFps() - 10);
+        }
+        if (event.key.key == SDLK_Q) {
+          goto end_loop;
         }
       default:
         break;
@@ -86,6 +79,7 @@ void GE::GameEngine::start() {
     // Render Changes
     SDL_RenderPresent(renderer);
   }
+end_loop:
 
   // Shutdown
   SDL_DestroyWindow(window);
