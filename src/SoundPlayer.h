@@ -10,7 +10,7 @@ namespace GE {
 class SoundPlayer {
 public:
     SoundPlayer(std::string src);
-    ~SoundPlayer(); //Behövs destruktor?
+    ~SoundPlayer(); 
 
     void play();
     void pause();
@@ -20,8 +20,8 @@ public:
     void setSrc(std::string src);
 
 private:
-    std::string src {};
-    SDL_AudioSpec spec{};
+    std::string src {}; 
+    SDL_AudioSpec spec{}; //initiera alla värden till default (nollor antar jag)
     Uint8* buffer = nullptr;
     Uint32 length = 0;
     SDL_AudioStream* stream = nullptr;

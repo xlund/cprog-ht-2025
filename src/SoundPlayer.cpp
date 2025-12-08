@@ -7,7 +7,6 @@ SoundPlayer::SoundPlayer(std::string src) : src(src) {
     loadSound(src);
 }
 
-//Tror att destruktor ska vara med?
 
 SoundPlayer::~SoundPlayer() {
     if (stream) {
@@ -17,7 +16,7 @@ SoundPlayer::~SoundPlayer() {
 
     if (buffer) {
         SDL_free(buffer);
-        buffer = nullptr;
+        buffer = nullptr; //kanske onödigt?
     }
 }
 
