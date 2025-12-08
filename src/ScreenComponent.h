@@ -18,6 +18,7 @@ public:
   void setHeight(int);
   void setWidth(int);
   void setRotation(int);
+  virtual void update() = 0;
 
 protected:
   int x{0};
