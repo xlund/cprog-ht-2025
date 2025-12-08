@@ -7,6 +7,8 @@ SoundPlayer::SoundPlayer(std::string src) : src(src) {
     loadSound(src);
 }
 
+//Tror att destruktor ska vara med?
+
 SoundPlayer::~SoundPlayer() {
     if (stream) {
         SDL_DestroyAudioStream(stream);
@@ -66,7 +68,7 @@ std::string SoundPlayer::getSrc() {
 void SoundPlayer::setSrc(std::string src) {
     this->src = src;
 
-    // Rensa tidigare ljud
+    // Rensa tidigare ljud - kanske onödigt?
     if (stream) SDL_DestroyAudioStream(stream);
     if (buffer) SDL_free(buffer);
 
@@ -76,4 +78,4 @@ void SoundPlayer::setSrc(std::string src) {
     loadSound(src);
 }
 
-} // namespace GE
+} 
