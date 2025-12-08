@@ -2,7 +2,10 @@
 #include "../include/Constants.h"
 #include <SDL3/SDL.h>
 
-GE::GameEngine::GameEngine() {}
+GE::GameEngine::GameEngine(int fps) : fps(fps) {
+  window = SDL_CreateWindow("Nelda!", 500, 500, 0);
+  renderer = SDL_CreateRenderer(window, "NELDA!");
+}
 
 void GE::GameEngine::tick() {}
 
@@ -14,11 +17,7 @@ void GE::GameEngine::setFps(int fps) {
 int GE::GameEngine::getFps() { return fps; }
 
 void GE::GameEngine::start() {
-  // Initialization
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
-  SDL_Window *win = SDL_CreateWindow("Nelda!", 500, 500, 0);
-  SDL_Renderer *ren = SDL_CreateRenderer(win, "NELDA!");
-
   // Loop
   SDL_Event event{};
   while (true) {
@@ -45,12 +44,11 @@ void GE::GameEngine::start() {
     }
     // Update objects
     // Render Changes
-    SDL_RenderPresent(ren);
+    SDL_RenderPresent(renderer);
   }
 
-  SDL_Delay(4000);
   // Shutdown
-  SDL_DestroyWindow(win);
-  SDL_DestroyRenderer(ren);
+  SDL_DestroyWindow(window);
+  SDL_DestroyRenderer(renderer);
   SDL_Quit();
 }
