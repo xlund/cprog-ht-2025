@@ -4,7 +4,7 @@
 #include "ScreenComponent.h"
 #include "Sprite.h"
 #include <functional>
-namespace GameEngine {
+namespace GE {
   class Hitbox: public ScreenComponent {
     public:
       Sprite onEnter(std::function<void()>);

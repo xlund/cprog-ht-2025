@@ -2,7 +2,7 @@
 #define SOUND_PLAYER_H
 
 #include <string>
-namespace GameEngine {
+namespace GE {
   class SoundPlayer {
     public:
       void play();

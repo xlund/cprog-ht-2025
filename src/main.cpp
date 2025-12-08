@@ -1,4 +1,47 @@
 
-int main(int argc, char* argv[]) {
-	return 0;
+#include "GameEngine.h"
+#include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
+#include <chrono>
+#include <iostream>
+#include <thread>
+int main(int argc, char *argv[]) {
+  // Initialization
+  SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
+  TTF_Init();
+  SDL_Window *win = SDL_CreateWindow("First", 500, 500, 0);
+  SDL_Renderer *ren = SDL_CreateRenderer(win, NULL);
+
+  const int fps{10000};
+  const int tickInterval{1000 / fps};
+
+  // Loop
+  SDL_Event event{};
+  while (true) {
+    Uint64 nextTick = SDL_GetTicks() + tickInterval;
+    // Process events
+    while (SDL_PollEvent(&event)) {
+      switch (event.type) {
+      case SDL_EVENT_MOUSE_MOTION:
+        // SDL_Log("We got a motion event!");
+        // SDL_Log("Current mouse position is: (%f, %f)", event.motion.x,
+        //         event.motion.y);
+      default:
+        // SDL_Log("Unhandled Event!");
+        break;
+      }
+      long delay = nextTick - SDL_GetTicks();
+      SDL_Log("Delay: %ld", delay);
+      if (delay > 0)
+        SDL_Delay(delay);
+    }
+    // Update objects
+    // Render Changes
+  }
+
+  SDL_Delay(4000);
+  // Shutdown
+  SDL_DestroyWindow(win);
+  TTF_Quit();
+  SDL_Quit();
 }

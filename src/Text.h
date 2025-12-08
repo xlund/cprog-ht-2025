@@ -3,7 +3,7 @@
 
 #include "ScreenComponent.h"
 #include <string>
-namespace GameEngine {
+namespace GE {
   class Text : public ScreenComponent {
     public:
       void setString(std::string);

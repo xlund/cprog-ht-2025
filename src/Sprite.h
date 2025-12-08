@@ -4,7 +4,7 @@
 #include "ScreenComponent.h"
 #include <string>
 
-namespace GameEngine {
+namespace GE {
   class Sprite : public ScreenComponent {
     public:
       void erase();

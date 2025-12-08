@@ -3,7 +3,7 @@
 
 #include "Text.h"
 #include <functional>
-namespace GameEngine {
+namespace GE {
   class Button : public Text {
     public:
       void onClick(std::function<void()>);

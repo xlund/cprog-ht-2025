@@ -1,7 +1,7 @@
 #ifndef INPUT_MANAGER_H
 #define INPUT_MANAGER_H
 
-namespace GameEngine {
+namespace GE {
   // maybe static? 
   class InputManager {
     public:

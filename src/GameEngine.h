@@ -3,9 +3,11 @@
 
 #include "Sprite.h"
 
-namespace GameEngine {
+namespace GE {
    class GameEngine {
      public:
+       GameEngine(); 
+       void start();
        void tick();
        void setFps();
        int getFps();
@@ -13,7 +15,7 @@ namespace GameEngine {
      private: 
        int fps{60};
    };
-};
+}
 
 #endif
 
