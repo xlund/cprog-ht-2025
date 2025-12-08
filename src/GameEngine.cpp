@@ -1,24 +1,26 @@
 #include "GameEngine.h"
+#include "../include/Constants.h"
 #include <SDL3/SDL.h>
 
 GE::GameEngine::GameEngine() {}
 
 void GE::GameEngine::tick() {}
 
-void GE::GameEngine::start() {
+void GE::GameEngine::setFps(int fps) {
+  this->fps = fps;
+  this->tickInterval = constants::clockSpeed / this->fps;
+}
 
+void GE::GameEngine::start() {
   // Initialization
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
   SDL_Window *win = SDL_CreateWindow("First", 500, 500, 0);
   SDL_Renderer *ren = SDL_CreateRenderer(win, NULL);
 
-  const int fps{60};
-  const int tickInterval{1000 / fps};
-
   // Loop
   SDL_Event event{};
   while (true) {
-    Uint64 nextTick = SDL_GetTicks() + tickInterval;
+    Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
     // Process events
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
