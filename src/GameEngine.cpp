@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <list>
 #include <vector>
+#include <SDL3_ttf/SDL_ttf.h>
 
 GE::GameEngine::GameEngine(int fps) : fps(fps) {
   window = SDL_CreateWindow("Nelda!", 500, 500, 0);
@@ -41,6 +42,7 @@ void GE::GameEngine::removeScreenComponent(ScreenComponent *component) {
 
 void GE::GameEngine::start() {
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
+  TTF_Init();
   // Loop
   SDL_Event event{};
   std::vector<ScreenComponent *> components;
