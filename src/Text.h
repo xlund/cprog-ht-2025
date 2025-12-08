@@ -9,14 +9,19 @@ namespace GE {
     public:
     Text(std::string);
     Text(std::string,std::string,int);
-      void setString(std::string);
-      std::string getString();
+      void setString(const std::string &);
+      std::string getString() const;
+      void setFont(const std::string &);
+      void setSize(const int &);
       void draw();
       void hide();
       void erase();
-    private:
-      TTF_Font* font;
+    
+      private:
       std::string str{""};
+      TTF_Font* font;
+      std::string fontPath;
+      int size;
   };
 }
 
