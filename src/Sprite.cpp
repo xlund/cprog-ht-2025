@@ -23,4 +23,4 @@ std::string GE::Sprite::getSrc() { return src; }
 
 void GE::Sprite::setSrc(std::string src) { this->src = src; }
 
-void GE::Sprite::update() {}
+void GE::Sprite::update() { draw(); }

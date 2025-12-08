@@ -43,13 +43,13 @@ void GE::GameEngine::start() {
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
   // Loop
   SDL_Event event{};
-  std::vector<Sprite *> sprites;
+  std::vector<ScreenComponent *> components;
 
   while (true) {
     Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
     // Process events
-    for (Sprite *sprite : sprites) {
-      sprite->draw();
+    for (ScreenComponent *component : components) {
+      component->update();
     }
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
@@ -61,7 +61,7 @@ void GE::GameEngine::start() {
           SDL_Log("Creating screen component");
           Sprite *sprite =
               new GE::Sprite(renderer, constants::cool_link, 40, 40);
-          sprites.push_back(sprite);
+          components.push_back(sprite);
         }
         if (event.key.key == SDLK_D) {
         }
