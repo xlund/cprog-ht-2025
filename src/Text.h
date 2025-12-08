@@ -7,12 +7,13 @@
 namespace GE {
   class Text : public ScreenComponent {
     public:
-    Text(std::string);
-    Text(std::string,std::string,int);
+    Text(std::string,int,int);
+    Text(std::string,std::string,int,int,int);
       void setString(const std::string &);
       std::string getString() const;
+      void setColor(unsigned char ,unsigned char, unsigned char, unsigned char);
       void setFont(const std::string &);
-      void setSize(const int &);
+      void setSize(int);
       void draw();
       void hide();
       void erase();
@@ -22,6 +23,7 @@ namespace GE {
       TTF_Font* font;
       std::string fontPath;
       int size;
+      SDL_Color color{0,0,0,0};
   };
 }
 

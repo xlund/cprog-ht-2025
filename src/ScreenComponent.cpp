@@ -1,6 +1,5 @@
 #include "ScreenComponent.h"
 GE::ScreenComponent::ScreenComponent() {}
-
 int GE::ScreenComponent::getHeight() { return 0; }
 int GE::ScreenComponent::getWidth() { return 0; }
 int GE::ScreenComponent::getX() { return 0; }
