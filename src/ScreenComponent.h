@@ -1,13 +1,15 @@
 #ifndef SCREEN_COMPONENT_H
 #define SCREEN_COMPONENT_H
 
-namespace GameEngine {
+namespace GE {
   class ScreenComponent {
     public:
       int getX();
       void setX();
-      void setY();
       int getY();
+      void setY();
+      int getZ();
+      void setZ();
       int getHeight();
       int getWidth();
       int getRotation();
@@ -18,6 +20,7 @@ namespace GameEngine {
     protected:
       int x;
       int y;
+      int z;
       int height;
       int width;
       int rotation;
