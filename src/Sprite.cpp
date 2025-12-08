@@ -9,12 +9,12 @@ GE::Sprite::Sprite(SDL_Renderer *renderer, std::string src, int x, int y)
     : renderer(renderer), src(src) {
   float width;
   float height;
-  SDL_Texture *texture = IMG_LoadTexture(renderer, src.c_str());
-  SDL_Log("w: %f, h: %f", width, height);
+  texture = IMG_LoadTexture(renderer, src.c_str());
   SDL_GetTextureSize(texture, &width, &height);
-  SDL_FRect rect = {(float)x, (float)y, 1080, 1080};
-  SDL_RenderTexture(renderer, texture, NULL, &rect);
+  rect = {(float)x, (float)y, 1080, 1080};
 }
+
+void GE::Sprite::draw() { SDL_RenderTexture(renderer, texture, NULL, &rect); }
 
 void GE::Sprite::setZ(int z) { this->z = z; }
 int GE::Sprite::getZ() { return z; }

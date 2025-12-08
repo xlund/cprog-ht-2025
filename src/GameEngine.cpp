@@ -9,11 +9,11 @@
 
 GE::GameEngine::GameEngine(int fps) : fps(fps) {
   window = SDL_CreateWindow("Nelda!", 500, 500, 0);
-  renderer = SDL_CreateRenderer(window, "NELDA!");
+  renderer = SDL_CreateRenderer(window, NULL);
 }
 GE::GameEngine::GameEngine() {
   window = SDL_CreateWindow("Nelda!", 1080, 1080, 0);
-  renderer = SDL_CreateRenderer(window, "NELDA!");
+  renderer = SDL_CreateRenderer(window, NULL);
 }
 
 void GE::GameEngine::tick() {}
@@ -43,19 +43,25 @@ void GE::GameEngine::start() {
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
   // Loop
   SDL_Event event{};
+  std::vector<Sprite *> sprites;
+
   while (true) {
     Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
     // Process events
+    for (Sprite *sprite : sprites) {
+      sprite->draw();
+    }
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
       case SDL_EVENT_KEY_DOWN:
         if (event.key.key == SDLK_F) {
-          SDL_Log("FPS: %d", this->getFps());
+          SDL_Log("FPS: %uz", this->getFps());
         }
         if (event.key.key == SDLK_C) {
           SDL_Log("Creating screen component");
           Sprite *sprite =
               new GE::Sprite(renderer, constants::cool_link, 40, 40);
+          sprites.push_back(sprite);
         }
         if (event.key.key == SDLK_D) {
         }

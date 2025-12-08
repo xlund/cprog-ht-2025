@@ -16,11 +16,14 @@ public:
   std::string getSrc();
   void setSrc(std::string);
   void update();
+  SDL_Texture *getTexture();
 
 private:
   std::string src{""};
   int z{0};
   SDL_Renderer *renderer;
+  SDL_Texture *texture;
+  SDL_FRect rect;
 };
 } // namespace GE
 
