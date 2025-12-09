@@ -7,6 +7,7 @@
 #include <list>
 #include <vector>
 #include <SDL3_ttf/SDL_ttf.h>
+#include "Text.h"
 
 GE::GameEngine::GameEngine(int fps) : fps(fps) {
   window = SDL_CreateWindow("Nelda!", 500, 500, 0);
@@ -46,8 +47,12 @@ void GE::GameEngine::start() {
   // Loop
   SDL_Event event{};
   std::vector<ScreenComponent *> components;
-
+  Text* text = new GE::Text(renderer,"Linus",50,50);
+  components.push_back(text);
+  text->setColor(255,255,255,255);
+  text->draw();
   while (true) {
+    SDL_RenderClear(renderer);
     Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
     // Process events
     for (ScreenComponent *component : components) {
@@ -64,6 +69,9 @@ void GE::GameEngine::start() {
           Sprite *sprite =
               new GE::Sprite(renderer, constants::cool_link, 40, 40);
           components.push_back(sprite);
+        }
+        if(event.key.key == SDLK_L){
+          text->setFont("./resources/fonts/fancy_font.ttf");
         }
         if (event.key.key == SDLK_D) {
         }
