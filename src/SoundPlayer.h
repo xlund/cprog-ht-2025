@@ -9,26 +9,29 @@ namespace GE {
 
 class SoundPlayer {
 public:
-    SoundPlayer(std::string src);
+    SoundPlayer(std::string src, bool loop = false);
     ~SoundPlayer(); 
 
     void play();
     void pause();
     void stop();
+    void update();                      // Håller loopande ljud vid liv
 
     std::string getSrc();
     void setSrc(std::string src);
 
 private:
     std::string src {}; 
-    SDL_AudioSpec spec{}; //initiera alla värden till default (nollor antar jag)
+    SDL_AudioSpec spec{}; 
     Uint8* buffer = nullptr;
     Uint32 length = 0;
     SDL_AudioStream* stream = nullptr;
 
-    void loadSound(std::string src); //privat hjälpmetod
+    bool loop = false;                  // Loop-flagga
+
+    void loadSound(std::string src);    // Privat hjälpmetod
 };
 
-} 
+}
 
 #endif

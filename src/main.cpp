@@ -33,8 +33,7 @@ int main(int argc, char *argv[]) {
     }
     /******************************/
 
-    GE::GameEngine *ge = new GE::GameEngine();
-    ge->start();
+   
 
     SDL_Quit();
     return 0;
