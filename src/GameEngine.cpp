@@ -47,7 +47,7 @@ void GameEngine::start() {
 
     SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
 
-    // 🎵 Starta bakgrundsljud
+    // starta bakgrundsljudet!!!!
     bgSound = new SoundPlayer("resources/sounds/background.wav", true);
     bgSound->play();
 
@@ -61,7 +61,7 @@ void GameEngine::start() {
         for (auto* c : components)
             c->update();
 
-        // 🎵 Uppdatera ljudet så det loopar
+        // ppdatera ljudet så det loopar
         if (bgSound)
             bgSound->update();
 
@@ -100,4 +100,4 @@ end_loop:
     SDL_Quit();
 }
 
-} // namespace GE
+} 

@@ -79,7 +79,7 @@ void SoundPlayer::update() {
     // Hur många bytes är kvar i streamens buffert?
     int available = SDL_GetAudioStreamAvailable(stream);
 
-    // SDL3 har nu annat ätt att beräkna bytes per sample
+    // SDL3 har nu annat sätt att beräkna bytes per sample
     int bytesPerSample = SDL_AUDIO_BYTESIZE(spec.format);
     int frameSize = bytesPerSample * spec.channels;
 
