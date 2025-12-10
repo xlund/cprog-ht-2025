@@ -1,5 +1,6 @@
 #ifndef SCREEN_COMPONENT_H
 #define SCREEN_COMPONENT_H
+#include <SDL3/SDL.h>
 
 namespace GE {
 class ScreenComponent {
@@ -16,7 +17,7 @@ public:
   void setHeight(int);
   void setWidth(int);
   void setRotation(int);
-  virtual void update() = 0;
+  virtual void update(SDL_Renderer*) = 0;
 
 protected:
   int x{0};

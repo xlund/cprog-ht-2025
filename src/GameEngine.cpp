@@ -5,6 +5,8 @@
 #include <SDL3/SDL.h>
 #include <algorithm>
 #include <vector>
+#include <SDL3_ttf/SDL_ttf.h>
+#include "Text.h"
 
 namespace GE {
 
@@ -42,49 +44,55 @@ void GameEngine::removeScreenComponent(ScreenComponent* component) {
     if (it != screenComponents.end())
         screenComponents.erase(it);
 }
-
-void GameEngine::start() {
-
-    SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
-
-    // starta bakgrundsljudet!!!!
-    bgSound = new SoundPlayer("resources/sounds/background.wav", true);
+  
+void GE::GameEngine::start() {
+  SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
+  TTF_Init();
+  // Loop
+  SDL_Event event{};
+  std::vector<ScreenComponent *> components;
+  Text* text = new GE::Text("Linus",50,50);
+  components.push_back(text);
+  text->setColor(255,255,255,255);
+  text->draw();
+   bgSound = new SoundPlayer("resources/sounds/background.wav", true);
     bgSound->play();
-
-    SDL_Event event{};
-    std::vector<ScreenComponent*> components;
-
-    while (true) {
-        Uint64 nextTick = SDL_GetTicks() + tickInterval;
-
-        // Uppdatera screen components
-        for (auto* c : components)
-            c->update();
-
-        // ppdatera ljudet så det loopar
+  int x=0;
+  while (true) {
+    SDL_RenderClear(renderer);
+    Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
+    // Process events
+    for (ScreenComponent *component : components) {
+      component->update(renderer);
+    }
+      // ppdatera ljudet så det loopar
         if (bgSound)
             bgSound->update();
-
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_EVENT_KEY_DOWN) {
-
-                if (event.key.key == SDLK_Q)
-                    goto end_loop;
-
-                if (event.key.key == SDLK_F)
-                    SDL_Log("FPS: %d", fps);
-
-                if (event.key.key == SDLK_C) {
-                    Sprite* sprite = new Sprite(renderer, constants::cool_link, 40, 40);
-                    components.push_back(sprite);
-                }
-
-                if (event.key.key == SDLK_UP)
-                    setFps(getFps() + 10);
-
-                if (event.key.key == SDLK_DOWN)
-                    setFps(getFps() - 10);
-            }
+    while (SDL_PollEvent(&event)) {
+      switch (event.type) {
+      case SDL_EVENT_KEY_DOWN:
+        if (event.key.key == SDLK_F) {
+          SDL_Log("FPS: %uz", this->getFps());
+        }
+        if (event.key.key == SDLK_C) {
+          SDL_Log("Creating screen component");
+          Sprite *sprite =
+              new GE::Sprite(renderer, constants::cool_link, 40, 40);
+          components.push_back(sprite);
+        }
+        if(event.key.key == SDLK_L){
+          text->setRotation(++x);
+        }
+        if (event.key.key == SDLK_D) {
+        }
+        if (event.key.key == SDLK_UP) {
+          this->setFps(this->getFps() + 10);
+        }
+        if (event.key.key == SDLK_DOWN) {
+          this->setFps(this->getFps() - 10);
+        }
+        if (event.key.key == SDLK_Q) {
+          goto end_loop;
         }
 
         long delay = nextTick - SDL_GetTicks();
