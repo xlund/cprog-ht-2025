@@ -65,11 +65,10 @@ void GE::Text::update(SDL_Renderer* renderer) {
         SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
         SDL_DestroySurface(surface);
 
-        float texW, texH;
+        float texW,texH;
         SDL_GetTextureSize(texture, &texW, &texH);
-        int iTexW = static_cast<int>(texW);
-        int iTexH = static_cast<int>(texH);
-        int clippedHeight = std::min(height, iTexH);
+        int intTexH = static_cast<int>(texH);
+        int clippedHeight = std::min(height, intTexH);
 
         //beskär
         SDL_FRect srcRect = {0.0f,0.0f,static_cast<float>(texW),
