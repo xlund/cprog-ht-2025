@@ -15,6 +15,8 @@ const std::string sample_str{gResPath + "sounds/sample.wav"};
 
 const std::string cool_link{gResPath + "images/sprite-link.jpg"};
 
+const std::string STANDARD_FONT{gResPath + "fonts/GoogleSansFlex.ttf"};
+
 const int clockSpeed{1000};
 } // namespace constants
 

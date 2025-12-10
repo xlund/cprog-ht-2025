@@ -1,12 +1,15 @@
-#ifndef GAME_ENGINE_H
-#define GAME_ENGINE_H
+#ifndef GAMEENGINE_H
+#define GAMEENGINE_H
 
 #include "../include/Constants.h"
+#include "ScreenComponent.h"
+#include "SoundPlayer.h"
 #include "Sprite.h"
 #include <SDL3/SDL.h>
 #include <vector>
 
 namespace GE {
+
 class GameEngine {
 public:
   GameEngine(int fps);
@@ -31,6 +34,7 @@ private:
   SDL_Window *window;
   std::vector<GE::Component *> components;
 };
+
 } // namespace GE
 
 #endif
