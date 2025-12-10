@@ -7,6 +7,7 @@
 #include <SDL3_ttf/SDL_ttf.h>
 #include <algorithm>
 #include <vector>
+#include <iostream>
 
 namespace GE {
 
@@ -56,8 +57,6 @@ void GE::GameEngine::start() {
   components.push_back(text);
   text->setColor(255, 255, 255, 255);
   text->draw();
-  bgSound = new SoundPlayer("resources/sounds/background.wav", true);
-  bgSound->play();
   int x = 0;
   while (true) {
     SDL_RenderClear(renderer);
@@ -67,8 +66,6 @@ void GE::GameEngine::start() {
       component->update(renderer);
     }
     // ppdatera ljudet så det loopar
-    if (bgSound)
-      bgSound->update();
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
       case SDL_EVENT_KEY_DOWN:
@@ -100,9 +97,9 @@ void GE::GameEngine::start() {
         if (delay > 0)
           SDL_Delay(delay);
 
-        SDL_RenderPresent(renderer);
       }
     }
+    SDL_RenderPresent(renderer);
   }
 end_loop:
   SDL_DestroyRenderer(renderer);
