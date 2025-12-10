@@ -4,11 +4,12 @@
 #include "ScreenComponent.h"
 #include <string>
 #include <SDL3_ttf/SDL_ttf.h>
+#include <SDL3/SDL.h>
 namespace GE {
   class Text : public ScreenComponent {
     public:
-    Text(SDL_Renderer*,std::string,int,int);
-    Text(SDL_Renderer*,std::string,std::string,int,int,int);
+    Text(std::string,int,int);
+    Text(std::string,std::string,int,int,int);
     ~Text();
       void setString(const std::string &);
       std::string getString() const;
@@ -18,10 +19,9 @@ namespace GE {
       void draw();
       void hide();
       void erase();
-      void update();
+      void update(SDL_Renderer*);
     
       private:
-      SDL_Renderer* renderer{};
       std::string str{""};
       TTF_Font* font{};
       std::string fontPath{""};

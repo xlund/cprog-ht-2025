@@ -15,7 +15,7 @@ public:
   void setZ(int);
   std::string getSrc();
   void setSrc(std::string);
-  void update();
+  void update(SDL_Renderer*);
   SDL_Texture *getTexture();
 
 private:

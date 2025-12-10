@@ -47,16 +47,17 @@ void GE::GameEngine::start() {
   // Loop
   SDL_Event event{};
   std::vector<ScreenComponent *> components;
-  Text* text = new GE::Text(renderer,"Linus",50,50);
+  Text* text = new GE::Text("Linus",50,50);
   components.push_back(text);
   text->setColor(255,255,255,255);
   text->draw();
+  int x=0;
   while (true) {
     SDL_RenderClear(renderer);
     Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
     // Process events
     for (ScreenComponent *component : components) {
-      component->update();
+      component->update(renderer);
     }
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
@@ -71,7 +72,7 @@ void GE::GameEngine::start() {
           components.push_back(sprite);
         }
         if(event.key.key == SDLK_L){
-          text->setFont("./resources/fonts/fancy_font.ttf");
+          text->setRotation(++x);
         }
         if (event.key.key == SDLK_D) {
         }

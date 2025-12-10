@@ -7,17 +7,15 @@
 #include <iostream>
 
 
-GE::Text::Text(SDL_Renderer* ren ,std::string text, int x, int y) : 
+GE::Text::Text(std::string text, int x, int y) : 
     ScreenComponent(x,y,0,0,0),
-    renderer(ren),
     str(text),
     font(TTF_OpenFont(constants::STANDARD_FONT.c_str(),24)),
     fontPath(constants::STANDARD_FONT),
     size(24){}
 
-GE::Text::Text(SDL_Renderer* ren, std::string text,std::string path,int size,int x,int y):
+GE::Text::Text( std::string text,std::string path,int size,int x,int y):
     ScreenComponent(x,y,0,0,0),
-    renderer(ren),
     str(text),
     font(TTF_OpenFont(path.c_str(),size)),
     fontPath(path),
@@ -57,7 +55,8 @@ void GE::Text::draw(){
     isSeen=true;
 }
 
-void GE::Text::update(){
+//Prata med dem anrda imorgon!!!!!!!!! om denna renderare 
+void GE::Text::update(SDL_Renderer* renderer){
 
     if(str.empty()){return;}
     if(!font){throw std::invalid_argument("Font dose not exist");}
@@ -66,7 +65,7 @@ void GE::Text::update(){
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer,surface);
     SDL_DestroySurface(surface);
     SDL_FRect rect = {static_cast<float>(x),static_cast<float>(y),static_cast<float>(texture->w),static_cast<float>(texture->h)};
-    SDL_RenderTexture(renderer,texture,NULL,&rect);
+    SDL_RenderTextureRotated(renderer,texture,NULL,&rect,rotation,NULL,SDL_FLIP_NONE);
     SDL_DestroyTexture(texture);
     }
 }
