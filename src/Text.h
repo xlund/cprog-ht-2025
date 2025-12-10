@@ -15,7 +15,7 @@ namespace GE {
       std::string getString() const;
       void setColor(unsigned char ,unsigned char, unsigned char, unsigned char);
       void setFont(const std::string &);
-      void setSize(int);
+      void setFontSize(int);
       void draw();
       void hide();
       void erase();
@@ -25,7 +25,7 @@ namespace GE {
       std::string str{""};
       TTF_Font* font{};
       std::string fontPath{""};
-      int size{0};
+      int fontSize{0};
       SDL_Color color{0,0,0,0};
       bool isSeen{false};
   };

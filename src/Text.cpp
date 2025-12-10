@@ -12,14 +12,14 @@ GE::Text::Text(std::string text, int x, int y) :
     str(text),
     font(TTF_OpenFont(constants::STANDARD_FONT.c_str(),24)),
     fontPath(constants::STANDARD_FONT),
-    size(24){}
+    fontSize(24){}
 
-GE::Text::Text( std::string text,std::string path,int size,int x,int y):
+GE::Text::Text(std::string text, std::string path, int fontSize, int x, int y):
     ScreenComponent(x,y,0,0,0),
     str(text),
-    font(TTF_OpenFont(path.c_str(),size)),
+    font(TTF_OpenFont(path.c_str(),fontSize)),
     fontPath(path),
-    size(size){}
+    fontSize(fontSize){}
 
 GE::Text::~Text() {
     if(font){
@@ -44,10 +44,10 @@ void GE::Text::setColor(unsigned char r, unsigned char g ,unsigned char b,unsign
 }
 
 void GE::Text::setFont(const std::string &path){
-    font = TTF_OpenFont(path.c_str(),size);
+    font = TTF_OpenFont(path.c_str(),fontSize);
 }
 
-void GE::Text::setSize(int size){
+void GE::Text::setFontSize(int size){
     font = TTF_OpenFont(fontPath.c_str(),size);
 }
 
