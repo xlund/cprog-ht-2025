@@ -1,6 +1,5 @@
 #include "GameEngine.h"
 #include "../include/Constants.h"
-#include "ScreenComponent.h"
 #include "Sprite.h"
 #include <SDL3/SDL.h>
 #include <algorithm>
@@ -29,27 +28,26 @@ SDL_Window *GE::GameEngine::getWindow() { return window; }
 
 int GE::GameEngine::getFps() { return fps; }
 
-void GE::GameEngine::addScreenComponent(GE::ScreenComponent *component) {
-  screenComponents.push_back(component);
+void GE::GameEngine::addScreenComponent(GE::Component *component) {
+  components.push_back(component);
 }
 
-void GE::GameEngine::removeScreenComponent(ScreenComponent *component) {
-  auto i =
-      std::find(screenComponents.begin(), screenComponents.end(), component);
-  screenComponents.erase(i);
+void GE::GameEngine::removeScreenComponent(GE::Component *component) {
+  auto i = std::find(components.begin(), components.end(), component);
+  components.erase(i);
 }
 
 void GE::GameEngine::start() {
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
   // Loop
   SDL_Event event{};
-  std::vector<ScreenComponent *> components;
+  std::vector<GE::Component *> components;
 
   while (true) {
     Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
     // Process events
-    for (ScreenComponent *component : components) {
-      component->update();
+    for (GE::Component *component : components) {
+      component->update(renderer);
     }
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
@@ -59,9 +57,10 @@ void GE::GameEngine::start() {
         }
         if (event.key.key == SDLK_C) {
           SDL_Log("Creating screen component");
-          Sprite *sprite =
-              new GE::Sprite(renderer, constants::cool_link, 40, 40);
+          Sprite *sprite = new GE::Sprite(0, 0, 0, 1080, 1080, 0,
+                                          constants::cool_link, renderer);
           components.push_back(sprite);
+          SDL_Log("Len: %ld", components.size());
         }
         if (event.key.key == SDLK_D) {
         }

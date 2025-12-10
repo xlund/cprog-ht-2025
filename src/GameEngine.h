@@ -2,7 +2,6 @@
 #define GAME_ENGINE_H
 
 #include "../include/Constants.h"
-#include "ScreenComponent.h"
 #include "Sprite.h"
 #include <SDL3/SDL.h>
 #include <vector>
@@ -20,9 +19,9 @@ public:
   bool spawnEntity(Sprite);
   SDL_Renderer *getRenderer();
   SDL_Window *getWindow();
-  std::vector<ScreenComponent *> getScreenComponents();
-  void addScreenComponent(ScreenComponent *);
-  void removeScreenComponent(ScreenComponent *);
+  std::vector<Component *> getScreenComponents();
+  void addScreenComponent(GE::Component *);
+  void removeScreenComponent(GE::Component *);
   void removeAllScreenComponents();
 
 private:
@@ -30,7 +29,7 @@ private:
   int tickInterval{constants::clockSpeed / fps};
   SDL_Renderer *renderer;
   SDL_Window *window;
-  std::vector<ScreenComponent *> screenComponents;
+  std::vector<GE::Component *> components;
 };
 } // namespace GE
 
