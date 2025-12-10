@@ -8,14 +8,14 @@
 
 
 GE::Text::Text(std::string text, int x, int y) : 
-    ScreenComponent(x,y,0,0,0),
+    ScreenComponent(x,y,24,500,0),
     str(text),
     font(TTF_OpenFont(constants::STANDARD_FONT.c_str(),24)),
     fontPath(constants::STANDARD_FONT),
     fontSize(24){}
 
 GE::Text::Text(std::string text, std::string path, int fontSize, int x, int y):
-    ScreenComponent(x,y,0,0,0),
+    ScreenComponent(x,y,fontSize,500,0),
     str(text),
     font(TTF_OpenFont(path.c_str(),fontSize)),
     fontPath(path),
@@ -56,19 +56,33 @@ void GE::Text::draw(){
 }
 
 //Prata med dem anrda imorgon!!!!!!!!! om denna renderare 
-void GE::Text::update(SDL_Renderer* renderer){
+void GE::Text::update(SDL_Renderer* renderer) {
+    if (str.empty()) { return; }
+    if (!font) { throw std::invalid_argument("Font dose not exist"); }
 
-    if(str.empty()){return;}
-    if(!font){throw std::invalid_argument("Font dose not exist");}
-    if(isSeen){
-    SDL_Surface* surface = TTF_RenderText_Solid(font,str.c_str(),0,color);
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer,surface);
-    SDL_DestroySurface(surface);
-    SDL_FRect rect = {static_cast<float>(x),static_cast<float>(y),static_cast<float>(texture->w),static_cast<float>(texture->h)};
-    SDL_RenderTextureRotated(renderer,texture,NULL,&rect,rotation,NULL,SDL_FLIP_NONE);
-    SDL_DestroyTexture(texture);
+    if (isSeen) {
+        SDL_Surface* surface = TTF_RenderText_Blended_Wrapped(font,str.c_str(),0,color,width);
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+        SDL_DestroySurface(surface);
+
+        float texW, texH;
+        SDL_GetTextureSize(texture, &texW, &texH);
+        int iTexW = static_cast<int>(texW);
+        int iTexH = static_cast<int>(texH);
+        int clippedHeight = std::min(height, iTexH);
+
+        //beskär
+        SDL_FRect srcRect = {0.0f,0.0f,static_cast<float>(texW),
+            static_cast<float>(clippedHeight)};
+        //ritar det beskärda
+        SDL_FRect destRect = {static_cast<float>(x),static_cast<float>(y),
+            static_cast<float>(texW),static_cast<float>(clippedHeight)};
+
+        SDL_RenderTextureRotated(renderer,texture,&srcRect,&destRect,rotation,NULL,SDL_FLIP_NONE);
+        SDL_DestroyTexture(texture);
     }
 }
+
 void GE::Text::hide(){
     isSeen=false;
 }
