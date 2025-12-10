@@ -1,41 +1,40 @@
 #ifndef GAMEENGINE_H
 #define GAMEENGINE_H
 
-#include <SDL3/SDL.h>
-#include <vector>
+#include "../include/Constants.h"
 #include "ScreenComponent.h"
 #include "SoundPlayer.h"
+#include "Sprite.h"
+#include <SDL3/SDL.h>
+#include <vector>
 
 namespace GE {
 
 class GameEngine {
 public:
-    GameEngine(int fps);
-    GameEngine();
-    ~GameEngine();
-
-    void start();
-    void tick();
-    void setFps(int fps);
-
-    SDL_Renderer* getRenderer();
-    SDL_Window* getWindow();
-    int getFps();
-
-    void addScreenComponent(ScreenComponent* component);
-    void removeScreenComponent(ScreenComponent* component);
+  GameEngine(int fps);
+  GameEngine();
+  void start();
+  void tick();
+  void setFps(int fps);
+  int getFps();
+  int getTickInterval();
+  bool spawnEntity(Sprite);
+  SDL_Renderer *getRenderer();
+  SDL_Window *getWindow();
+  std::vector<Component *> getScreenComponents();
+  void addScreenComponent(GE::Component *);
+  void removeScreenComponent(GE::Component *);
+  void removeAllScreenComponents();
 
 private:
-    SDL_Window* window = nullptr;
-    SDL_Renderer* renderer = nullptr;
-    int fps = 60;
-    int tickInterval = 1000 / 60;
-
-    std::vector<ScreenComponent*> screenComponents;
-
-    GE::SoundPlayer* bgSound = nullptr;   // Bakgrundsljud
+  int fps{60};
+  int tickInterval{constants::clockSpeed / fps};
+  SDL_Renderer *renderer;
+  SDL_Window *window;
+  std::vector<GE::Component *> components;
 };
 
-}
+} // namespace GE
 
 #endif
