@@ -9,7 +9,9 @@ namespace GE {
       bool isKeyDown(char);
       bool isKeyPressed(char);
       bool isSpecialKeyPressed(std::string);
+      bool isKeyReleased(char);
       void fetchKeys();
+
   }
 
 }

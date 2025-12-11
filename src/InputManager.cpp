@@ -28,6 +28,16 @@ bool GE::IM::isKeyPressed(char key){
     }
     return false;
 }
+
+bool GE::IM::isKeyReleased(char key){
+    for(SDL_Event event : events){
+        if(event.type==SDL_EVENT_KEY_UP && event.key.key == key){
+            return true;
+        }
+    }
+    return false;
+}
+
 bool GE::IM::isSpecialKeyPressed(std::string key){
 
 }
