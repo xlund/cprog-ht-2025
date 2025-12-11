@@ -12,7 +12,7 @@
 namespace GE {
 
 GameEngine::GameEngine(int fps) : fps(fps) {
-  window = SDL_CreateWindow("Nelda!", 500, 500, 0);
+  window = SDL_CreateWindow("Nelda!", 500, 450, 0);
   renderer = SDL_CreateRenderer(window, nullptr);
 }
 
@@ -52,7 +52,7 @@ void GE::GameEngine::start() {
   TTF_Init();
   // Loop
   std::vector<ScreenComponent *> components;
-  Text *text = new GE::Text("Linus", 50, 50);
+  Text *text = new GE::Text("Linus", 20, 20);
   components.push_back(text);
   text->setColor(255, 255, 255, 255);
   text->draw();
@@ -69,24 +69,25 @@ void GE::GameEngine::start() {
       component->update(renderer);
     }
     
-    GE::fetchKeys();
+    GE::IM::fetchKeys();
 
-    if(GE::isKeyPressed('c')){
+    if(GE::IM::isKeyDown('l')){
+      text->setRotation(++x);
+    }
+
+    if(GE::IM::isKeyPressed('c')){
       SDL_Log("Creating screen component");
       Sprite *sprite =
       new GE::Sprite(renderer, constants::cool_link, 40, 40);
       components.push_back(sprite);
     }
 
-    if(GE::isKeyPressed('l')){
-      text->setRotation(++x);
-    }
 
-    if(GE::isKeyPressed('f')){
+    if(GE::IM::isKeyDown('f')){
       SDL_Log("FPS: %uz", this->getFps());
     }
 
-    if(GE::isKeyPressed('q')){
+    if(GE::IM::isKeyDown('q')){
       goto end_loop;
     }
     

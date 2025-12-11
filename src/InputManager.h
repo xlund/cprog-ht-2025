@@ -2,10 +2,16 @@
 #define INPUT_MANAGER_H
 
 #include <SDL3/SDL.h>
+#include <string>
 
 namespace GE {
-  bool isKeyPressed(unsigned int);
-  void fetchKeys();
+  namespace IM{
+      bool isKeyDown(char);
+      bool isKeyPressed(char);
+      bool isSpecialKeyPressed(std::string);
+      void fetchKeys();
+  }
+
 }
 
 
