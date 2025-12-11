@@ -1,14 +1,12 @@
 #ifndef INPUT_MANAGER_H
 #define INPUT_MANAGER_H
 
+#include <SDL3/SDL.h>
+
 namespace GE {
-  // maybe static? 
-  class InputManager {
-    public:
-      bool isKeyPressed(char);
-      // isMousePressed(???)
-  };
-  
+  bool isKeyPressed(unsigned int);
+  void fetchKeys();
 }
+
 
 #endif
