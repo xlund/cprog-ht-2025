@@ -11,7 +11,6 @@ namespace GE {
       bool isSpecialKeyPressed(std::string);
       bool isKeyReleased(char);
       void fetchKeys();
-
   }
 
 }

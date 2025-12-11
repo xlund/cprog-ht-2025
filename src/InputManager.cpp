@@ -20,23 +20,24 @@ bool GE::IM::isKeyDown(char key) {
     return state[sc];
 }
 
-bool GE::IM::isKeyPressed(char key){
-    for(SDL_Event event : events){
-        if(event.type==SDL_EVENT_KEY_DOWN && event.key.key == key){
+bool isKeyInteracted(char key,SDL_EventType type){
+        for(SDL_Event event : events){
+        if(event.type==type && event.key.key == key){
             return true;
         }
     }
     return false;
 }
 
-bool GE::IM::isKeyReleased(char key){
-    for(SDL_Event event : events){
-        if(event.type==SDL_EVENT_KEY_UP && event.key.key == key){
-            return true;
-        }
-    }
-    return false;
+bool GE::IM::isKeyPressed(char key){
+    return isKeyInteracted(key,SDL_EVENT_KEY_DOWN);
 }
+
+bool GE::IM::isKeyReleased(char key){
+    return isKeyInteracted(key,SDL_EVENT_KEY_UP);
+}
+
+
 
 bool GE::IM::isSpecialKeyPressed(std::string key){
 

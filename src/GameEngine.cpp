@@ -87,15 +87,13 @@ void GE::GameEngine::start() {
       SDL_Log("släpte c");
     }
 
-
     if(GE::IM::isKeyDown('f')){
       SDL_Log("FPS: %uz", this->getFps());
     }
 
     if(GE::IM::isKeyDown('q')){
       goto end_loop;
-    }
-    
+    }    
    
     // ppdatera ljudet så det loopar
     if (bgSound)
