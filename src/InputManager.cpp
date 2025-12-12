@@ -6,21 +6,18 @@
 
 
 std::vector<SDL_Event> events;
+const bool* states;
 
 bool GE::IM::isKeyDown(char key) {
-    key = std::tolower((unsigned char)key);
+    key = std::tolower(key);
     if (key < 'a' || key > 'z'){
         throw std::invalid_argument("isKeyDown needs an karakter fome a to z");
     }
-
-    SDL_Scancode sc = (SDL_Scancode)(SDL_SCANCODE_A + (key - 'a'));
-
-    const bool* state = SDL_GetKeyboardState(NULL);
-    bool isPresen = state[sc];
-    return state[sc];
+    SDL_Scancode code = (SDL_Scancode)(SDL_SCANCODE_A + (key - 'a'));
+    return states[code];
 }
 
-bool isKeyInteracted(char key,SDL_EventType type){
+bool isKeyInteracted(unsigned int key,SDL_EventType type){
         for(SDL_Event event : events){
         if(event.type==type && event.key.key == key){
             return true;
@@ -40,7 +37,7 @@ bool GE::IM::isKeyReleased(char key){
 
 
 bool GE::IM::isSpecialKeyPressed(std::string key){
-
+    
 }
 
 //kan skapa rray av nedtryckna tangenter
@@ -50,4 +47,7 @@ void GE::IM::fetchKeys(){
     while(SDL_PollEvent(&event)){
         events.push_back(event);
     }
+
+    states = SDL_GetKeyboardState(NULL);
+
 }

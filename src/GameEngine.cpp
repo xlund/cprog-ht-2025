@@ -59,7 +59,6 @@ void GE::GameEngine::start() {
   bgSound = new SoundPlayer("resources/sounds/background.wav", true);
   bgSound->play();
   int x = 0;
-  SDL_Event event{};
   while (true) {
 
     SDL_RenderClear(renderer);
