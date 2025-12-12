@@ -74,13 +74,13 @@ void GE::GameEngine::start() {
       text->setRotation(++x);
     }
 
-    if(GE::IM::isKeyPressed('c')){
+    if(GE::IM::isKeyPressed("c")){
       SDL_Log("Creating screen component");
       Sprite *sprite =
       new GE::Sprite(renderer, constants::cool_link, 40, 40);
       components.push_back(sprite);
     }
-    if(GE::IM::isKeyReleased('c')){
+    if(GE::IM::isKeyReleased("c")){
       SDL_Log("släpte c");
     }
 

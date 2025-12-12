@@ -13,20 +13,21 @@ bool GE::IM::isKeyDown(std::string key) {
     return states[code];
 }
 
-bool isKeyInteracted(unsigned int key,SDL_EventType type){
+bool isKeyInteracted(std::string key,SDL_EventType type){
         for(SDL_Event event : events){
-        if(event.type==type && event.key.key == key){
+            SDL_Keycode code = SDL_GetKeyFromName(key.c_str());
+        if(event.type==type && event.key.key == code){
             return true;
         }
     }
     return false;
 }
 
-bool GE::IM::isKeyPressed(char key){
+bool GE::IM::isKeyPressed(std::string key){
     return isKeyInteracted(key,SDL_EVENT_KEY_DOWN);
 }
 
-bool GE::IM::isKeyReleased(char key){
+bool GE::IM::isKeyReleased(std::string key){
     return isKeyInteracted(key,SDL_EVENT_KEY_UP);
 }
 
