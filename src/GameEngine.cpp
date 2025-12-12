@@ -70,11 +70,9 @@ void GE::GameEngine::start() {
     
     GE::IM::fetchKeys();
 
-    if(GE::IM::isKeyDown('l')){
+    if(GE::IM::isKeyDown("l")){
       text->setRotation(++x);
     }
-
-
 
     if(GE::IM::isKeyPressed('c')){
       SDL_Log("Creating screen component");
@@ -86,11 +84,11 @@ void GE::GameEngine::start() {
       SDL_Log("släpte c");
     }
 
-    if(GE::IM::isKeyDown('f')){
+    if(GE::IM::isKeyDown("f")){
       SDL_Log("FPS: %uz", this->getFps());
     }
 
-    if(GE::IM::isKeyDown('q')){
+    if(GE::IM::isKeyDown("q")){
       goto end_loop;
     }    
    

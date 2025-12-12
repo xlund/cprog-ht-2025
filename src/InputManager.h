@@ -6,9 +6,8 @@
 
 namespace GE {
   namespace IM{
-      bool isKeyDown(char);
+      bool isKeyDown(std::string);
       bool isKeyPressed(char);
-      bool isSpecialKeyPressed(std::string);
       bool isKeyReleased(char);
       void fetchKeys();
   }
