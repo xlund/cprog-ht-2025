@@ -31,8 +31,6 @@ bool GE::IM::isKeyReleased(std::string key){
     return isKeyInteracted(key,SDL_EVENT_KEY_UP);
 }
 
-
-//kan skapa rray av nedtryckna tangenter
 void GE::IM::fetchKeys(){
     events.clear();
     SDL_Event event;
