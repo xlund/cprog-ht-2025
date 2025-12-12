@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <vector>
 #include "InputManager.h"
+#include <iostream>
 
 namespace GE {
 
@@ -111,10 +112,4 @@ end_loop:
   SDL_DestroyWindow(window);
   SDL_Quit();
 }
-
-  void tytyt(){
-
-  }
-
-
 } // namespace GE

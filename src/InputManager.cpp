@@ -10,6 +10,21 @@ const bool* keyStates;
 unsigned int mouseStates;
 float mouseX, mouseY;
 
+
+//=========Fetch===========
+void GE::IM::fetchKeys(){
+    events.clear();
+    SDL_Event event;
+    while(SDL_PollEvent(&event)){
+        events.push_back(event);
+    }
+
+    keyStates = SDL_GetKeyboardState(NULL);
+    mouseStates = SDL_GetMouseState(&mouseX, &mouseY);
+}
+
+
+//=========tangent===========
 bool GE::IM::isKeyDown(std::string key) {
     SDL_Scancode code = SDL_GetScancodeFromName(key.c_str());
     return keyStates[code];
@@ -23,6 +38,12 @@ bool isKeyInteracted(std::string key,SDL_EventType type){
         }
     }
     return false;
+}
+
+//=========mus===========
+void GE::IM::getMousePosition(float &x, float &y){
+    x = mouseX;
+    y = mouseY;
 }
 
 bool isMouseInteracted(int button,SDL_EventType type){
@@ -65,20 +86,4 @@ bool GE::IM::isLeftMouseDown(){
 
 bool GE::IM::isRightMouseDown(){
     return mouseStates & SDL_BUTTON_RMASK;
-}
-
-void GE::IM::getMousePosition(float &x, float &y){
-    x = mouseX;
-    y = mouseY;
-}
-
-void GE::IM::fetchKeys(){
-    events.clear();
-    SDL_Event event;
-    while(SDL_PollEvent(&event)){
-        events.push_back(event);
-    }
-
-    keyStates = SDL_GetKeyboardState(NULL);
-    mouseStates = SDL_GetMouseState(&mouseX, &mouseY);
 }

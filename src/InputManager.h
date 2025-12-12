@@ -6,17 +6,19 @@
 
 namespace GE {
   namespace IM{
+      void fetchKeys();
+
       bool isKeyDown(std::string);
       bool isKeyPressed(std::string);
       bool isKeyReleased(std::string);
+
+      void getMousePosition(float &,float &);
       bool isLeftMouseDown();
       bool isRightMouseDown();
       bool isLeftMousePressed();
       bool isRightMousePressed();
       bool isLeftMouseReleased();
-      bool isRightMouseReleased();
-      void getMousePosition(float &,float &);
-      void fetchKeys();
+      bool isRightMouseReleased(); 
   }
 
 }
