@@ -90,7 +90,11 @@ void GE::GameEngine::start() {
 
     if(GE::IM::isKeyDown("q")){
       goto end_loop;
-    }    
+    }
+    
+    if(GE::IM::isRightMouseDown()){
+      SDL_Log("tryckt");
+    }
    
     // ppdatera ljudet så det loopar
     if (bgSound)
