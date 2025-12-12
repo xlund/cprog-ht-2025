@@ -40,6 +40,14 @@ bool isKeyInteracted(std::string key,SDL_EventType type){
     return false;
 }
 
+bool GE::IM::isKeyPressed(std::string key){
+    return isKeyInteracted(key,SDL_EVENT_KEY_DOWN);
+}
+
+bool GE::IM::isKeyReleased(std::string key){
+    return isKeyInteracted(key,SDL_EVENT_KEY_UP);
+}
+
 //=========mus===========
 void GE::IM::getMousePosition(float &x, float &y){
     x = mouseX;
@@ -53,15 +61,6 @@ bool isMouseInteracted(int button,SDL_EventType type){
         }
     }
     return false;
-}
-
-
-bool GE::IM::isKeyPressed(std::string key){
-    return isKeyInteracted(key,SDL_EVENT_KEY_DOWN);
-}
-
-bool GE::IM::isKeyReleased(std::string key){
-    return isKeyInteracted(key,SDL_EVENT_KEY_UP);
 }
 
 bool GE::IM::isLeftMousePressed(){
