@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <vector>
 #include <string>
+#include <functional>
+
 
 std::vector<GE::Hitbox*> GE::Hitbox::allHitboxes;
 
@@ -55,12 +57,16 @@ void GE::Hitbox::setOnExit(std::function<void()> function){
 
 void GE::Hitbox::update(SDL_Renderer* renderer){
     for(Hitbox* other : allHitboxes){
-        if(other != this && SDL_HasRectIntersectionFloat(&hitbox,&other->hitbox)){
-            onEnterFunction;
+        if(other != this && SDL_HasRectIntersectionFloat(&hitbox,&other->hitbox) && std::find(collidingHitboxes.begin(),collidingHitboxes.end(),other)==collidingHitboxes.end()){
+            if(onEnterFunction){
+                onEnterFunction();
+            }
             collidingHitboxes.push_back(other);
         }
-        else{
-            onEnterFunction;
+        else if(std::find(collidingHitboxes.begin(),collidingHitboxes.end(),other)!=collidingHitboxes.end()){
+            if(onExitFunction){
+                onExitFunction();
+            }
             auto i = std::find(collidingHitboxes.begin(), collidingHitboxes.end(), other);
             collidingHitboxes.erase(i);
         }
