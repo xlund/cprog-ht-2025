@@ -45,8 +45,24 @@ void GE::Hitbox::setDimentions(const float width, const float height){
     hitbox.h = height;
 }
 
+void GE::Hitbox::setOnEnter(std::function<void()> function){
+    onEnterFunction = function;
+}
+
+void GE::Hitbox::setOnExit(std::function<void()> function){
+    onExitFunction = function;
+}
+
 void GE::Hitbox::update(SDL_Renderer* renderer){
     for(Hitbox* other : allHitboxes){
-        SDL_HasRectIntersectionFloat(&hitbox,&other->hitbox);
+        if(other != this && SDL_HasRectIntersectionFloat(&hitbox,&other->hitbox)){
+            onEnterFunction;
+            collidingHitboxes.push_back(other);
+        }
+        else{
+            onEnterFunction;
+            auto i = std::find(collidingHitboxes.begin(), collidingHitboxes.end(), other);
+            collidingHitboxes.erase(i);
+        }
     }
 }
