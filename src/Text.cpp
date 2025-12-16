@@ -5,21 +5,24 @@
 #include <stdexcept>
 #include "GameEngine.h"
 #include <iostream>
+#include <algorithm>
 
 
 GE::Text::Text(std::string text, int x, int y) : 
-    ScreenComponent(x,y,24,500,0),
+    Component(x,y,0),
     str(text),
     font(TTF_OpenFont(constants::STANDARD_FONT.c_str(),24)),
     fontPath(constants::STANDARD_FONT),
-    fontSize(24){}
+    fontSize(24),
+    width(24){}
 
 GE::Text::Text(std::string text, std::string path, int fontSize, int x, int y):
-    ScreenComponent(x,y,fontSize,500,0),
+    Component(x,y,0),
     str(text),
     font(TTF_OpenFont(path.c_str(),fontSize)),
     fontPath(path),
-    fontSize(fontSize){}
+    fontSize(fontSize),
+    width(1080){}
 
 GE::Text::~Text() {
     if(font){
@@ -68,7 +71,7 @@ void GE::Text::update(SDL_Renderer* renderer) {
         float texW,texH;
         SDL_GetTextureSize(texture, &texW, &texH);
         int intTexH = static_cast<int>(texH);
-        int clippedHeight = std::min(height, intTexH);
+        int clippedHeight = std::min( static_cast<int>(height), intTexH);
 
         //beskär
         SDL_FRect srcRect = {0.0f,0.0f,static_cast<float>(texW),

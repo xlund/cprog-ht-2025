@@ -43,12 +43,13 @@ void GE::GameEngine::removeScreenComponent(GE::Component *component) {
 
 void GE::GameEngine::start() {
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
+  TTF_Init();
   // Loop
-  std::vector<ScreenComponent *> components;
+  std::vector<Component *> components;
   Text *text = new GE::Text("Linus", 20, 20);
-  components.push_back(text);
   text->setColor(255, 255, 255, 255);
   text->draw();
+  components.push_back(text);
   auto bgSound = new SoundPlayer("resources/sounds/background.wav", true);
   bgSound->play();
   int x = 0;
@@ -59,6 +60,7 @@ void GE::GameEngine::start() {
     // Process events
     for (GE::Component *component : components) {
       component->update(renderer);
+      std::cout<< components.size();
     }
     
     GE::IM::fetchKeys();
@@ -69,8 +71,7 @@ void GE::GameEngine::start() {
 
     if(GE::IM::isKeyPressed("c")){
       SDL_Log("Creating screen component");
-      Sprite *sprite =
-      new GE::Sprite(renderer, constants::cool_link, 40, 40);
+      Sprite *sprite = new GE::Sprite(40,40,0,10,10,0,constants::cool_link,renderer);
       components.push_back(sprite);
     }
     if(GE::IM::isKeyReleased("c")){
