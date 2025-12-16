@@ -29,8 +29,8 @@ namespace GE {
       SDL_Color color{0,0,0,0};
       bool isSeen{false};
 
-      float width;
-      float height;
+      int width;
+      int height;
   };
 }
 
