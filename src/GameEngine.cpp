@@ -7,6 +7,8 @@
 #include <vector>
 #include "InputManager.h"
 #include <iostream>
+#include "Text.h"
+#include "Component.h"
 
 GE::GameEngine::GameEngine(int fps) : fps(fps) {
   window = SDL_CreateWindow("Nelda!", 500, 500, 0);
@@ -47,7 +49,7 @@ void GE::GameEngine::start() {
   components.push_back(text);
   text->setColor(255, 255, 255, 255);
   text->draw();
-  bgSound = new SoundPlayer("resources/sounds/background.wav", true);
+  auto bgSound = new SoundPlayer("resources/sounds/background.wav", true);
   bgSound->play();
   int x = 0;
   while (true) {
