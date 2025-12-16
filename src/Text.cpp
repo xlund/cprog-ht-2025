@@ -14,8 +14,8 @@ GE::Text::Text(std::string text, int x, int y) :
     font(TTF_OpenFont(constants::STANDARD_FONT.c_str(),24)),
     fontPath(constants::STANDARD_FONT),
     fontSize(24),
-    width(24),
-    height(100){}
+    width(100000),
+    height(24){}
 
 GE::Text::Text(std::string text, std::string path, int fontSize, int x, int y):
     Component(x,y,0),
@@ -23,7 +23,8 @@ GE::Text::Text(std::string text, std::string path, int fontSize, int x, int y):
     font(TTF_OpenFont(path.c_str(),fontSize)),
     fontPath(path),
     fontSize(fontSize),
-    width(1080){}
+    width(1080),
+    height(fontSize){}
 
 GE::Text::~Text() {
     if(font){
@@ -55,6 +56,14 @@ void GE::Text::setFontSize(int size){
     font = TTF_OpenFont(fontPath.c_str(),size);
 }
 
+void GE::Text::setWidth(const int w){
+    width = w;
+}
+
+void GE::Text::setHeight (const int h){
+    height = h;
+}
+
 void GE::Text::draw(){
     isSeen=true;
 }
@@ -74,7 +83,6 @@ void GE::Text::update(SDL_Renderer* renderer) {
         int intTexH = static_cast<int>(texH);
         intTexH = 1000;
         int clippedHeight = std::min(height, intTexH);
-        std::cout<<clippedHeight;
 
         //beskär
         SDL_FRect srcRect = {0.0f,0.0f,static_cast<float>(texW),

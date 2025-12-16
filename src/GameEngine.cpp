@@ -60,7 +60,6 @@ void GE::GameEngine::start() {
     // Process events
     for (GE::Component *component : components) {
       component->update(renderer);
-      std::cout<< components.size();
     }
     
     GE::IM::fetchKeys();
