@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <list>
 #include <vector>
+#include "Hitbox.h"
 
 GE::GameEngine::GameEngine(int fps) : fps(fps) {
   window = SDL_CreateWindow("Nelda!", 500, 500, 0);
@@ -43,12 +44,25 @@ void GE::GameEngine::start() {
   SDL_Event event{};
   std::vector<GE::Component *> components;
 
+    Hitbox* b1 = new Hitbox(10,10,100,100);
+    Hitbox* b2 = new Hitbox(10,10,100,100);
+    components.push_back(b1);
+    components.push_back(b2);
+    b1->setOnEnter([](Hitbox* other){
+        SDL_Log("i");
+     });
+     b1->setOnExit([](Hitbox* other){
+      SDL_Log("Ut");
+     });
+
   while (true) {
     Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
     // Process events
     for (GE::Component *component : components) {
       component->update(renderer);
     }
+
+
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
       case SDL_EVENT_KEY_DOWN:
@@ -63,6 +77,7 @@ void GE::GameEngine::start() {
           SDL_Log("Len: %ld", components.size());
         }
         if (event.key.key == SDLK_D) {
+          b1->setPosition(1000000.0,10000000);
         }
         if (event.key.key == SDLK_UP) {
           this->setFps(this->getFps() + 10);
@@ -90,4 +105,13 @@ end_loop:
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
+  
+}
+
+void GE::GameEngine::Hiting(Hitbox* other){
+  SDL_Log("i");
+}
+
+void GE::GameEngine::Exiting(Hitbox* other){
+  SDL_Log("ut");
 }

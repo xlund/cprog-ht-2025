@@ -7,6 +7,7 @@
 #include "Sprite.h"
 #include <SDL3/SDL.h>
 #include <vector>
+#include "Hitbox.h"
 
 namespace GE {
 
@@ -26,6 +27,10 @@ public:
   void addScreenComponent(GE::Component *);
   void removeScreenComponent(GE::Component *);
   void removeAllScreenComponents();
+
+  void Hiting(Hitbox*);
+  void Exiting(Hitbox*);
+
 
 private:
   int fps{60};

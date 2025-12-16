@@ -18,15 +18,15 @@ namespace GE {
       void setPosition(const float ,const float);
       void getDimentions(float&, float&) const;
       void setDimentions(const float, const float);
-      void setOnEnter(std::function<void()>);
-      void setOnExit(std::function<void()>);
+      void setOnEnter(std::function<void(Hitbox*)>);
+      void setOnExit(std::function<void(Hitbox*)>);
       void update(SDL_Renderer *renderer);
     private:
       static std::vector<Hitbox*> allHitboxes;
       std::vector<Hitbox*> collidingHitboxes;
       std::string tag;
-      std::function<void()> onEnterFunction;
-      std::function<void()> onExitFunction;
+      std::function<void(Hitbox*)> onEnterFunction;
+      std::function<void(Hitbox*)> onExitFunction;
 
       SDL_FRect hitbox;
   };

@@ -47,25 +47,28 @@ void GE::Hitbox::setDimentions(const float width, const float height){
     hitbox.h = height;
 }
 
-void GE::Hitbox::setOnEnter(std::function<void()> function){
+void GE::Hitbox::setOnEnter(std::function<void(Hitbox*)> function){
     onEnterFunction = function;
 }
 
-void GE::Hitbox::setOnExit(std::function<void()> function){
+void GE::Hitbox::setOnExit(std::function<void(Hitbox*)> function){
     onExitFunction = function;
 }
 
 void GE::Hitbox::update(SDL_Renderer* renderer){
     for(Hitbox* other : allHitboxes){
-        if(other != this && SDL_HasRectIntersectionFloat(&hitbox,&other->hitbox) && std::find(collidingHitboxes.begin(),collidingHitboxes.end(),other)==collidingHitboxes.end()){
+        bool hasCollided=(std::find(collidingHitboxes.begin(),collidingHitboxes.end(),other) != collidingHitboxes.end());
+        bool touching = SDL_HasRectIntersectionFloat(&hitbox,&other->hitbox);
+
+        if(other != this && touching && !hasCollided){
             if(onEnterFunction){
-                onEnterFunction();
+                onEnterFunction(other);
             }
             collidingHitboxes.push_back(other);
         }
-        else if(std::find(collidingHitboxes.begin(),collidingHitboxes.end(),other)!=collidingHitboxes.end()){
+        else if(!touching && hasCollided){
             if(onExitFunction){
-                onExitFunction();
+                onExitFunction(other);
             }
             auto i = std::find(collidingHitboxes.begin(), collidingHitboxes.end(), other);
             collidingHitboxes.erase(i);
