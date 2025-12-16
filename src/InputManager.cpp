@@ -12,7 +12,7 @@ float mouseX, mouseY;
 
 
 //=========Fetch===========
-void GE::IM::fetchKeys(){
+void GE::InputManager::fetchKeys(){
     events.clear();
     SDL_Event event;
     while(SDL_PollEvent(&event)){
@@ -25,7 +25,7 @@ void GE::IM::fetchKeys(){
 
 
 //=========tangent===========
-bool GE::IM::isKeyDown(std::string key) {
+bool GE::InputManager::isKeyDown(std::string key) {
     SDL_Scancode code = SDL_GetScancodeFromName(key.c_str());
     return keyStates[code];
 }
@@ -40,16 +40,16 @@ bool isKeyInteracted(std::string key,SDL_EventType type){
     return false;
 }
 
-bool GE::IM::isKeyPressed(std::string key){
+bool GE::InputManager::isKeyPressed(std::string key){
     return isKeyInteracted(key,SDL_EVENT_KEY_DOWN);
 }
 
-bool GE::IM::isKeyReleased(std::string key){
+bool GE::InputManager::isKeyReleased(std::string key){
     return isKeyInteracted(key,SDL_EVENT_KEY_UP);
 }
 
 //=========mus===========
-void GE::IM::getMousePosition(float &x, float &y){
+void GE::InputManager::getMousePosition(float &x, float &y){
     x = mouseX;
     y = mouseY;
 }
@@ -63,26 +63,26 @@ bool isMouseInteracted(int button,SDL_EventType type){
     return false;
 }
 
-bool GE::IM::isLeftMousePressed(){
+bool GE::InputManager::isLeftMousePressed(){
     return isMouseInteracted(SDL_BUTTON_LEFT,SDL_EVENT_MOUSE_BUTTON_DOWN);
 }
 
-bool GE::IM::isRightMousePressed(){
+bool GE::InputManager::isRightMousePressed(){
     return isMouseInteracted(SDL_BUTTON_RIGHT,SDL_EVENT_MOUSE_BUTTON_DOWN);
 }
 
-bool GE::IM::isLeftMouseReleased(){
+bool GE::InputManager::isLeftMouseReleased(){
     return isMouseInteracted(SDL_BUTTON_LEFT,SDL_EVENT_MOUSE_BUTTON_UP);
 }
 
-bool GE::IM::isRightMouseReleased(){
+bool GE::InputManager::isRightMouseReleased(){
     return isMouseInteracted(SDL_BUTTON_RIGHT,SDL_EVENT_MOUSE_BUTTON_UP);
 }
 
-bool GE::IM::isLeftMouseDown(){
+bool GE::InputManager::isLeftMouseDown(){
     return mouseStates & SDL_BUTTON_LMASK;
 }
 
-bool GE::IM::isRightMouseDown(){
+bool GE::InputManager::isRightMouseDown(){
     return mouseStates & SDL_BUTTON_RMASK;
 }
