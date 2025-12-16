@@ -115,3 +115,4 @@ void GE::GameEngine::Hiting(Hitbox* other){
 void GE::GameEngine::Exiting(Hitbox* other){
   SDL_Log("ut");
 }
+

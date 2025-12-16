@@ -4,8 +4,10 @@
 #include <chrono>
 #include <iostream>
 #include <thread>
-int main(int argc, char *argv[]) {
-  GE::GameEngine *ge = new GE::GameEngine();
+int main(int argc, char* argv[]) {
 
-  ge->start();
+    GE::GameEngine game;
+    game.start();
+
+    return 0;
 }
