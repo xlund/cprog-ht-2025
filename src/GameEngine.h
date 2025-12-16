@@ -2,11 +2,11 @@
 #define GAMEENGINE_H
 
 #include "../include/Constants.h"
+#include "Hitbox.h"
 #include "SoundPlayer.h"
 #include "Sprite.h"
 #include <SDL3/SDL.h>
 #include <vector>
-#include "Hitbox.h"
 
 namespace GE {
 
@@ -27,9 +27,8 @@ public:
   void removeScreenComponent(GE::Component *);
   void removeAllScreenComponents();
 
-  void Hiting(Hitbox*);
-  void Exiting(Hitbox*);
-
+  void Hiting(Hitbox *);
+  void Exiting(Hitbox *);
 
 private:
   int fps{60};
