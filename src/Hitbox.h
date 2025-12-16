@@ -1,7 +1,5 @@
 #ifndef HITBOX_H
 #define HITBOX_H
-
-#include "ScreenComponent.h"
 #include "Sprite.h"
 #include <SDL3/SDL.h>
 #include <functional>
