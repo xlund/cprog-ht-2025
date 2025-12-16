@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <list>
 #include <vector>
+#include "InputManager.h"
+#include <iostream>
 
 GE::GameEngine::GameEngine(int fps) : fps(fps) {
   window = SDL_CreateWindow("Nelda!", 500, 500, 0);
@@ -40,48 +42,59 @@ void GE::GameEngine::removeScreenComponent(GE::Component *component) {
 void GE::GameEngine::start() {
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
   // Loop
-  SDL_Event event{};
-  std::vector<GE::Component *> components;
-
+  std::vector<ScreenComponent *> components;
+  Text *text = new GE::Text("Linus", 20, 20);
+  components.push_back(text);
+  text->setColor(255, 255, 255, 255);
+  text->draw();
+  bgSound = new SoundPlayer("resources/sounds/background.wav", true);
+  bgSound->play();
+  int x = 0;
   while (true) {
+
+    SDL_RenderClear(renderer);
     Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
     // Process events
     for (GE::Component *component : components) {
       component->update(renderer);
     }
-    while (SDL_PollEvent(&event)) {
-      switch (event.type) {
-      case SDL_EVENT_KEY_DOWN:
-        if (event.key.key == SDLK_F) {
-          SDL_Log("FPS: %uz", this->getFps());
-        }
-        if (event.key.key == SDLK_C) {
-          SDL_Log("Creating screen component");
-          Sprite *sprite = new GE::Sprite(0, 0, 0, 1080, 1080, 0,
-                                          constants::cool_link, renderer);
-          components.push_back(sprite);
-          SDL_Log("Len: %ld", components.size());
-        }
-        if (event.key.key == SDLK_D) {
-        }
-        if (event.key.key == SDLK_UP) {
-          this->setFps(this->getFps() + 10);
-        }
-        if (event.key.key == SDLK_DOWN) {
-          this->setFps(this->getFps() - 10);
-        }
-        if (event.key.key == SDLK_Q) {
-          goto end_loop;
-        }
-      default:
-        break;
-      }
-      long delay = nextTick - SDL_GetTicks();
-      if (delay > 0)
-        SDL_Delay(delay);
+    
+    GE::IM::fetchKeys();
+
+    if(GE::IM::isKeyDown("l")){
+      text->setRotation(++x);
     }
-    // Update objects
-    // Render Changes
+
+    if(GE::IM::isKeyPressed("c")){
+      SDL_Log("Creating screen component");
+      Sprite *sprite =
+      new GE::Sprite(renderer, constants::cool_link, 40, 40);
+      components.push_back(sprite);
+    }
+    if(GE::IM::isKeyReleased("c")){
+      SDL_Log("släpte c");
+    }
+
+    if(GE::IM::isKeyDown("f")){
+      SDL_Log("FPS: %uz", this->getFps());
+    }
+
+    if(GE::IM::isKeyDown("q")){
+      goto end_loop;
+    }
+    
+    if(GE::IM::isRightMouseDown()){
+      SDL_Log("tryckt");
+    }
+   
+    // ppdatera ljudet så det loopar
+    if (bgSound)
+      bgSound->update();
+
+
+    long delay = nextTick - SDL_GetTicks();
+    if (delay > 0){SDL_Delay(delay);}
+
     SDL_RenderPresent(renderer);
   }
 end_loop:
@@ -90,4 +103,4 @@ end_loop:
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
-}
+} // namespace GE
