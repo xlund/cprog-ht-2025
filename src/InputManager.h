@@ -5,7 +5,7 @@
 #include <string>
 
 namespace GE {
-  namespace IM{
+  namespace InputManager{
       void fetchKeys();
 
       bool isKeyDown(std::string);

@@ -12,6 +12,8 @@ const std::string gResPath{"./resources/"};
 // PATH'S TO ALL YOUR EXTERNAL RESOURCES using 'gResPath'
 const std::string bg_str{gResPath + "images/bg.jpg"};
 const std::string sample_str{gResPath + "sounds/sample.wav"};
+const std::string sample_sprite_sheet{gResPath +
+                                      "images/cute-mushroom-idle.png"};
 
 const std::string cool_link{gResPath + "images/sprite-link.jpg"};
 
