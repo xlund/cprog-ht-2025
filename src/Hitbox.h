@@ -1,18 +1,32 @@
 #ifndef HITBOX_H
 #define HITBOX_H
-
-#include "ScreenComponent.h"
 #include "Sprite.h"
+#include <SDL3/SDL.h>
 #include <functional>
+#include <vector>
+#include <string>
 namespace GE {
-  class Hitbox: public ScreenComponent {
+  class Hitbox: public Component {
     public:
-      Sprite onEnter(std::function<void()>);
-      Sprite onExit(std::function<void()>);
+      Hitbox(float,float,float,float);
+      ~Hitbox();
+      std::string getTag() const;
+      void setTag(const std::string&);
+      void getPosition(float&, float&) const;
+      void setPosition(const float ,const float);
+      void getDimentions(float&, float&) const;
+      void setDimentions(const float, const float);
+      void setOnEnter(std::function<void(Hitbox*)>);
+      void setOnExit(std::function<void(Hitbox*)>);
+      void update(SDL_Renderer *renderer);
     private:
-      int height;
-      int width;
-      std::function<void()> func;
+      static std::vector<Hitbox*> allHitboxes;
+      std::vector<Hitbox*> collidingHitboxes;
+      std::string tag;
+      std::function<void(Hitbox*)> onEnterFunction;
+      std::function<void(Hitbox*)> onExitFunction;
+
+      SDL_FRect hitbox;
   };
 }
 

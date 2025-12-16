@@ -5,10 +5,7 @@
 #include <algorithm>
 #include <list>
 #include <vector>
-#include "InputManager.h"
-#include <iostream>
-#include "Text.h"
-#include "Component.h"
+#include "Hitbox.h"
 
 GE::GameEngine::GameEngine(int fps) : fps(fps) {
   window = SDL_CreateWindow("Nelda!", 500, 500, 0);
@@ -43,60 +40,63 @@ void GE::GameEngine::removeScreenComponent(GE::Component *component) {
 
 void GE::GameEngine::start() {
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
-  TTF_Init();
   // Loop
-  std::vector<Component *> components;
-  Text *text = new GE::Text("Linus", 20, 20);
-  text->setColor(255, 255, 255, 255);
-  text->draw();
-  components.push_back(text);
-  auto bgSound = new SoundPlayer("resources/sounds/background.wav", true);
-  bgSound->play();
-  int x = 0;
-  while (true) {
+  SDL_Event event{};
+  std::vector<GE::Component *> components;
 
-    SDL_RenderClear(renderer);
+    Hitbox* b1 = new Hitbox(10,10,100,100);
+    Hitbox* b2 = new Hitbox(10,10,100,100);
+    components.push_back(b1);
+    components.push_back(b2);
+    b1->setOnEnter([](Hitbox* other){
+        SDL_Log("i");
+     });
+     b1->setOnExit([](Hitbox* other){
+      SDL_Log("Ut");
+     });
+
+  while (true) {
     Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
     // Process events
     for (GE::Component *component : components) {
       component->update(renderer);
     }
-    
-    GE::IM::fetchKeys();
 
-    if(GE::IM::isKeyDown("l")){
-      text->setRotation(++x);
+
+    while (SDL_PollEvent(&event)) {
+      switch (event.type) {
+      case SDL_EVENT_KEY_DOWN:
+        if (event.key.key == SDLK_F) {
+          SDL_Log("FPS: %uz", this->getFps());
+        }
+        if (event.key.key == SDLK_C) {
+          SDL_Log("Creating screen component");
+          Sprite *sprite = new GE::Sprite(0, 0, 0, 1080, 1080, 0,
+                                          constants::cool_link, renderer);
+          components.push_back(sprite);
+          SDL_Log("Len: %ld", components.size());
+        }
+        if (event.key.key == SDLK_D) {
+          b1->setPosition(1000000.0,10000000);
+        }
+        if (event.key.key == SDLK_UP) {
+          this->setFps(this->getFps() + 10);
+        }
+        if (event.key.key == SDLK_DOWN) {
+          this->setFps(this->getFps() - 10);
+        }
+        if (event.key.key == SDLK_Q) {
+          goto end_loop;
+        }
+      default:
+        break;
+      }
+      long delay = nextTick - SDL_GetTicks();
+      if (delay > 0)
+        SDL_Delay(delay);
     }
-
-    if(GE::IM::isKeyPressed("c")){
-      SDL_Log("Creating screen component");
-      Sprite *sprite = new GE::Sprite(40,40,0,10,10,0,constants::cool_link,renderer);
-      components.push_back(sprite);
-    }
-    if(GE::IM::isKeyReleased("c")){
-      SDL_Log("släpte c");
-    }
-
-    if(GE::IM::isKeyDown("f")){
-      SDL_Log("FPS: %uz", this->getFps());
-    }
-
-    if(GE::IM::isKeyDown("q")){
-      goto end_loop;
-    }
-    
-    if(GE::IM::isRightMouseDown()){
-      SDL_Log("tryckt");
-    }
-   
-    // ppdatera ljudet så det loopar
-    if (bgSound)
-      bgSound->update();
-
-
-    long delay = nextTick - SDL_GetTicks();
-    if (delay > 0){SDL_Delay(delay);}
-
+    // Update objects
+    // Render Changes
     SDL_RenderPresent(renderer);
   }
 end_loop:
@@ -105,4 +105,14 @@ end_loop:
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
-} // namespace GE
+  
+}
+
+void GE::GameEngine::Hiting(Hitbox* other){
+  SDL_Log("i");
+}
+
+void GE::GameEngine::Exiting(Hitbox* other){
+  SDL_Log("ut");
+}
+
