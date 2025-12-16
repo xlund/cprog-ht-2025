@@ -1,7 +1,6 @@
 #include <string>
 #include "Text.h"
 #include"../include/Constants.h"
-#include "ScreenComponent.h"
 #include <stdexcept>
 #include "GameEngine.h"
 #include <iostream>

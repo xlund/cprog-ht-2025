@@ -6,6 +6,7 @@
 #include <list>
 #include <vector>
 #include "Hitbox.h"
+#include "InputManager.h"
 
 GE::GameEngine::GameEngine(int fps) : fps(fps) {
   window = SDL_CreateWindow("Nelda!", 500, 500, 0);
@@ -61,40 +62,21 @@ void GE::GameEngine::start() {
     for (GE::Component *component : components) {
       component->update(renderer);
     }
-
-
-    while (SDL_PollEvent(&event)) {
-      switch (event.type) {
-      case SDL_EVENT_KEY_DOWN:
-        if (event.key.key == SDLK_F) {
-          SDL_Log("FPS: %uz", this->getFps());
-        }
-        if (event.key.key == SDLK_C) {
-          SDL_Log("Creating screen component");
-          Sprite *sprite = new GE::Sprite(0, 0, 0, 1080, 1080, 0,
-                                          constants::cool_link, renderer);
-          components.push_back(sprite);
-          SDL_Log("Len: %ld", components.size());
-        }
-        if (event.key.key == SDLK_D) {
-          b1->setPosition(1000000.0,10000000);
-        }
-        if (event.key.key == SDLK_UP) {
-          this->setFps(this->getFps() + 10);
-        }
-        if (event.key.key == SDLK_DOWN) {
-          this->setFps(this->getFps() - 10);
-        }
-        if (event.key.key == SDLK_Q) {
-          goto end_loop;
-        }
-      default:
-        break;
-      }
-      long delay = nextTick - SDL_GetTicks();
-      if (delay > 0)
-        SDL_Delay(delay);
+    
+    GE::InputManager::fetchKeys();
+    if(GE::InputManager::isKeyPressed("c")){
+      SDL_Log("Creating screen component");
+      Sprite *sprite = new GE::Sprite(0, 0, 0, 1080, 1080, 0,constants::cool_link, renderer);
+      components.push_back(sprite);
+      SDL_Log("Len: %ld", components.size());
     }
+
+    
+ 
+    long delay = nextTick - SDL_GetTicks();
+    if (delay > 0)
+    SDL_Delay(delay);
+    
     // Update objects
     // Render Changes
     SDL_RenderPresent(renderer);

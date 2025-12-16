@@ -2,7 +2,6 @@
 #define GAMEENGINE_H
 
 #include "../include/Constants.h"
-#include "ScreenComponent.h"
 #include "SoundPlayer.h"
 #include "Sprite.h"
 #include <SDL3/SDL.h>
