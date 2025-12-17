@@ -15,9 +15,9 @@
 #define SCREEN_HEIGHT 1080
 #define FPS 60
 
-GE::GameEngine game;
+
 int main(int argc, char *argv[]) {
-  game = GE::GameEngine("Nelda");
+  GE::GameEngine game = GE::GameEngine("Nelda");
   game.start();
 
   TempObject to = TempObject(0,0);  
