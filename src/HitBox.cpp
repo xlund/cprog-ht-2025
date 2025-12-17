@@ -47,11 +47,11 @@ void GE::Hitbox::setDimentions(const float width, const float height){
     hitbox.h = height;
 }
 
-void GE::Hitbox::setOnEnter(std::function<void(Hitbox*)> function){
+void GE::Hitbox::setOnEnter(const std::function<void(Hitbox*)>& function){
     onEnterFunction = function;
 }
 
-void GE::Hitbox::setOnExit(std::function<void(Hitbox*)> function){
+void GE::Hitbox::setOnExit(const std::function<void(Hitbox*)>& function){
     onExitFunction = function;
 }
 
