@@ -9,16 +9,18 @@
 #include <thread>
 #include "../include/Constants.h"
 #include "GameEngine/GameEngine.h"
+#include "Nelda/TempObject.h"
 
 #define SCREEN_WIDTH 1080
 #define SCREEN_HEIGHT 1080
 #define FPS 60
 
-
+GE::GameEngine game;
 int main(int argc, char *argv[]) {
-  GE::GameEngine game = GE::GameEngine("Nelda");
+  game = GE::GameEngine("Nelda");
   game.start();
 
+  TempObject to = TempObject(0,0);  
   /*
   int interval{constants::clockSpeed / FPS};
   SDL_Window *window;

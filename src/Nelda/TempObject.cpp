@@ -1,4 +1,5 @@
 #include "TempObject.h"
+TempObject::TempObject(int x, int y) : x(x),y(y){}
 
 void TempObject::getPos(int& x,int& y) const{
     x = this->x;

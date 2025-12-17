@@ -4,6 +4,7 @@
 
 class TempObject : public GE::GameObject{
     public:
+        TempObject(int,int);
         void getPos(int& ,int&) const;
         void setPos(const int, const int);
     private:
