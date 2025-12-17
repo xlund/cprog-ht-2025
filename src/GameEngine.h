@@ -2,36 +2,26 @@
 #define GAMEENGINE_H
 
 #include "../include/Constants.h"
-#include "Hitbox.h"
-#include "SoundPlayer.h"
-#include "Sprite.h"
+#include "Component.h"
 #include <SDL3/SDL.h>
 #include <vector>
 #include "GameObject.h"
+#include <string>
 
 namespace GE {
 
 class GameEngine {
 public:
-  GameEngine(int fps);
-  GameEngine();
+  GameEngine(int fps,std::string);
+  GameEngine(std::string);
   void start();
-  void tick();
-  void setFps(int fps);
-  int getFps();
-  int getTickInterval();
-  bool spawnEntity(Sprite);
-  SDL_Renderer *getRenderer();
-  SDL_Window *getWindow();
-  std::vector<Component *> getScreenComponents();
-  void addScreenComponent(GE::Component *);
-  void removeScreenComponent(GE::Component *);
+  bool tick();
+  void setFps(const int fps);
+  int getFps() const;
+  void addComponent(GE::Component *);
+  void removeComponent(GE::Component *);
   void addGameObject(GE::GameObject *);
-    void removeGameObject(GE::GameObject *);
-  void removeAllScreenComponents();
-
-  void Hiting(Hitbox *);
-  void Exiting(Hitbox *);
+  void removeGameObject(GE::GameObject *);
 
 private:
   int fps{60};

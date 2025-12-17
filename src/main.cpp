@@ -6,7 +6,7 @@
 #include <thread>
 int main(int argc, char* argv[]) {
 
-    GE::GameEngine game;
+    GE::GameEngine game("Nelda");
     game.start();
 
     return 0;
