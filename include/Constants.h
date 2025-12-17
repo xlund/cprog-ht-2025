@@ -14,7 +14,6 @@ const std::string bg_str{gResPath + "images/bg.jpg"};
 const std::string sample_str{gResPath + "sounds/sample.wav"};
 const std::string sample_sprite_sheet{gResPath +
                                       "images/cute-mushroom-idle.png"};
-const std::string sample_sprite_2{gResPath + "images/red-shroom-idle.png"};
 
 const std::string cool_link{gResPath + "images/sprite-link.jpg"};
 
