@@ -25,12 +25,12 @@ void GE::InputManager::fetchKeys(){
 
 
 //=========tangent===========
-bool GE::InputManager::isKeyDown(std::string key) {
+bool GE::InputManager::isKeyDown(const std::string &key) {
     SDL_Scancode code = SDL_GetScancodeFromName(key.c_str());
     return keyStates[code];
 }
 
-bool isKeyInteracted(std::string key,SDL_EventType type){
+bool isKeyInteracted(const std::string &key,const SDL_EventType &type){
         for(SDL_Event event : events){
             SDL_Keycode code = SDL_GetKeyFromName(key.c_str());
         if(event.type==type && event.key.key == code){
@@ -40,11 +40,11 @@ bool isKeyInteracted(std::string key,SDL_EventType type){
     return false;
 }
 
-bool GE::InputManager::isKeyPressed(std::string key){
+bool GE::InputManager::isKeyPressed(const std::string &key){
     return isKeyInteracted(key,SDL_EVENT_KEY_DOWN);
 }
 
-bool GE::InputManager::isKeyReleased(std::string key){
+bool GE::InputManager::isKeyReleased(const std::string &key){
     return isKeyInteracted(key,SDL_EVENT_KEY_UP);
 }
 
@@ -54,7 +54,7 @@ void GE::InputManager::getMousePosition(float &x, float &y){
     y = mouseY;
 }
 
-bool isMouseInteracted(int button,SDL_EventType type){
+bool isMouseInteracted(const int button,const SDL_EventType &type){
         for(SDL_Event event : events){
         if(event.type==type && event.button.button == button){
             return true;

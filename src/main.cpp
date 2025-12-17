@@ -8,12 +8,12 @@
 #include <iostream>
 #include <thread>
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
-#define SPRITE_SIZE 48
-#define FPS 60
+
 
 int main(int argc, char *argv[]) {
+  
+  GE::GameEngine game("Nelda");
+  game.start();
   int interval{constants::clockSpeed / FPS};
   SDL_Window *window;
   SDL_Renderer *renderer;

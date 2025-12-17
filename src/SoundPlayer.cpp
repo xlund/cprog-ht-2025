@@ -21,7 +21,7 @@ SoundPlayer::~SoundPlayer() {
     }
 }
 
-void SoundPlayer::loadSound(std::string src) {
+void SoundPlayer::loadSound(const std::string &src) {
     if (!SDL_LoadWAV(src.c_str(), &spec, &buffer, &length)) {
         std::cerr << "Could not load sound '" << src
                   << "': " << SDL_GetError() << std::endl;
@@ -93,7 +93,7 @@ std::string SoundPlayer::getSrc() {
     return src;
 }
 
-void SoundPlayer::setSrc(std::string src) {
+void SoundPlayer::setSrc(const std::string &src) {
     this->src = src;
 
     if (stream) SDL_DestroyAudioStream(stream);

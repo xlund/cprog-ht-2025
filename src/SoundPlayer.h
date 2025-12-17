@@ -18,7 +18,7 @@ public:
     void update();                      // Håller loopande ljud vid liv
 
     std::string getSrc();
-    void setSrc(std::string src);
+    void setSrc(const std::string &src);
 
 private:
     std::string src {}; 
@@ -29,7 +29,7 @@ private:
 
     bool loop = false;                  // Loop-flagga
 
-    void loadSound(std::string src);    // Privat hjälpmetod
+    void loadSound(const std::string &src);    // Privat hjälpmetod
 };
 
 }

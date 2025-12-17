@@ -16,8 +16,8 @@ namespace GE {
       void setPosition(const float ,const float);
       void getDimentions(float&, float&) const;
       void setDimentions(const float, const float);
-      void setOnEnter(std::function<void(Hitbox*)>);
-      void setOnExit(std::function<void(Hitbox*)>);
+      void setOnEnter(const std::function<void(Hitbox*)> &);
+      void setOnExit(const std::function<void(Hitbox*)> &);
       void update(SDL_Renderer *renderer);
     private:
       static std::vector<Hitbox*> allHitboxes;

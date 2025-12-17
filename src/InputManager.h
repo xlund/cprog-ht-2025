@@ -8,9 +8,9 @@ namespace GE {
   namespace InputManager{
       void fetchKeys();
 
-      bool isKeyDown(std::string);
-      bool isKeyPressed(std::string);
-      bool isKeyReleased(std::string);
+      bool isKeyDown(const std::string &);
+      bool isKeyPressed(const std::string &);
+      bool isKeyReleased(const std::string &);
 
       void getMousePosition(float &,float &);
       bool isLeftMouseDown();
