@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <list>
 #include <vector>
+#include <iostream>
+#include<SDL3_ttf/SDL_ttf.h>
 
 GE::GameEngine::GameEngine(int fps, std::string windowName) : fps(fps) {
   window = SDL_CreateWindow(windowName.c_str(), 500, 500, 0);
@@ -31,7 +33,7 @@ bool GE::GameEngine::tick() {
     
     if(GE::InputManager::isKeyPressed("c")){
       SDL_Log("Creating screen component");
-      Sprite *sprite = new GE::Sprite(0, 0, 0, 1080, 1080, 0,constants::cool_link, renderer);
+      Sprite *sprite = new GE::Sprite(0, 0, 0, 0,constants::cool_link, renderer);
       components.push_back(sprite);
       SDL_Log("Len: %ld", components.size());
     }
