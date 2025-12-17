@@ -7,6 +7,9 @@
 #include <algorithm>
 #include <list>
 #include <vector>
+#include "GameObject.h"
+#include "Text.h"
+#include <iostream>
 
 GE::GameEngine::GameEngine(int fps) : fps(fps) {
   window = SDL_CreateWindow("Nelda!", 500, 500, 0);
@@ -39,28 +42,39 @@ void GE::GameEngine::removeScreenComponent(GE::Component *component) {
   components.erase(i);
 }
 
-void GE::GameEngine::start() {
-  SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
-  // Loop
-  SDL_Event event{};
-  std::vector<GE::Component *> components;
+void GE::GameEngine::addGameObject(GE::GameObject *object){
+  gameObjects.push_back(object);
+}
 
-  Hitbox *b1 = new Hitbox(10, 10, 100, 100);
-  Hitbox *b2 = new Hitbox(10, 10, 100, 100);
-  components.push_back(b1);
-  components.push_back(b2);
-  b1->setOnEnter([](Hitbox *other) { SDL_Log("i"); });
-  b1->setOnExit([](Hitbox *other) { SDL_Log("Ut"); });
+void GE::GameEngine::removeGameObject(GE::GameObject *object){
+  auto i = std::find(gameObjects.begin(), gameObjects.end(), object);
+  gameObjects.erase(i);
+}
+
+void GE::GameEngine::start() {
+  if(!SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO)||!TTF_Init()){
+    std::cerr<<SDL_GetError()<<std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+  
+  // Loop
+  for(GE::GameObject* object : gameObjects){
+    object->setup();
+  }
 
   while (true) {
     Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
+    GE::InputManager::fetchKeys();
+
     // Process events
+    for(GE::GameObject* object : gameObjects){
+      object->update();
+    }
     for (GE::Component *component : components) {
       component->update(renderer);
     }
-
-    GE::InputManager::fetchKeys();
-    if (GE::InputManager::isKeyPressed("c")) {
+    
+    if(GE::InputManager::isKeyPressed("c")){
       SDL_Log("Creating screen component");
       Sprite *sprite =
           new GE::Sprite(0, 0, 0, 0, constants::cool_link, renderer);
@@ -68,6 +82,12 @@ void GE::GameEngine::start() {
       SDL_Log("Len: %ld", components.size());
     }
 
+    if(GE::InputManager::isKeyPressed("q")){
+      goto end_loop;
+    }
+
+    
+ 
     long delay = nextTick - SDL_GetTicks();
     if (delay > 0)
       SDL_Delay(delay);
@@ -77,6 +97,7 @@ void GE::GameEngine::start() {
     SDL_RenderPresent(renderer);
   }
   // Shutdown
+  TTF_Quit();
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
