@@ -1,12 +1,12 @@
 #include "GameEngine.h"
 #include "../include/Constants.h"
+#include "Hitbox.h"
+#include "InputManager.h"
 #include "Sprite.h"
 #include <SDL3/SDL.h>
 #include <algorithm>
 #include <list>
 #include <vector>
-#include "Hitbox.h"
-#include "InputManager.h"
 #include "GameObject.h"
 #include "Text.h"
 #include <iostream>
@@ -76,7 +76,8 @@ void GE::GameEngine::start() {
     
     if(GE::InputManager::isKeyPressed("c")){
       SDL_Log("Creating screen component");
-      Sprite *sprite = new GE::Sprite(0, 0, 0, 1080, 1080, 0,constants::cool_link, renderer);
+      Sprite *sprite =
+          new GE::Sprite(0, 0, 0, 0, constants::cool_link, renderer);
       components.push_back(sprite);
       SDL_Log("Len: %ld", components.size());
     }
@@ -89,27 +90,19 @@ void GE::GameEngine::start() {
  
     long delay = nextTick - SDL_GetTicks();
     if (delay > 0)
-    SDL_Delay(delay);
-    
+      SDL_Delay(delay);
+
     // Update objects
     // Render Changes
     SDL_RenderPresent(renderer);
   }
-end_loop:
-
   // Shutdown
   TTF_Quit();
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
-  
 }
 
-void GE::GameEngine::Hiting(Hitbox* other){
-  SDL_Log("i");
-}
+void GE::GameEngine::Hiting(Hitbox *other) { SDL_Log("i"); }
 
-void GE::GameEngine::Exiting(Hitbox* other){
-  SDL_Log("ut");
-}
-
+void GE::GameEngine::Exiting(Hitbox *other) { SDL_Log("ut"); }
