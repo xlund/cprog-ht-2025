@@ -1,5 +1,5 @@
-#include "AnimatedSprite.h"
 #include "Constants.h"
+#include "GameEngine/AnimatedSprite.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_video.h>
 #include <SDL3_image/SDL_image.h>
