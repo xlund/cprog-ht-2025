@@ -1,6 +1,8 @@
 #ifndef TEMPOBJECT_H
 #define TEMPOBJECT_H
-class TempObject{
+#include "../GameEngine/GameObject.h"
+
+class TempObject : public GE::GameObject{
     public:
         void getPos(int& ,int&) const;
         void setPos(const int, const int);
