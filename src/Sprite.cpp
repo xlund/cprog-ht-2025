@@ -6,7 +6,7 @@
 
 GE::Sprite::Sprite(int x, int y, int z, int r, std::string src,
                    SDL_Renderer *renderer)
-    : Component(), srcPath(src) {
+    : Component(), x(x), y(y), z(z), rotation(r), srcPath(src) {
   float width;
   float height;
   texture = IMG_LoadTexture(renderer, src.c_str());

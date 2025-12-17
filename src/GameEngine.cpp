@@ -7,9 +7,6 @@
 #include <algorithm>
 #include <list>
 #include <vector>
-#include "GameObject.h"
-#include "Text.h"
-#include <iostream>
 
 GE::GameEngine::GameEngine(int fps) : fps(fps) {
   window = SDL_CreateWindow("Nelda!", 500, 500, 0);

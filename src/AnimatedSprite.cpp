@@ -26,7 +26,7 @@ void GE::AnimatedSprite::update(SDL_Renderer *renderer) {
   auto currentPair = currentAnimation[index];
   size_t pos = currentPair.second + currentPair.first * cols;
   SDL_FRect src = frames[pos];
-  SDL_FRect dst = {75, 75, static_cast<float>(frameWidth),
+  SDL_FRect dst = {(float)x, float(y), static_cast<float>(frameWidth),
                    static_cast<float>(frameHeight)};
 
   index++;
