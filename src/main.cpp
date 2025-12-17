@@ -7,12 +7,16 @@
 #include <cstddef>
 #include <iostream>
 #include <thread>
+#include "../include/Constants.h"
+#include "GameEngine.h"
 
+#define SCREEN_WIDTH 1080
+#define SCREEN_HEIGHT 1080
+#define FPS 60
 
 
 int main(int argc, char *argv[]) {
-  
-  GE::GameEngine game("Nelda");
+  GE::GameEngine game = GE::GameEngine("Nelda");
   game.start();
   int interval{constants::clockSpeed / FPS};
   SDL_Window *window;
