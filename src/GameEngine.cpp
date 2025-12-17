@@ -52,6 +52,7 @@ void GE::GameEngine::removeGameObject(GE::GameObject *object){
 
 void GE::GameEngine::start() {
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
+  TTF_Init();
   // Loop
   for(GE::GameObject* object : gameObjects){
     object->setup();
