@@ -7,6 +7,8 @@
 #include <vector>
 #include "Hitbox.h"
 #include "InputManager.h"
+#include "GameObject.h"
+#include "Text.h"
 
 GE::GameEngine::GameEngine(int fps) : fps(fps) {
   window = SDL_CreateWindow("Nelda!", 500, 500, 0);
@@ -42,33 +44,34 @@ void GE::GameEngine::removeScreenComponent(GE::Component *component) {
 void GE::GameEngine::start() {
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
   // Loop
-  SDL_Event event{};
   std::vector<GE::Component *> components;
+  std::vector<GE::GameObject *> objects;
 
-    Hitbox* b1 = new Hitbox(10,10,100,100);
-    Hitbox* b2 = new Hitbox(10,10,100,100);
-    components.push_back(b1);
-    components.push_back(b2);
-    b1->setOnEnter([](Hitbox* other){
-        SDL_Log("i");
-     });
-     b1->setOnExit([](Hitbox* other){
-      SDL_Log("Ut");
-     });
+  for(GameObject* object : objects){
+    object->setup();
+  }
 
   while (true) {
     Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
+    GE::InputManager::fetchKeys();
+
     // Process events
+    for(GameObject* object : objects){
+      object->update();
+    }
     for (GE::Component *component : components) {
       component->update(renderer);
     }
     
-    GE::InputManager::fetchKeys();
     if(GE::InputManager::isKeyPressed("c")){
       SDL_Log("Creating screen component");
       Sprite *sprite = new GE::Sprite(0, 0, 0, 1080, 1080, 0,constants::cool_link, renderer);
       components.push_back(sprite);
       SDL_Log("Len: %ld", components.size());
+    }
+
+    if(GE::InputManager::isKeyPressed("q")){
+      goto end_loop;
     }
 
     
