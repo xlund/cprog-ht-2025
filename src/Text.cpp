@@ -38,7 +38,7 @@ void GE::Text::setFont(const std::string &path) {
   font = TTF_OpenFont(path.c_str(), fontSize);
 }
 
-void GE::Text::setFontSize(int size) {
+void GE::Text::setFontSize(const int size) {
   font = TTF_OpenFont(fontPath.c_str(), size);
 }
 

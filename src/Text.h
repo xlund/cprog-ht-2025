@@ -16,7 +16,7 @@ public:
   std::string getString() const;
   void setColor(unsigned char, unsigned char, unsigned char, unsigned char);
   void setFont(const std::string &);
-  void setFontSize(int);
+  void setFontSize(const int);
   void setWidth(const int);
   void setHeight(const int);
   void draw();
