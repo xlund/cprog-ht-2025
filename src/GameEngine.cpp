@@ -1,15 +1,12 @@
 #include "GameEngine.h"
 #include "../include/Constants.h"
+#include "Hitbox.h"
+#include "InputManager.h"
 #include "Sprite.h"
 #include <SDL3/SDL.h>
 #include <algorithm>
 #include <list>
 #include <vector>
-#include "Hitbox.h"
-#include "InputManager.h"
-#include "GameObject.h"
-#include "Text.h"
-#include <iostream>
 
 GE::GameEngine::GameEngine(int fps, std::string windowName) : fps(fps) {
   window = SDL_CreateWindow(windowName.c_str(), 500, 500, 0);

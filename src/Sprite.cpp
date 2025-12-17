@@ -4,27 +4,25 @@
 #include <iostream>
 #include <string>
 
-GE::Sprite::Sprite(int x, int y, int z, int w, int h, int r, std::string src,
+GE::Sprite::Sprite(int x, int y, int z, int r, std::string src,
                    SDL_Renderer *renderer)
-    : Component(),
-    src(src) {
-      
+    : Component(), x(x), y(y), z(z), rotation(r), srcPath(src) {
   float width;
   float height;
   texture = IMG_LoadTexture(renderer, src.c_str());
   SDL_GetTextureSize(texture, &width, &height);
-  rect = {(float)x, (float)y, 1080, 1080};
+  spriteWidth = width;
+  spriteHeight = height;
+  srcRect = {(float)x, (float)y, width, height};
 }
 
 void GE::Sprite::draw(SDL_Renderer *renderer) {
-  SDL_RenderTexture(renderer, texture, NULL, &rect);
+  SDL_RenderTexture(renderer, texture, NULL, &srcRect);
 }
 
 void GE::Sprite::setZ(int z) { this->z = z; }
-int GE::Sprite::getZ() { return z; }
+int GE::Sprite::getZ() const { return z; }
 
-std::string GE::Sprite::getSrc() { return src; }
-
-void GE::Sprite::setSrc(const std::string &src) { this->src = src; }
+std::string GE::Sprite::getSrc() const { return srcPath; }
 
 void GE::Sprite::update(SDL_Renderer *renderer) { draw(renderer); }

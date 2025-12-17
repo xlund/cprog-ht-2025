@@ -8,38 +8,35 @@
 namespace GE {
 class Sprite : public GE::Component {
 public:
-  Sprite(int x, int y, int z, int h, int w, int r, std::string src,
-         SDL_Renderer *renderer);
-  int getX();
-  int getY();
-  int getHeight();
-  int getWidth();
-  int getRotation();
-  void setX(int);
-  void setY(int);
-  void setHeight(int);
-  void setWidth(int);
-  void setRotation(int);
+  Sprite(int x, int y, int z, int r, std::string src, SDL_Renderer *renderer);
+  int getX() const;
+  int getY() const;
+  int getZ() const;
+  int getHeight() const;
+  int getWidth() const;
+  int getRotation() const;
+  void setX(const int);
+  void setY(const int);
+  void setZ(const int);
+  void setHeight(const int);
+  void setWidth(const int);
+  void setRotation(const int);
   void erase();
   void draw(SDL_Renderer *renderer);
   void update(SDL_Renderer *renderer);
-  int getZ();
-  void setZ(int);
-  std::string getSrc();
-  void setSrc(const std::string &);
-  SDL_Texture *getTexture();
-  std::string src{""};
+  std::string getSrc() const;
+  SDL_Texture *getTexture() const;
 
 protected:
   int x{0};
   int y{0};
   int z{0};
-  int height{50};
-  int width{50};
+  int spriteHeight{50};
+  int spriteWidth{50};
   int rotation{0};
-  SDL_Renderer *renderer;
+  std::string srcPath{""};
   SDL_Texture *texture;
-  SDL_FRect rect;
+  SDL_FRect srcRect;
 };
 
 } // namespace GE
