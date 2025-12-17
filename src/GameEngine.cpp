@@ -9,6 +9,7 @@
 #include "InputManager.h"
 #include "GameObject.h"
 #include "Text.h"
+#include <iostream>
 
 GE::GameEngine::GameEngine(int fps) : fps(fps) {
   window = SDL_CreateWindow("Nelda!", 500, 500, 0);
@@ -51,8 +52,11 @@ void GE::GameEngine::removeGameObject(GE::GameObject *object){
 }
 
 void GE::GameEngine::start() {
-  SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
-  TTF_Init();
+  if(!SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO)||!TTF_Init()){
+    std::cerr<<SDL_GetError()<<std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+  
   // Loop
   for(GE::GameObject* object : gameObjects){
     object->setup();
@@ -94,6 +98,7 @@ void GE::GameEngine::start() {
 end_loop:
 
   // Shutdown
+  TTF_Quit();
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
