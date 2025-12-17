@@ -29,6 +29,9 @@ int main(int argc, char *argv[]) {
       9, 1, 48, 48, 50, 50, 0, 0, constants::sample_sprite_sheet, renderer);
   sprite->setCurrentAnimation(
       {{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7}, {0, 8}});
+  GE::AnimatedSprite *sprite2 = new GE::AnimatedSprite(
+      2, 1, 32, 32, 150, 150, 0, 0, constants::sample_sprite_2, renderer);
+  sprite2->setCurrentAnimation({{0, 0}, {0, 1}});
 
   SDL_Event e;
   while (running) {
@@ -40,6 +43,7 @@ int main(int argc, char *argv[]) {
       }
     }
     sprite->update(renderer);
+    sprite2->update(renderer);
     SDL_RenderPresent(renderer);
     Uint64 frameTime = SDL_GetTicks() - frameStart;
     if (frameTime < interval) {
@@ -48,7 +52,6 @@ int main(int argc, char *argv[]) {
   }
 
   SDL_DestroyRenderer(renderer);
-  SDL_DestroyTexture(texture);
   SDL_Quit();
 
   return 0;
