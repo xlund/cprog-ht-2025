@@ -25,6 +25,6 @@ int GE::Sprite::getZ() { return z; }
 
 std::string GE::Sprite::getSrc() { return src; }
 
-void GE::Sprite::setSrc(std::string src) { this->src = src; }
+void GE::Sprite::setSrc(const std::string &src) { this->src = src; }
 
 void GE::Sprite::update(SDL_Renderer *renderer) { draw(renderer); }

@@ -26,7 +26,7 @@ public:
   int getZ();
   void setZ(int);
   std::string getSrc();
-  void setSrc(std::string);
+  void setSrc(const std::string &);
   SDL_Texture *getTexture();
   std::string src{""};
 
