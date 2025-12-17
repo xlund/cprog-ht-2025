@@ -41,13 +41,19 @@ void GE::GameEngine::removeScreenComponent(GE::Component *component) {
   components.erase(i);
 }
 
+void GE::GameEngine::addGameObject(GE::GameObject *object){
+  gameObjects.push_back(object);
+}
+
+void GE::GameEngine::removeGameObject(GE::GameObject *object){
+  auto i = std::find(gameObjects.begin(), gameObjects.end(), object);
+  gameObjects.erase(i);
+}
+
 void GE::GameEngine::start() {
   SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
   // Loop
-  std::vector<GE::Component *> components;
-  std::vector<GE::GameObject *> objects;
-
-  for(GameObject* object : objects){
+  for(GE::GameObject* object : gameObjects){
     object->setup();
   }
 
@@ -56,7 +62,7 @@ void GE::GameEngine::start() {
     GE::InputManager::fetchKeys();
 
     // Process events
-    for(GameObject* object : objects){
+    for(GE::GameObject* object : gameObjects){
       object->update();
     }
     for (GE::Component *component : components) {

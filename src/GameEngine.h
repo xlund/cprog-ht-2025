@@ -7,6 +7,7 @@
 #include "Sprite.h"
 #include <SDL3/SDL.h>
 #include <vector>
+#include "GameObject.h"
 
 namespace GE {
 
@@ -25,6 +26,8 @@ public:
   std::vector<Component *> getScreenComponents();
   void addScreenComponent(GE::Component *);
   void removeScreenComponent(GE::Component *);
+  void addGameObject(GE::GameObject *);
+    void removeGameObject(GE::GameObject *);
   void removeAllScreenComponents();
 
   void Hiting(Hitbox *);
@@ -36,6 +39,8 @@ private:
   SDL_Renderer *renderer;
   SDL_Window *window;
   std::vector<GE::Component *> components;
+  std::vector<GE::GameObject *> gameObjects;
+
 };
 
 } // namespace GE

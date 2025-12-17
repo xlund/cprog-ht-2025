@@ -1,3 +1,5 @@
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
 namespace GE{
     class GameObject
     {
@@ -6,3 +8,5 @@ namespace GE{
         virtual void update(){};
     };
 }
+
+#endif
