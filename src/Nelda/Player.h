@@ -4,7 +4,8 @@
 #include "../GameEngine/GameObject.h"
 #include "../GameEngine/Sprite.h"
 #include "../GameEngine/Hitbox.h"
-#include "Movement.h"
+#include "PlayerMovement.h"
+#include "../GameEngine/GameEngine.h"
 
 namespace GE {
 
@@ -18,7 +19,7 @@ public:
     Player();
 
    
-    void setup() override;
+    void setup(GameEngine*) override;
 
  
     void update() override;

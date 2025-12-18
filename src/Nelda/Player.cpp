@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "../GameEngine/GameEngine.h"
 
 namespace GE {
 
@@ -10,17 +11,17 @@ Player::Player()
 /*
   setup körs en gång. Tänker att här skapas sprite och hitbox samt startposition.
 */
-void Player::setup() {
+void Player::setup(GameEngine* engine) {
 
     //! Startposition - vad är egentligen rimligt
     x = 100.0f;
     y = 100.0f;
 
     //! Hur borde Sprite se ut här?
-    sprite = new Sprite(
-        static_cast<int>(x), static_cast<int>(y), 0,0, "assets/player.png", nullptr             
+    //sprite = new Sprite(
+        //static_cast<int>(x), static_cast<int>(y), 0,0, "assets/player.png", nullptr             
         //! renderer sätts av engine senare?
-    );
+    //);
 
 
     hitbox = new Hitbox(
@@ -40,8 +41,8 @@ void Player::update() {
 
     // Synka sprite med positionrna
     if (sprite) {
-        sprite->setX(static_cast<int>(x));
-        sprite->setY(static_cast<int>(y));
+        //sprite->setX(static_cast<int>(x));
+        //sprite->setY(static_cast<int>(y));
     }
 
     // Synka hitbox med positionerna
