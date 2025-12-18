@@ -1,11 +1,12 @@
 #include "Enemy.h"
 #include "TempObject.h"
 #include "../GameEngine/Sprite.h"
+#include "../GameEngine/GameEngine.h"
 
 Enemy::Enemy(TempObject target) : target(target){}
 
-void Enemy::setup(){
-    
+void Enemy::setup(GE::GameEngine* engine){
+
 }
 
 void Enemy::update(){

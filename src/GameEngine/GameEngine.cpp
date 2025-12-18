@@ -57,6 +57,10 @@ void GE::GameEngine::setFps(const int fps) {
   this->tickInterval = constants::clockSpeed / this->fps;
 }
 
+SDL_Renderer* GE::GameEngine::getRenderer(){
+  return renderer;
+}
+
 int GE::GameEngine::getFps() const { return fps; }
 
 void GE::GameEngine::addComponent(GE::Component *component) {
@@ -85,7 +89,7 @@ void GE::GameEngine::start() {
   
   // Loop
   for(GE::GameObject* object : gameObjects){
-    object->setup();
+    object->setup(this);
   }
 
   while (tick()) {}
@@ -97,3 +101,4 @@ void GE::GameEngine::start() {
   SDL_Quit();
   
 }
+

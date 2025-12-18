@@ -22,7 +22,7 @@ public:
   void removeComponent(GE::Component *);
   void addGameObject(GE::GameObject *);
   void removeGameObject(GE::GameObject *);
-
+  SDL_Renderer* getRenderer();
 private:
   int fps{60};
   int tickInterval{constants::clockSpeed / fps};
