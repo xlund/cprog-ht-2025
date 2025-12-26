@@ -27,6 +27,7 @@ namespace GE {
       std::function<void(Hitbox*)> onExitFunction;
 
       SDL_FRect hitbox;
+      bool debug{false};
   };
 }
 

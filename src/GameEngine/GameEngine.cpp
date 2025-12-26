@@ -23,6 +23,9 @@ bool GE::GameEngine::tick() {
   Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
     GE::InputManager::fetchKeys();
 
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
     // Process events
     for(GE::GameObject* object : gameObjects){
       object->update();
