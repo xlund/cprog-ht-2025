@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <functional>
+#include "InputManager.h"
 
 
 std::vector<GE::Hitbox*> GE::Hitbox::allHitboxes;
@@ -73,5 +74,14 @@ void GE::Hitbox::update(SDL_Renderer* renderer){
             auto i = std::find(collidingHitboxes.begin(), collidingHitboxes.end(), other);
             collidingHitboxes.erase(i);
         }
+    }
+
+    if(GE::InputManager::isKeyPressed("h")){
+        debug = !debug;
+        SDL_Log("t");
+    }
+    if(debug){
+        SDL_SetRenderDrawColor(renderer, 255,0,0,255);
+        SDL_RenderFillRect(renderer,&hitbox);
     }
 }
