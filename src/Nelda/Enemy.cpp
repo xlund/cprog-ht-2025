@@ -38,9 +38,9 @@ void Enemy::update(){
 }
 
 void Enemy::wallDetection(GE::Hitbox* other){
-    SDL_Log("nuddar");
-    if(other->getTag()=="Wall"){
-        y-=(speed+1);
-        SDL_Log("En vägg");
+    while(hitbox->isTuching(other)){
+        y=y-1;
+        hitbox->setPosition(x,y);
     }
+    y=y-1;
 }
