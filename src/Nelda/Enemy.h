@@ -7,7 +7,7 @@
 
 class Enemy : public GE::GameObject{
 public:
-    Enemy(TempObject,int,int);
+    Enemy(TempObject,int,int,int);
     void setup(GE::GameEngine*);
     void update();
 private:

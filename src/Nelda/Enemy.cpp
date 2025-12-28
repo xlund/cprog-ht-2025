@@ -6,7 +6,7 @@
 #include "../GameEngine/InputManager.h"
 #include <iostream>
 
-Enemy::Enemy(TempObject target,int x, int y) : target(target), x(x),y(y){}
+Enemy::Enemy(TempObject target,int x, int y, int speed) : target(target), x(x),y(y),speed(speed){}
 
 void Enemy::setup(GE::GameEngine* engine){
     hitbox = new GE::Hitbox(x,y,100,100);   

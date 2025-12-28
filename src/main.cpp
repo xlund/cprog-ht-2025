@@ -19,7 +19,7 @@
 
 int main(int argc, char *argv[]) {
   GE::GameEngine game = GE::GameEngine("Nelda");
-  game.addGameObject(new Enemy(TempObject(500,500),10,10));
+  game.addGameObject(new Enemy(TempObject(500,500),10,10,1));
   game.start();
   /*
   int interval{constants::clockSpeed / FPS};
