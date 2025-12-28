@@ -88,3 +88,13 @@ void GE::Hitbox::update(SDL_Renderer* renderer){
 bool GE::Hitbox::isTuching(GE::Hitbox* other){
     return SDL_HasRectIntersectionFloat(&hitbox,&other->hitbox);
 }
+
+bool GE::Hitbox::isTuching(std::string tag){
+    bool tuching = false; 
+    for(Hitbox* other : allHitboxes){
+        if(other != this && other->getTag()==tag && tuching == false){
+            tuching = SDL_HasRectIntersectionFloat(&hitbox,&other->hitbox);
+        }
+    }
+    return tuching;
+}

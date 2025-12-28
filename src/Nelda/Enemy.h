@@ -13,8 +13,8 @@ public:
 private:
     int hp;
     int speed;
-    int x;
-    int y;
+    float x;
+    float y;
     int targetX;
     int targetY;
     TempObject target;

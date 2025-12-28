@@ -33,14 +33,15 @@ void Enemy::update(){
         y+=speed;
     }
 
+    while(hitbox->isTuching("Wall")){
+        y=y-0.1;
+        hitbox->setPosition(x,y);
+    }
 
     hitbox->setPosition(x,y);
 }
 
 void Enemy::wallDetection(GE::Hitbox* other){
-    while(hitbox->isTuching(other)){
-        y=y-1;
-        hitbox->setPosition(x,y);
-    }
-    y=y-1;
+
+    //y=y-1;
 }

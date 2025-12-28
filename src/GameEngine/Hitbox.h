@@ -20,6 +20,7 @@ namespace GE {
       void setOnExit(const std::function<void(Hitbox*)> &);
       void update(SDL_Renderer *renderer);
       bool isTuching(Hitbox*);
+      bool isTuching(std::string);
     private:
       static std::vector<Hitbox*> allHitboxes;
       std::vector<Hitbox*> collidingHitboxes;
