@@ -11,6 +11,7 @@
 #include "GameEngine/GameEngine.h"
 #include "Nelda/TempObject.h"
 #include "Nelda/Enemy.h"
+#include "Nelda/Wall.h"
 
 #define SCREEN_WIDTH 1080
 #define SCREEN_HEIGHT 1080
@@ -19,7 +20,8 @@
 
 int main(int argc, char *argv[]) {
   GE::GameEngine game = GE::GameEngine("Nelda");
-  game.addGameObject(new Enemy(TempObject(500,500),10,10,1));
+  game.addGameObject(new Enemy(TempObject(10,500),10,10,1));
+  game.addGameObject(new Wall(0, 200));
   game.start();
   /*
   int interval{constants::clockSpeed / FPS};
