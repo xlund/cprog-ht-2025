@@ -3,10 +3,11 @@
 #include "../GameEngine/GameObject.h"
 #include "TempObject.h"
 #include "../GameEngine/GameEngine.h"
+#include "../GameEngine/Hitbox.h"
 
 class Enemy : public GE::GameObject{
 public:
-    Enemy(TempObject);
+    Enemy(TempObject,int,int,int);
     void setup(GE::GameEngine*);
     void update();
 private:
@@ -17,6 +18,7 @@ private:
     int targetX;
     int targetY;
     TempObject target;
+    GE::Hitbox* hitbox;
 };
 
 #endif

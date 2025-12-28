@@ -78,7 +78,6 @@ void GE::Hitbox::update(SDL_Renderer* renderer){
 
     if(GE::InputManager::isKeyPressed("h")){
         debug = !debug;
-        SDL_Log("t");
     }
     if(debug){
         SDL_SetRenderDrawColor(renderer, 255,0,0,255);
