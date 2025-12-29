@@ -1,3 +1,6 @@
+#ifndef WALL_H
+#define WALL_H
+
 #include "../GameEngine/Hitbox.h"
 #include "../GameEngine/GameObject.h"
 class Wall : public GE::GameObject{
@@ -10,3 +13,5 @@ private:
     int x;
     int y;
 };
+
+#endif

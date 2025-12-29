@@ -5,6 +5,7 @@
 #include "../GameEngine/Hitbox.h"
 #include "../GameEngine/InputManager.h"
 #include <iostream>
+#include "WallDetection.h"
 
 Enemy::Enemy(TempObject target,int x, int y, int speed) : target(target), x(x),y(y),speed(speed){}
 
@@ -12,7 +13,7 @@ void Enemy::setup(GE::GameEngine* engine){
     hitbox = new GE::Hitbox(x,y,100,100);   
     engine->addComponent(hitbox); 
     hitbox->setOnEnter([this](GE::Hitbox* other){
-        wallDetection(other);
+        //wallDetection(other);
     });
     speed = 1;
 }
@@ -33,15 +34,8 @@ void Enemy::update(){
         y+=speed;
     }
 
-    while(hitbox->isTuching("Wall")){
-        y=y-0.1;
-        hitbox->setPosition(x,y);
-    }
+    wallDetection(hitbox,"Wall",x,y);
 
     hitbox->setPosition(x,y);
 }
 
-void Enemy::wallDetection(GE::Hitbox* other){
-
-    //y=y-1;
-}

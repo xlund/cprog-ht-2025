@@ -19,7 +19,7 @@ private:
     int targetY;
     TempObject target;
     GE::Hitbox* hitbox;
-    void wallDetection(GE::Hitbox*);
+    //void wallDetection(GE::Hitbox*);
 };
 
 #endif
