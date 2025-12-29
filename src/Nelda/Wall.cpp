@@ -21,9 +21,13 @@ void Wall::setup(GE::GameEngine* engin){
     float barThickness = (1-barProcentage)/2;
 
     GE::Hitbox* u = new GE::Hitbox(x+(length*barThickness),y,length*barProcentage,(length*barThickness));
-    GE::Hitbox* r = new GE::Hitbox(x+length,y+(length*barThickness),-(length*barThickness),length*barProcentage);
-    GE::Hitbox* d = new GE::Hitbox(x+(length*barThickness),y+length,length*barProcentage,-(length*barThickness));
+    u->setTag("WallUp");
+    GE::Hitbox* r = new GE::Hitbox(x+length-(length*barThickness),y+(length*barThickness),(length*barThickness),length*barProcentage);
+    r->setTag("WallRight");
+    GE::Hitbox* d = new GE::Hitbox(x+(length*barThickness),y+length-(length*barThickness),length*barProcentage,(length*barThickness));
+    d->setTag("WallDown");
     GE::Hitbox* l = new GE::Hitbox(x,y+(length*barThickness),(length*barThickness),length*barProcentage);
+    l->setTag("WallLeft");
 
     hitboxes.push_back(d);
     hitboxes.push_back(u);
