@@ -3,15 +3,18 @@
 
 #include "../GameEngine/Hitbox.h"
 #include "../GameEngine/GameObject.h"
+#include <vector>
 class Wall : public GE::GameObject{
 public:
-    Wall(int,int);
+    Wall(float,float,float);
     void setup(GE::GameEngine*);
     void update();
 private:
+    std::vector<GE::Hitbox*> hitboxes;
     GE::Hitbox* hitbox;
-    int x;
-    int y;
+    float x;
+    float y;
+    float length;
 };
 
 #endif
