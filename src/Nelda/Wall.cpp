@@ -17,10 +17,13 @@ void Wall::setup(GE::GameEngine* engin){
     hitboxes.push_back(l);
     hitboxes.push_back(r);
     */
-    GE::Hitbox* u = new GE::Hitbox(x+(length*0.1),y,length*0.8,-(length/20));
-    GE::Hitbox* l = new GE::Hitbox(x+length,y+(length*0.1),length/20,length*0.8);
-    GE::Hitbox* d = new GE::Hitbox(x+(length*0.1),y+length,length*0.8,(length/20));
-    GE::Hitbox* r = new GE::Hitbox(x,y+(length*0.1),-(length/20),length*0.8);
+    float barProcentage = 0.9;
+    float barThickness = (1-barProcentage)/2;
+
+    GE::Hitbox* u = new GE::Hitbox(x+(length*barThickness),y,length*barProcentage,(length/20));
+    GE::Hitbox* r = new GE::Hitbox(x+length,y+(length*barThickness),-(length/20),length*barProcentage);
+    GE::Hitbox* d = new GE::Hitbox(x+(length*barThickness),y+length,length*barProcentage,-(length/20));
+    GE::Hitbox* l = new GE::Hitbox(x,y+(length*barThickness),(length/20),length*barProcentage);
 
     hitboxes.push_back(d);
     hitboxes.push_back(u);
