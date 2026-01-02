@@ -48,7 +48,7 @@ void Enemy::update(){
         x+=speed;
     }
 
-    wallDetection(hitbox,"Wall",x,y);
+    wallDetection(*hitbox,"Wall",x,y);
 
     hitbox->setPosition(x,y);
 }
