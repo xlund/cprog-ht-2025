@@ -26,8 +26,7 @@ public:
 private:
     Player();
     // Positionenrna  
-    float x {0.0f};
-    float y {0.0f};
+
 
     // Rörelselogik - osäker här?
     Movement movement;

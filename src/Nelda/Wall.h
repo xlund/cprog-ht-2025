@@ -13,8 +13,6 @@ private:
     Wall(float,float,float);
     std::vector<GE::Hitbox*> hitboxes;
     GE::Hitbox* hitbox;
-    float x;
-    float y;
     float length;
 };
 

@@ -8,8 +8,6 @@ class TempObject : public GE::GameObject{
         void getPos(int& ,int&) const;
         void setPos(const int, const int);
     private:
-    int x;
-    int y;
 };
 
 #endif
