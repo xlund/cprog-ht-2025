@@ -1,5 +1,5 @@
 #include "TempObject.h"
-TempObject::TempObject(int x, int y) : x(x),y(y){}
+TempObject::TempObject(int x, int y) : GameObject(x,y){}
 
 void TempObject::getPos(int& x,int& y) const{
     x = this->x;

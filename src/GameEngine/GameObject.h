@@ -9,6 +9,12 @@ namespace GE{
     public:
         virtual void setup(GameEngine*){};
         virtual void update(){};
+
+        protected:
+        GameObject();
+        GameObject(float,float);
+        float x;
+        float y;
     };
 }
 

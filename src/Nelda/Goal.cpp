@@ -6,7 +6,7 @@ Goal* Goal::create(){
     return new Goal();
 }
 
-Goal::Goal() {
+Goal::Goal(){
 }
 
 void Goal::setup(GE::GameEngine* ge) {

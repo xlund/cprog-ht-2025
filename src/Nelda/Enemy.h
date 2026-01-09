@@ -14,8 +14,6 @@ private:
     Enemy(TempObject,int,int,int);
     int hp;
     int speed;
-    float x;
-    float y;
     int targetX;
     int targetY;
     TempObject target;
