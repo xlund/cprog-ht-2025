@@ -4,7 +4,7 @@
 #include "../GameEngine/GameObject.h"
 #include "../GameEngine/Sprite.h"
 #include "../GameEngine/Hitbox.h"
-#include "Movement.h"
+#include "PlayerMovement.h"
 
 namespace GE {
 
