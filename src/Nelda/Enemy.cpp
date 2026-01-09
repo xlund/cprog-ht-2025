@@ -10,6 +10,10 @@
 
 Enemy::Enemy(TempObject target,int x, int y, int speed) : target(target), x(x),y(y),speed(speed){}
 
+Enemy* Enemy::create(TempObject target,int x, int y, int speed){
+    return new Enemy(target,x,y,speed);
+}
+
 void Enemy::setup(GE::GameEngine* engine){
     hitbox = new GE::Hitbox(x,y,100,100);   
     engine->addComponent(hitbox); 
