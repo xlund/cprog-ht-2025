@@ -59,7 +59,7 @@ void GE::Hitbox::setOnExit(const std::function<void(Hitbox*)>& function){
 void GE::Hitbox::update(SDL_Renderer* renderer){
     for(Hitbox* other : allHitboxes){
         bool hasCollided=(std::find(collidingHitboxes.begin(),collidingHitboxes.end(),other) != collidingHitboxes.end());
-        bool touching = SDL_HasRectIntersectionFloat(&hitbox,&other->hitbox);
+        bool touching = isTuching(other);
 
         if(other != this && touching && !hasCollided){
             if(onEnterFunction){
@@ -79,8 +79,22 @@ void GE::Hitbox::update(SDL_Renderer* renderer){
     if(GE::InputManager::isKeyPressed("h")){
         debug = !debug;
     }
-    if(debug){
+    if(debug && renderer != NULL){
         SDL_SetRenderDrawColor(renderer, 255,0,0,255);
         SDL_RenderFillRect(renderer,&hitbox);
     }
+}
+
+bool GE::Hitbox::isTuching(GE::Hitbox* other){
+    return SDL_HasRectIntersectionFloat(&hitbox,&other->hitbox);
+}
+
+bool GE::Hitbox::isTuching(std::string tag){
+    bool tuching = false; 
+    for(Hitbox* other : allHitboxes){
+        if(other != this && other->getTag()==tag && tuching == false){
+            tuching = SDL_HasRectIntersectionFloat(&hitbox,&other->hitbox);
+        }
+    }
+    return tuching;
 }
