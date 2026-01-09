@@ -10,7 +10,7 @@ class Goal : public GameObject {
 public:
     Goal();
 
-    void setup() override;
+    void setup(GE::GameEngine*) override;
     void update() override;
 
     bool isCollected() const;
