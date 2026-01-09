@@ -6,6 +6,10 @@
 
 Wall::Wall(float x,float y,float length) : x(x), y(y),length(length){}
 
+Wall* Wall::create(float x,float y,float length){
+    return new Wall(x,y,length);
+}
+
 void Wall::setup(GE::GameEngine* engin){
     /*GE::Hitbox* d = new GE::Hitbox(x+(length/2),y,length/10,length);
     GE::Hitbox* u = new GE::Hitbox(x-(length/2),y,length/10,length);
