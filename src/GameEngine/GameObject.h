@@ -7,8 +7,12 @@ namespace GE{
     class GameObject
     {
     public:
+        
+        ~GameObject() = default;
         virtual void setup(GameEngine*){};
         virtual void update(){};
+        void setPos(float,float);
+        void getPos(float&, float&);
 
         protected:
         GameObject();
