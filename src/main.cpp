@@ -22,11 +22,12 @@
 int main(int argc, char *argv[]) {
   GE::GameEngine game = GE::GameEngine("Nelda");
   
-  LevelCreator lc = LevelCreator("",10);
+  LevelCreator lc = LevelCreator("./src/Nelda/level.txt",100);
   lc.setGameObject('w',[](){return Wall::create(200,200,100);});
+  lc.setGameObject('e',[](){return Enemy::create(TempObject(400,500),10,10,1);});
+  lc.make(game);
 
-  game.addGameObject(Enemy::create(TempObject(400,500),10,10,1));
-  game.addGameObject(Wall::create(200,200,100));
+
   game.start();
   /*
   int interval{constants::clockSpeed / FPS};

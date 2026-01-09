@@ -5,16 +5,17 @@
 #include <map>
 #include <functional>
 #include "../GameEngine/GameObject.h"
+#include "../GameEngine/GameEngine.h"
 
 class LevelCreator{
     public:
-    LevelCreator(std::string path, double spacing);
+    LevelCreator(std::string path, float spacing);
     void setGameObject(char, std::function<GE::GameObject*()>);
-    void make();
+    void make(GE::GameEngine&);
 
     private:
     std::string path;
-    double spacing;
+    float spacing;
     std::map<char, std::function<GE::GameObject*()>> objectMap;
 };
 
