@@ -8,7 +8,7 @@ namespace GE {
 
 class Goal : public GameObject {
 public:
-    Goal();
+    static Goal* create();
 
     void setup(GE::GameEngine*) override;
     void update() override;
@@ -16,6 +16,7 @@ public:
     bool isCollected() const;
 
 private:
+    Goal();
     float x {0.0f};
     float y {0.0f};
 

@@ -2,6 +2,10 @@
 
 namespace GE {
 
+Goal* Goal::create(){
+    return new Goal();
+}
+
 Goal::Goal() {
 }
 
