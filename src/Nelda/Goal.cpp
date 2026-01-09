@@ -5,7 +5,7 @@ namespace GE {
 Goal::Goal() {
 }
 
-void Goal::setup() {
+void Goal::setup(GE::GameEngine* ge) {
 
     // placera triforce i världen
     x = 400.0f;
