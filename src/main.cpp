@@ -12,6 +12,7 @@
 #include "Nelda/TempObject.h"
 #include "Nelda/Enemy.h"
 #include "Nelda/Wall.h"
+#include "Nelda/LevelCreator.h"
 
 #define SCREEN_WIDTH 1080
 #define SCREEN_HEIGHT 1080
@@ -20,6 +21,10 @@
 
 int main(int argc, char *argv[]) {
   GE::GameEngine game = GE::GameEngine("Nelda");
+  
+  LevelCreator lc = LevelCreator("",10);
+  lc.setGameObject('w',[](){return Wall::create(200,200,100);});
+
   game.addGameObject(Enemy::create(TempObject(400,500),10,10,1));
   game.addGameObject(Wall::create(200,200,100));
   game.start();

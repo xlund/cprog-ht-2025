@@ -7,6 +7,8 @@ namespace GE{
     class GameObject
     {
     public:
+        
+        ~GameObject() = default;
         virtual void setup(GameEngine*){};
         virtual void update(){};
 
