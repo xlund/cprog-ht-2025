@@ -3,6 +3,10 @@
 
 namespace GE {
 
+Player* Player::create(){
+    return new Player();
+}
+
 Player::Player()
     : movement(2.5f) //! spelarens rörelsehastighet - vad är rimligt?
 {

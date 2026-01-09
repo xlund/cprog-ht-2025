@@ -6,10 +6,11 @@
 #include <vector>
 class Wall : public GE::GameObject{
 public:
-    Wall(float,float,float);
+    static Wall* create(float,float,float);
     void setup(GE::GameEngine*);
     void update();
 private:
+    Wall(float,float,float);
     std::vector<GE::Hitbox*> hitboxes;
     GE::Hitbox* hitbox;
     float x;
