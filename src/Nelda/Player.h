@@ -16,15 +16,15 @@ namespace GE {
 */
 class Player : public GameObject {
 public:
-    Player();
+    static Player* create();
 
-   
     void setup(GameEngine*) override;
 
  
     void update() override;
 
 private:
+    Player();
     // Positionenrna  
     float x {0.0f};
     float y {0.0f};
