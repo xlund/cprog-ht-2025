@@ -29,7 +29,7 @@ void Enemy::update(){
     if(targetX<x){
         x-=speed;
     }
-    if(targetX>x){
+    if(targetX>x){git pull
         x+=speed;
     }
     if(targetY<y){
