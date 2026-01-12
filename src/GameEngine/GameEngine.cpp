@@ -21,7 +21,8 @@ GE::GameEngine::GameEngine(int fps, std::string windowName) : fps(fps) {
 }
 GE::GameEngine::GameEngine(std::string windowName) {
   window = SDL_CreateWindow(windowName.c_str(), 1080, 1080, 0);
-  renderer = SDL_CreateRenderer(window, NULL);
+  SDL_Renderer *r = SDL_CreateRenderer(window, NULL);
+  GE::GameEngine::setRenderer(r);
 }
 
 bool GE::GameEngine::tick() {

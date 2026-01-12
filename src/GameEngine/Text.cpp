@@ -48,8 +48,9 @@ void GE::Text::setHeight(const int h) { height = h; }
 
 void GE::Text::draw() { isSeen = true; }
 
-// Prata med dem anrda imorgon!!!!!!!!! om denna renderare
-void GE::Text::update(SDL_Renderer *renderer) {
+void GE::Text::update() {
+
+  SDL_Renderer* renderer = GE::GameEngine::getRenderer();
   if (str.empty()) {
     return;
   }

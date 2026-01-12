@@ -22,7 +22,7 @@ public:
   void draw();
   void hide();
   void erase();
-  void update(SDL_Renderer *);
+  void update();
 
 private:
   std::string str{""};

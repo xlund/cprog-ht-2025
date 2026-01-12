@@ -18,7 +18,7 @@ namespace GE {
       void setDimentions(const float, const float);
       void setOnEnter(const std::function<void(Hitbox*)> &);
       void setOnExit(const std::function<void(Hitbox*)> &);
-      void update(SDL_Renderer *renderer);
+      void update();
       bool isTuching(Hitbox*);
       bool isTuching(std::string);
     private:
