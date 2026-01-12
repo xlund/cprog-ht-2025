@@ -15,7 +15,7 @@ Enemy* Enemy::create(TempObject target,int x, int y, int speed){
 }
 
 void Enemy::setup(GE::GameEngine* engine){
-    hitbox = new GE::Hitbox(x,y,64,64);
+    hitbox = new GE::Hitbox(x,y,32,54);
     sprite = new GE::Sprite(x,y,0,0,constants::enemy_image);
     engine->addComponent(hitbox); 
     hitbox->setOnEnter([this](GE::Hitbox* other){
