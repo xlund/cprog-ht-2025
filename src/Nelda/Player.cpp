@@ -8,11 +8,10 @@ Player* Player::create() {
 }
 
 Player::Player()
-    : movement(2.5f) // rörelsehastighet
-{
+    : movement(2.5f) 
 }
 
-void Player::setup(GameEngine* ge /*engine*/) {
+void Player::setup(GameEngine* ge ) {
 
     // Startposition
     x = 100.0f;
@@ -44,7 +43,7 @@ void Player::update() {
 
     sprite ->draw();
 
-    // Uppdatera rörelse
+
     movement.update(x, y);
 
    
