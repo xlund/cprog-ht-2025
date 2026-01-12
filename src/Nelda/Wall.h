@@ -4,6 +4,7 @@
 #include "../GameEngine/Hitbox.h"
 #include "../GameEngine/GameObject.h"
 #include <vector>
+#include "../GameEngine/Sprite.h"
 class Wall : public GE::GameObject{
 public:
     static Wall* create(float,float,float);
@@ -14,6 +15,7 @@ private:
     std::vector<GE::Hitbox*> hitboxes;
     GE::Hitbox* hitbox;
     float length;
+    GE::Sprite* sprite;
 };
 
 #endif
