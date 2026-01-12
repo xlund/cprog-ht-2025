@@ -1,4 +1,3 @@
-#include "../include/Constants.h"
 #include "Constants.h"
 #include "GameEngine/GameEngine.h"
 #include "Nelda/LevelCreator.h"
@@ -6,13 +5,13 @@
 #include "Nelda/Enemy.h"
 #include "Nelda/Wall.h"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
 
     GE::GameEngine game("Nelda");
 
     LevelCreator lc("./src/Nelda/level.txt", 100);
 
-    // SPELAREN
+    // PLAYER
     lc.setGameObject('p', []() {
         return GE::Player::create();
     });
@@ -27,10 +26,10 @@ int main(int argc, char *argv[]) {
         return Enemy::create(TempObject(400, 500), 10, 10, 1);
     });
 
-    // Skapa alla objekt i spelet
+    // Skapa alla objekt
     lc.make(game);
 
-  
+    // Starta spelet (ALLT ska vara skapat före)
     game.start();
 
     return 0;

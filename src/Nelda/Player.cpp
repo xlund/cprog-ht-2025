@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "../GameEngine/GameEngine.h"
+#include "Constants.h"
 
 namespace GE {
 
@@ -8,54 +9,47 @@ Player* Player::create() {
 }
 
 Player::Player()
-    : movement(2.5f) 
+    : movement(2.5f)
+{
 }
 
-void Player::setup(GameEngine* ge ) {
+void Player::setup(GameEngine* engine) {
 
-    // Startposition
-    x = 100.0f;
-    y = 100.0f;
+    // Startposition (kan även sättas via level)
+    x = 0;
+    y = 0;
 
-    // Skapa sprite
+    // Hitbox (matcha gärna sprite)
+    hitbox = new Hitbox(x, y, 32, 54);
+    hitbox->setTag("Player");
+
+  
     sprite = new Sprite(
-        static_cast<int>(x),
-        static_cast<int>(y),
-        0,  // z-layer
-        0,  
+        x,
+        y,
+        0,
+        0,
         constants::player_sprite
     );
 
-  
-    hitbox = new Hitbox(
-        x,
-        y,
-        64.0f,
-        32.0f
-    );
-
-    hitbox->setTag("Player");
-    ge->addComponent(sprite);
-    ge->addComponent(hitbox);
+    // Registrera ENDAST hitbox i engine
+    engine->addComponent(hitbox);
 }
 
 void Player::update() {
 
-    sprite ->draw();
-
-
+    // Rörelse
     movement.update(x, y);
 
-   
-    if (sprite) {
-        sprite->setX(static_cast<int>(x));
-        sprite->setY(static_cast<int>(y));
-    }
-
     // Synka hitbox
-    if (hitbox) {
-        hitbox->setPosition(x, y);
-    }
+    hitbox->setPosition(x, y);
+
+    // Synka sprite
+    sprite->setX(x);
+    sprite->setY(y);
+
+    //  rita sprite själv
+    sprite->draw();
 }
 
 } // namespace GE
