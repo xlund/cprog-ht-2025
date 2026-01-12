@@ -4,6 +4,7 @@
 #include <string>
 #include <functional>
 #include "InputManager.h"
+#include "GameEngine.h"
 
 
 std::vector<GE::Hitbox*> GE::Hitbox::allHitboxes;
@@ -56,7 +57,7 @@ void GE::Hitbox::setOnExit(const std::function<void(Hitbox*)>& function){
     onExitFunction = function;
 }
 
-void GE::Hitbox::update(SDL_Renderer* renderer){
+void GE::Hitbox::update(){
     for(Hitbox* other : allHitboxes){
         bool hasCollided=(std::find(collidingHitboxes.begin(),collidingHitboxes.end(),other) != collidingHitboxes.end());
         bool touching = isTuching(other);
@@ -79,7 +80,8 @@ void GE::Hitbox::update(SDL_Renderer* renderer){
     if(GE::InputManager::isKeyPressed("h")){
         debug = !debug;
     }
-    if(debug && renderer != NULL){
+    SDL_Renderer *renderer = GE::GameEngine::getRenderer();
+    if(debug &&  renderer!= nullptr){
         SDL_SetRenderDrawColor(renderer, 255,0,0,255);
         SDL_RenderFillRect(renderer,&hitbox);
     }
