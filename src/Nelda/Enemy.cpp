@@ -15,7 +15,8 @@ Enemy* Enemy::create(TempObject target,int x, int y, int speed){
 }
 
 void Enemy::setup(GE::GameEngine* engine){
-    hitbox = new GE::Hitbox(x,y,100,100);   
+    hitbox = new GE::Hitbox(x,y,64,64);
+    sprite = new GE::Sprite(x,y,0,0,constants::enemy_image);
     engine->addComponent(hitbox); 
     hitbox->setOnEnter([this](GE::Hitbox* other){
         //wallDetection(other);
@@ -24,6 +25,7 @@ void Enemy::setup(GE::GameEngine* engine){
 }
 
 void Enemy::update(){
+    
 
     /*target.getPos(targetX,targetY);
     if(targetX<x){
@@ -55,5 +57,8 @@ void Enemy::update(){
     wallDetection(*hitbox,"Wall",x,y);
 
     hitbox->setPosition(x,y);
+    sprite->setX(x);
+    sprite->setY(y);
+    sprite->draw();
 }
 

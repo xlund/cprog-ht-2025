@@ -4,6 +4,7 @@
 #include "TempObject.h"
 #include "../GameEngine/GameEngine.h"
 #include "../GameEngine/Hitbox.h"
+#include "../GameEngine/Sprite.h"
 
 class Enemy : public GE::GameObject{
 public:
@@ -18,6 +19,8 @@ private:
     int targetY;
     TempObject target;
     GE::Hitbox* hitbox;
+    GE::Sprite* sprite;
+    
     //void wallDetection(GE::Hitbox*);
 };
 

@@ -21,6 +21,7 @@ const std::string cool_link{gResPath + "images/sprite-link.jpg"};
 const std::string STANDARD_FONT{gResPath + "fonts/GoogleSansFlex.ttf"};
 
 const std::string level_file{"./src/level.txt"};
+const std::string enemy_image{gResPath + "images/Enemy.png"};
 
 const int clockSpeed{1000};
 } // namespace constants
