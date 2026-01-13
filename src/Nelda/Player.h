@@ -8,17 +8,17 @@
 #include "Game.h"
 #include "Health.h"
 
-
 namespace GE {
 
 class GameEngine;
 
 class Player : public GameObject {
 public:
-    static Player* create();
+  static Player *create(GameState &);
 
-    void setup(GameEngine* engine) override;
-    void update() override;
+  void setup(GameEngine *engine) override;
+  void update() override;
+  void handleMovement();
 
 private:
   Player(GameState &);
@@ -26,16 +26,15 @@ private:
   // Positionenrna
   Health hp;
 
-    float speed {3.0f};
+  float speed{3.0f};
 
-    Sprite* sprite {nullptr};
-    Hitbox* hitbox {nullptr};
+  Sprite *sprite{nullptr};
+  Hitbox *hitbox{nullptr};
 
-    int spriteWidth  {0};
-    int spriteHeight {0};
+  int spriteWidth{0};
+  int spriteHeight{0};
 };
 
 } // namespace GE
-
 
 #endif // PLAYER_H
