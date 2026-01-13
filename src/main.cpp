@@ -20,6 +20,8 @@
 #define FPS 60
 
 int main(int argc, char *argv[]) {
+TTF_Init();
+
   GE::GameEngine game = GE::GameEngine("Nelda");
 
   LevelCreator lc = LevelCreator("./src/Nelda/level.txt", 64);
