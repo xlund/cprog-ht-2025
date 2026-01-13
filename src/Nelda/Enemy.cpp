@@ -1,64 +1,74 @@
 #include "Enemy.h"
-#include "TempObject.h"
-#include "../GameEngine/Sprite.h"
 #include "../GameEngine/GameEngine.h"
 #include "../GameEngine/Hitbox.h"
 #include "../GameEngine/InputManager.h"
-#include <iostream>
+#include "../GameEngine/Sprite.h"
+#include "Game.h"
+#include "Goal.h"
+#include "Health.h"
+#include "TempObject.h"
 #include "WallDetection.h"
-#include "../GameEngine/InputManager.h"
+#include <iostream>
 
-Enemy::Enemy(TempObject target,int x, int y, int speed) : GameObject(x,y), target(target),speed(speed){}
+Enemy::Enemy(TempObject target, int x, int y, int speed, GameState &gs)
+    : GameObject(x, y), speed(speed), target(target), gameState_(gs) {}
 
-Enemy* Enemy::create(TempObject target,int x, int y, int speed){
-    return new Enemy(target,x,y,speed);
+Enemy *Enemy::create(TempObject target, int x, int y, int speed,
+                     GameState &gs) {
+  return new Enemy(target, x, y, speed, gs);
 }
 
-void Enemy::setup(GE::GameEngine* engine){
-    hitbox = new GE::Hitbox(x,y,32,54);
-    sprite = new GE::Sprite(x,y,0,0,constants::enemy_image);
-    engine->addComponent(hitbox); 
-    hitbox->setOnEnter([this](GE::Hitbox* other){
-        //wallDetection(other);
-    });
-    speed = 1;
+Health Enemy::getHealth() { return hp; }
+
+GE::Hitbox *Enemy::getHitbox() const { return hitbox; }
+void Enemy::setup(GE::GameEngine *engine) {
+  hitbox = new GE::Hitbox(x, y, 100, 100);
+  engine->addComponent(hitbox);
+  hitbox->setOnEnter([this](GE::Hitbox *other) {
+    // wallDetection(other);
+    if (other->getTag() == "player") {
+      this->hp.current -= 50;
+      if (this->hp.isDead()) {
+        gameState_.score.add(100);
+      }
+    }
+  });
+  speed = 1;
 }
 
-void Enemy::update(){
-    
+void Enemy::update() {
 
-    /*target.getPos(targetX,targetY);
-    if(targetX<x){
-        x-=speed;
-    }
-    if(targetX>x){
-        x+=speed;
-    }
-    if(targetY<y){
-        y-=speed;
-    }
-    if(targetY>y){
-        y+=speed;
-    }*/
-   
-    if(GE::InputManager::isKeyDown("w")){
-      y-=speed;  
-    }
-    if(GE::InputManager::isKeyDown("s")){
-       y+=speed; 
-    }
-    if(GE::InputManager::isKeyDown("a")){
-      x-=speed;  
-    }
-    if(GE::InputManager::isKeyDown("d")){
-        x+=speed;
-    }
+  /*target.getPos(targetX,targetY);
+  if(targetX<x){
+      x-=speed;
+  }
+  if(targetX>x){
+      x+=speed;
+  }
+  if(targetY<y){
+      y-=speed;
+  }
+  if(targetY>y){
+      y+=speed;
+  }*/
 
-    wallDetection(*hitbox,"Wall",x,y);
+  if (GE::InputManager::isKeyDown("w")) {
+    y -= speed;
+  }
+  if (GE::InputManager::isKeyDown("s")) {
+    y += speed;
+  }
+  if (GE::InputManager::isKeyDown("a")) {
+    x -= speed;
+  }
+  if (GE::InputManager::isKeyDown("d")) {
+    x += speed;
+  }
 
-    hitbox->setPosition(x,y);
     sprite->setX(x);
     sprite->setY(y);
     sprite->draw();
-}
+  wallDetection(*hitbox, "Wall", x, y);
 
+  hitbox->setPosition(x, y);
+}

@@ -8,21 +8,19 @@ namespace GE {
 
 class Goal : public GameObject {
 public:
-    static Goal* create();
+  static Goal *create();
 
-    void setup(GE::GameEngine*) override;
-    void update() override;
+  void setup(GE::GameEngine *) override;
+  void update() override;
 
-    bool isCollected() const;
+  bool isCollected() const;
 
 private:
-    Goal();
-
-    bool collected {false};
-
-    Hitbox* hitbox {nullptr};
+  Goal();
+  bool collected{false};
+  Hitbox *hitbox{nullptr};
 };
 
-}
+} // namespace GE
 
 #endif

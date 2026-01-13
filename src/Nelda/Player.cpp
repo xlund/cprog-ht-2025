@@ -1,58 +1,68 @@
 #include "Player.h"
 #include "../GameEngine/GameEngine.h"
+#include "../GameEngine/InputManager.h"
+#include "WallDetection.h"
+#include "Constants.h"
+
+#include <cmath>
 
 namespace GE {
 
-Player* Player::create(){
+constexpr int TILE_SIZE = 100;
+
+Player* Player::create() {
     return new Player();
 }
 
-Player::Player() :  
-    movement(2.5f) //! spelarens rörelsehastighet - vad är rimligt?
-{
-}
+Player::Player() = default;
 
-/*
-  setup körs en gång. Tänker att här skapas sprite och hitbox samt startposition.
-*/
 void Player::setup(GameEngine* engine) {
 
-    //! Startposition - vad är egentligen rimligt
-    x = 100.0f;
-    y = 100.0f;
+    hitbox = new Hitbox(x, y, TILE_SIZE, TILE_SIZE);
+    hitbox->setTag("Player");
 
-    //! Hur borde Sprite se ut här?
-    //sprite = new Sprite(
-        //static_cast<int>(x), static_cast<int>(y), 0,0, "assets/player.png", nullptr             
-        //! renderer sätts av engine senare?
-    //);
+    constexpr int PLAYER_SPRITE_WIDTH  = 32; //!Skalningen funkar ej
+    constexpr int PLAYER_SPRITE_HEIGHT = 54;
 
+    float scale =
+        static_cast<float>(TILE_SIZE) / PLAYER_SPRITE_HEIGHT;
 
-    hitbox = new Hitbox(
-        x, y,
-        50.0f, 
-        50.0f        //! bredd och höjd - vad borde vi ha här?
+    spriteWidth  =
+        static_cast<int>(std::round(PLAYER_SPRITE_WIDTH  * scale));
+    spriteHeight =
+        static_cast<int>(std::round(PLAYER_SPRITE_HEIGHT * scale));
+
+    sprite = new Sprite(
+        x,
+        y,
+        spriteWidth,
+        spriteHeight,
+        constants::player_sprite
     );
 
-    hitbox->setTag("Player");
+    engine->addComponent(hitbox);
+    engine->addComponent(sprite);
 }
-
 
 void Player::update() {
 
-    //updatering
-    movement.update(x, y);
+    handleMovement();
+    wallDetection(*hitbox, "Wall", x, y);
 
-    // Synka sprite med positionrna
-    if (sprite) {
-        //sprite->setX(static_cast<int>(x));
-        //sprite->setY(static_cast<int>(y));
-    }
+    hitbox->setPosition(x, y);
 
-    // Synka hitbox med positionerna
-    if (hitbox) {
-        hitbox->setPosition(x, y);
-    }
+    sprite->setX(x + (TILE_SIZE - spriteWidth) / 2);
+    sprite->setY(y + (TILE_SIZE - spriteHeight));
+
+    sprite->draw();
 }
 
-} 
+void Player::handleMovement() {
+
+    if (InputManager::isKeyDown("w")) y -= speed;
+    if (InputManager::isKeyDown("s")) y += speed;
+    if (InputManager::isKeyDown("a")) x -= speed;
+    if (InputManager::isKeyDown("d")) x += speed;
+}
+
+} // namespace GE
