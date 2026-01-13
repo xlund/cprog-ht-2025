@@ -1,56 +1,68 @@
 #include "Player.h"
 #include "../GameEngine/GameEngine.h"
+#include "../GameEngine/InputManager.h"
+#include "WallDetection.h"
 #include "Constants.h"
 
+#include <cmath>
+
 namespace GE {
+
+constexpr int TILE_SIZE = 100;
 
 Player* Player::create() {
     return new Player();
 }
 
-Player::Player()
-    : movement(2.5f)
-{
-}
+Player::Player() = default;
 
 void Player::setup(GameEngine* engine) {
 
-    // Startposition (kan även sättas via level)
-    x = 0;
-    y = 0;
-
-    // Hitbox (matcha gärna sprite)
-    hitbox = new Hitbox(x, y, 32, 54);
+    hitbox = new Hitbox(x, y, TILE_SIZE, TILE_SIZE);
     hitbox->setTag("Player");
 
-  
+    constexpr int PLAYER_SPRITE_WIDTH  = 32; //!Skalningen funkar ej
+    constexpr int PLAYER_SPRITE_HEIGHT = 54;
+
+    float scale =
+        static_cast<float>(TILE_SIZE) / PLAYER_SPRITE_HEIGHT;
+
+    spriteWidth  =
+        static_cast<int>(std::round(PLAYER_SPRITE_WIDTH  * scale));
+    spriteHeight =
+        static_cast<int>(std::round(PLAYER_SPRITE_HEIGHT * scale));
+
     sprite = new Sprite(
         x,
         y,
-        0,
-        0,
+        spriteWidth,
+        spriteHeight,
         constants::player_sprite
     );
 
-    // Registrera ENDAST hitbox i engine
     engine->addComponent(hitbox);
     engine->addComponent(sprite);
 }
 
 void Player::update() {
 
-    // Rörelse
-    movement.update(x, y);
+    handleMovement();
+    wallDetection(*hitbox, "Wall", x, y);
 
-    // Synka hitbox
     hitbox->setPosition(x, y);
 
-    // Synka sprite
-    sprite->setX(x);
-    sprite->setY(y);
+    sprite->setX(x + (TILE_SIZE - spriteWidth) / 2);
+    sprite->setY(y + (TILE_SIZE - spriteHeight));
 
-    //  rita sprite själv
     sprite->draw();
+}
+
+void Player::handleMovement() {
+
+    if (InputManager::isKeyDown("w")) y -= speed;
+    if (InputManager::isKeyDown("s")) y += speed;
+    if (InputManager::isKeyDown("a")) x -= speed;
+    if (InputManager::isKeyDown("d")) x += speed;
 }
 
 } // namespace GE

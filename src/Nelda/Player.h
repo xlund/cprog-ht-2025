@@ -4,7 +4,6 @@
 #include "../GameEngine/GameObject.h"
 #include "../GameEngine/Sprite.h"
 #include "../GameEngine/Hitbox.h"
-#include "PlayerMovement.h"
 
 namespace GE {
 
@@ -20,11 +19,17 @@ public:
 private:
     Player();
 
-    Movement movement;
-    Sprite* sprite{nullptr};
-    Hitbox* hitbox{nullptr};
+    void handleMovement();
+
+    float speed {3.0f};
+
+    Sprite* sprite {nullptr};
+    Hitbox* hitbox {nullptr};
+
+    int spriteWidth  {0};
+    int spriteHeight {0};
 };
 
 } // namespace GE
 
-#endif
+#endif // PLAYER_H
