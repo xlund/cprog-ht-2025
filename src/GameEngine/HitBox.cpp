@@ -100,3 +100,20 @@ bool GE::Hitbox::isTuching(std::string tag){
     }
     return tuching;
 }
+
+bool GE::Hitbox::isClicked(){
+    float mx, my;
+    GE::InputManager::getMousePosition(mx,my);
+
+        bool mouseHovering =
+        mx >= hitbox.x &&
+        mx <= hitbox.x + hitbox.w &&
+        my >= hitbox.y &&
+        my <= hitbox.y + hitbox.h;
+
+        if(!mouseHovering){
+            return false;
+        }
+
+        return GE::InputManager::isLeftMousePressed();
+}
