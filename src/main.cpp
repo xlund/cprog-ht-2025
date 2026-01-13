@@ -20,7 +20,6 @@
 #define FPS 60
 
 int main(int argc, char *argv[]) {
-TTF_Init();
 
   GE::GameEngine game = GE::GameEngine("Nelda");
 
