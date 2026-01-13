@@ -7,13 +7,12 @@
 #include "Component.h"
 #include <string>
 namespace GE {
-  class Button : public GE::Component{
+  class Button : public Text{
     public:
       Button(std::string,int,int,int,int);
       void setOnClick(std::function<void()>);
       void update();
     private:
-      GE::Text text;
       GE::Hitbox hitbox;
       std::function<void()> onClick;
 
