@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
 
     GE::GameEngine game("Nelda");
 
-    LevelCreator lc("./src/Nelda/level.txt", 100);
+    LevelCreator lc("./src/Nelda/level2.txt", 100);
 
     // PLAYER
     lc.setGameObject('p', []() {
@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
     // Skapa alla objekt
     lc.make(game);
 
-    // Starta spelet (ALLT ska vara skapat före)
+    // Starta spelet
     game.start();
 
     return 0;

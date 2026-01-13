@@ -34,6 +34,7 @@ void Player::setup(GameEngine* engine) {
 
     // Registrera ENDAST hitbox i engine
     engine->addComponent(hitbox);
+    engine->addComponent(sprite);
 }
 
 void Player::update() {
