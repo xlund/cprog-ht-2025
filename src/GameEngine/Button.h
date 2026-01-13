@@ -2,12 +2,20 @@
 #define BUTTON_H
 
 #include "Text.h"
+#include "Hitbox.h"
 #include <functional>
+#include "Component.h"
+#include <string>
 namespace GE {
-  class Button : public Text {
+  class Button : public Text{
     public:
-      void onClick(std::function<void()>);
-      void onExit(std::function<void()>);
+      Button(std::string,int,int,int,int);
+      void setOnClick(std::function<void()>);
+      void update();
+    private:
+      GE::Hitbox hitbox;
+      std::function<void()> onClick;
+
   };
 }
 

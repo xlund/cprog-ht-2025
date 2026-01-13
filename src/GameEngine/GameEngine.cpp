@@ -18,11 +18,21 @@ GE::GameEngine::GameEngine(int fps, std::string windowName) : fps(fps) {
   window = SDL_CreateWindow(windowName.c_str(), 500, 500, 0);
   SDL_Renderer *r = SDL_CreateRenderer(window, NULL);
   GE::GameEngine::setRenderer(r);
+
+  if (!SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO) || !TTF_Init()) {
+    std::cerr << SDL_GetError() << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
 }
 GE::GameEngine::GameEngine(std::string windowName) {
   window = SDL_CreateWindow(windowName.c_str(), 1080, 1080, 0);
   SDL_Renderer *r = SDL_CreateRenderer(window, NULL);
   GE::GameEngine::setRenderer(r);
+
+  if (!SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO) || !TTF_Init()) {
+    std::cerr << SDL_GetError() << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
 }
 
 bool GE::GameEngine::tick() {
@@ -89,10 +99,7 @@ void GE::GameEngine::removeGameObject(GE::GameObject *object) {
 }
 
 void GE::GameEngine::start() {
-  if (!SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO) || !TTF_Init()) {
-    std::cerr << SDL_GetError() << std::endl;
-    std::exit(EXIT_FAILURE);
-  }
+
 
   // Loop
   for (GE::GameObject *object : gameObjects) {

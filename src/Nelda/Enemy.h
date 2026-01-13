@@ -3,6 +3,7 @@
 #include "../GameEngine/GameEngine.h"
 #include "../GameEngine/GameObject.h"
 #include "../GameEngine/Hitbox.h"
+#include "../GameEngine/Sprite.h"
 #include "Game.h"
 #include "Health.h"
 #include "TempObject.h"
@@ -23,6 +24,7 @@ private:
   int targetY;
   TempObject target;
   GE::Hitbox *hitbox;
+  GE::Sprite* sprite;
   // void wallDetection(GE::Hitbox*);
   GameState &gameState_;
 };

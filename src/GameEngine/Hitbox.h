@@ -21,6 +21,7 @@ namespace GE {
       void update();
       bool isTuching(Hitbox*);
       bool isTuching(std::string);
+      bool isClicked();
     private:
       static std::vector<Hitbox*> allHitboxes;
       std::vector<Hitbox*> collidingHitboxes;
