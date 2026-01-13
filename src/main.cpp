@@ -13,6 +13,7 @@
 #include <cstddef>
 #include <iostream>
 #include <thread>
+#include "GameEngine/Button.h"
 
 #define SCREEN_WIDTH 1080
 #define SCREEN_HEIGHT 1080
@@ -26,6 +27,11 @@ int main(int argc, char *argv[]) {
   lc.setGameObject(
       'e', []() { return Enemy::create(TempObject(400, 500), 10, 10, 1); });
   lc.make(game);
+    GE::Button* b = new GE::Button("hej",200,200,1000,1000);
+    b->setOnClick([](){std::cout<<"soho";});
+    game.addComponent(b);
+
+
 
   game.start();
   GE::AnimatedSprite *sprite = new GE::AnimatedSprite(

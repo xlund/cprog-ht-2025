@@ -10,11 +10,13 @@ namespace GE {
   class Button : public GE::Component{
     public:
       Button(std::string,int,int,int,int);
-      void onClick(std::function<void()>);
+      void setOnClick(std::function<void()>);
       void update();
     private:
       GE::Text text;
       GE::Hitbox hitbox;
+      std::function<void()> onClick;
+
   };
 }
 
