@@ -3,7 +3,9 @@
 #include "GameEngine/AnimatedSprite.h"
 #include "GameEngine/GameEngine.h"
 #include "Nelda/Enemy.h"
+#include "Nelda/Game.h"
 #include "Nelda/LevelCreator.h"
+#include "Nelda/Player.h"
 #include "Nelda/TempObject.h"
 #include "Nelda/Wall.h"
 #include <SDL3/SDL.h>
@@ -19,22 +21,20 @@
 #define FPS 60
 
 int main(int argc, char *argv[]) {
-  GE::GameEngine game = GE::GameEngine("Nelda");
+  GE::GameEngine engine = GE::GameEngine("Nelda");
+  GameState gameState = GameState();
 
   LevelCreator lc = LevelCreator("./src/Nelda/level.txt", 100);
   lc.setGameObject('w', []() { return Wall::create(200, 200, 100); });
-  lc.setGameObject(
-      'e', []() { return Enemy::create(TempObject(400, 500), 10, 10, 1); });
-  lc.make(game);
+  lc.setGameObject('e', [&gameState]() {
+    return Enemy::create(TempObject(400, 500), 10, 10, 1, gameState);
+  });
+  lc.make(engine);
 
-  game.start();
-  GE::AnimatedSprite *sprite = new GE::AnimatedSprite(
-      9, 1, 48, 48, 50, 50, 0, 0, constants::sample_sprite_sheet);
-  sprite->setCurrentAnimation(
-      {{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7}, {0, 8}});
-  GE::AnimatedSprite *sprite2 = new GE::AnimatedSprite(
-      2, 1, 32, 32, 150, 150, 0, 0, constants::sample_sprite_2);
-  sprite2->setCurrentAnimation({{0, 0}, {0, 1}});
+  GE::Player *p = GE::Player::create(gameState);
+  p->setup(&engine);
+
+  engine.start();
 
   return 0;
 }

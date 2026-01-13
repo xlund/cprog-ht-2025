@@ -1,11 +1,13 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../GameEngine/GameObject.h"
-#include "../GameEngine/Sprite.h"
-#include "../GameEngine/Hitbox.h"
-#include "PlayerMovement.h"
 #include "../GameEngine/GameEngine.h"
+#include "../GameEngine/GameObject.h"
+#include "../GameEngine/Hitbox.h"
+#include "../GameEngine/Sprite.h"
+#include "Game.h"
+#include "Health.h"
+#include "PlayerMovement.h"
 
 namespace GE {
 
@@ -16,26 +18,26 @@ namespace GE {
 */
 class Player : public GameObject {
 public:
-    static Player* create();
+  static Player *create(GameState &);
 
-    void setup(GameEngine*) override;
+  void setup(GameEngine *) override;
 
- 
-    void update() override;
+  void update() override;
 
 private:
-    Player();
-    // Positionenrna  
+  Player(GameState &);
+  GameState &gameState_;
+  // Positionenrna
+  Health hp;
 
+  // Rörelselogik - osäker här?
+  Movement movement;
 
-    // Rörelselogik - osäker här?
-    Movement movement;
-
-    // komponenter kopplade till spelare
-    Sprite* sprite {nullptr};
-    Hitbox* hitbox {nullptr};
+  // komponenter kopplade till spelare
+  Sprite *sprite{nullptr};
+  Hitbox *hitbox{nullptr};
 };
 
-} 
+} // namespace GE
 
 #endif
