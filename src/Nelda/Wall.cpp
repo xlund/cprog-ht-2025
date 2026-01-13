@@ -2,6 +2,8 @@
 #include "../GameEngine/Hitbox.h"
 #include "../GameEngine/GameEngine.h"
 #include "../GameEngine/GameObject.h"
+#include "../GameEngine/Sprite.h"
+
 
 
 Wall::Wall(float x,float y,float length) : GameObject(x,y),length(length){}
@@ -37,8 +39,6 @@ void Wall::setup(GE::GameEngine* engin){
     hitboxes.push_back(u);
     hitboxes.push_back(l);
     hitboxes.push_back(r);
-
-
     
     for(GE::Hitbox* h : hitboxes){
         engin->addComponent(h);
@@ -46,7 +46,10 @@ void Wall::setup(GE::GameEngine* engin){
     //hitbox = new GE::Hitbox(x,y,1000,100);
     //hitbox->setTag("Wall");
     //engin->addComponent(hitbox);
+
+    sprite = new GE::Sprite(x,y,0,0,constants::wall_image);
+    
 }
 void Wall::update(){
-
+    sprite->draw();
 }

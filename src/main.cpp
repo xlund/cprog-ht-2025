@@ -29,5 +29,9 @@ int main(int argc, char *argv[]) {
 
   engine.start();
 
+  level.make(engine);
+
+  engine.start();
+
   return 0;
 }
