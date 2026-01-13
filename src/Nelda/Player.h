@@ -1,9 +1,13 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "../GameEngine/GameEngine.h"
 #include "../GameEngine/GameObject.h"
-#include "../GameEngine/Sprite.h"
 #include "../GameEngine/Hitbox.h"
+#include "../GameEngine/Sprite.h"
+#include "Game.h"
+#include "Health.h"
+
 
 namespace GE {
 
@@ -17,9 +21,10 @@ public:
     void update() override;
 
 private:
-    Player();
-
-    void handleMovement();
+  Player(GameState &);
+  GameState &gameState_;
+  // Positionenrna
+  Health hp;
 
     float speed {3.0f};
 
@@ -31,5 +36,6 @@ private:
 };
 
 } // namespace GE
+
 
 #endif // PLAYER_H

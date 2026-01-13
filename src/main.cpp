@@ -1,36 +1,38 @@
 #include "Constants.h"
 #include "GameEngine/GameEngine.h"
-#include "Nelda/LevelCreator.h"
-#include "Nelda/Player.h"
+
 #include "Nelda/Enemy.h"
+#include "Nelda/Game.h"
+#include "Nelda/LevelCreator.h"
+#include "Nelda/TempObject.h"
+#include "Nelda/Player.h"
 #include "Nelda/Wall.h"
+
+
 
 int main(int argc, char* argv[]) {
 
-    GE::GameEngine game("Nelda");
+    GE::GameEngine engine("Nelda");
 
-    LevelCreator lc("./src/Nelda/level2.txt", 100);
+    GameState gameState;
 
-    // PLAYER
-    lc.setGameObject('p', []() {
-        return GE::Player::create();
-    });
+    LevelCreator level("./src/Nelda/level2.txt", 100);
 
-    // Väggar
-    lc.setGameObject('w', []() {
+    level.setGameObject('w', []() {
         return Wall::create(200, 200, 100);
     });
 
-    // Fiender
-    lc.setGameObject('e', []() {
-        return Enemy::create(TempObject(400, 500), 10, 10, 1);
+    level.setGameObject('p', []() {
+        return GE::Player::create();
     });
 
-    // Skapa alla objekt
-    lc.make(game);
+    level.setGameObject('e', [&gameState]() {
+        return Enemy::create(TempObject(400, 500), 10, 10, 1, gameState);
+    });
 
-    // Starta spelet
-    game.start();
+    level.make(engine);
+
+    engine.start();
 
     return 0;
 }
