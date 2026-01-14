@@ -20,7 +20,9 @@ public:
   int getFps() const;
   void addComponent(GE::Component *);
   void removeComponent(GE::Component *);
+  void clearComponent();
   void addGameObject(GE::GameObject *);
+  void clearGameobjects();
   void removeGameObject(GE::GameObject *);
   static SDL_Renderer *getRenderer();
   static void setRenderer(SDL_Renderer *r);

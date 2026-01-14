@@ -8,11 +8,19 @@
 
 LevelCreator::LevelCreator(std::string path, float spacing) : path(path), spacing(spacing){}
 
+LevelCreator::LevelCreator(const LevelCreator& other)
+    : path(other.path),
+      spacing(other.spacing),
+      objectMap(other.objectMap)
+{
+}
+
 void LevelCreator::setGameObject(char c, std::function<GE::GameObject*()> creator){
     objectMap[c] = creator;    
 }
 
 void LevelCreator::make(GE::GameEngine &ge){
+    
     std::fstream file(path);
     if(!file.is_open()){
         throw std::invalid_argument("Level-Fil existerar ej");
@@ -33,5 +41,6 @@ void LevelCreator::make(GE::GameEngine &ge){
         }
         ++y;
     }
-
+    file.clear();
+    file.close();
 }

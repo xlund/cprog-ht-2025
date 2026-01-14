@@ -98,6 +98,15 @@ void GE::GameEngine::removeGameObject(GE::GameObject *object) {
   gameObjects.erase(i);
 }
 
+void GE::GameEngine::clearGameobjects(){
+  gameObjects.clear();
+}
+
+void GE::GameEngine::clearComponent(){
+  components.clear();
+}
+
+
 void GE::GameEngine::start() {
 
 

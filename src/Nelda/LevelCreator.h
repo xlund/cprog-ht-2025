@@ -10,6 +10,7 @@
 class LevelCreator{
     public:
     LevelCreator(std::string path, float spacing);
+    LevelCreator(const LevelCreator&);
     void setGameObject(char, std::function<GE::GameObject*()>);
     void make(GE::GameEngine&);
 
