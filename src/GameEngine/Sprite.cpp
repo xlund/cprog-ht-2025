@@ -7,8 +7,14 @@
 GE::Sprite::Sprite(int x, int y, int z, int r, std::string src)
     : Component(), x(x), y(y), z(z), rotation(r), srcPath(src) {
 
+  std::cout << "Creating sprite: " << src << std::endl;
   SDL_Renderer *renderer = GE::GameEngine::getRenderer();
   texture = IMG_LoadTexture(renderer, src.c_str());
+  if (!renderer) {
+    std::cerr << "Renderer is null when creating sprite: " << src << "\n";
+    texture = nullptr;
+    return;
+  }
   if (!texture) {
     std::cerr << "Failed to load texture: " << src << "\n";
     return;
