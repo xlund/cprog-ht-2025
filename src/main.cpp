@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     [&gameState]() { return Player::create(gameState); }
     );
   level.setGameObject('e', [&gameState]() {
-    return Enemy::create(TempObject(400, 500), 10, 10, 1, gameState);
+    return Enemy::create(nullptr, 10, 10, 1, gameState);
   });
 
   level.make(engine);
