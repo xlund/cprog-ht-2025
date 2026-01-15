@@ -10,7 +10,7 @@
 namespace GE {
 
 constexpr int TILE_SIZE = 100;
-Player::Player(GameState& gs) : hp(Health{100, 100}), gameState_(gs){};
+Player::Player(GameState& gs) : gameState_(gs), hp(100, 100){};
 
 Player *Player::create(GameState &gs) { return new Player(gs); }
 

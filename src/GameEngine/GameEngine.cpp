@@ -50,13 +50,6 @@ bool GE::GameEngine::tick() {
     component->update();
   }
 
-  if (GE::InputManager::isKeyPressed("c")) {
-    SDL_Log("Creating screen component");
-    Sprite *sprite = new GE::Sprite(0, 0, 0, 0, constants::cool_link);
-    components.push_back(sprite);
-    SDL_Log("Len: %ld", components.size());
-  }
-
   if (GE::InputManager::isKeyPressed("q")) {
     return false;
   }
