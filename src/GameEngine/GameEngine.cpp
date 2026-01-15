@@ -93,7 +93,6 @@ void GE::GameEngine::removeGameObject(GE::GameObject *object) {
 
 void GE::GameEngine::start() {
 
-
   // Loop
   for (GE::GameObject *object : gameObjects) {
     object->setup(this);
@@ -101,6 +100,8 @@ void GE::GameEngine::start() {
 
   while (tick()) {
   }
+
+  gameObjects.clear();
 
   // Shutdown
   TTF_Quit();
