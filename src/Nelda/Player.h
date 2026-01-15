@@ -21,25 +21,25 @@ private:
     void handleMovementX();
     void handleMovementY();
 
-    // Helpers
+    
     int hitboxX() const;
     int hitboxY() const;
 
     GameState& gameState_;
 
-    // Stats
+    
     Health hp;
     float speed{3.0f};
 
-    // Sprite
+   
     GE::Sprite* sprite{nullptr};
     int spriteWidth{0};
     int spriteHeight{0};
 
-    // Tight feet hitbox
+    
     GE::Hitbox* hitbox{nullptr};
     int hitboxWidth{0};
     int hitboxHeight{0};
 };
 
-#endif // PLAYER_H
+#endif 
