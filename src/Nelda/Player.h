@@ -8,33 +8,31 @@
 #include "Game.h"
 #include "Health.h"
 
-namespace GE {
-
-class GameEngine;
-
-class Player : public GameObject {
+class Player : public GE::GameObject {
 public:
-  static Player *create(GameState &);
+    static Player* create(GameState&);
 
-  void setup(GameEngine *engine) override;
-  void update() override;
-  void handleMovement();
+    void setup(GE::GameEngine* engine) override;
+    void update() override;
 
 private:
-  Player(GameState &);
-  GameState &gameState_;
-  // Positionenrna
-  Health hp;
+    Player(GameState&);
 
-  float speed{3.0f};
+    void handleMovement();
 
-  Sprite *sprite{nullptr};
-  Hitbox *hitbox{nullptr};
+    GameState& gameState_;
 
-  int spriteWidth{0};
-  int spriteHeight{0};
+    Health hp;
+
+    float speed{3.0f};
+
+    GE::Sprite* sprite{nullptr};
+    int spriteWidth{0};
+    int spriteHeight{0};
+
+    GE::Hitbox* hitbox{nullptr};
+    int hitboxWidth{0};
+    int hitboxHeight{0};
 };
 
-} // namespace GE
-
-#endif // PLAYER_H
+#endif 

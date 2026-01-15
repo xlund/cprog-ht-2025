@@ -18,9 +18,10 @@ int main(int argc, char *argv[]) {
 
   level.setGameObject('w', []() { return Wall::create(200, 200, 64); });
 
-  level.setGameObject('p',
-                      [&gameState]() { return GE::Player::create(gameState); });
-
+  level.setGameObject(
+    'p',
+    [&gameState]() { return Player::create(gameState); }
+    );
   level.setGameObject('e', [&gameState]() {
     return Enemy::create(TempObject(400, 500), 10, 10, 1, gameState);
   });
