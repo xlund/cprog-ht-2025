@@ -6,6 +6,10 @@
 #include <stdexcept>
 
 
+GE::Button* GE::Button::create(std::string text, int x,int y,int w,int h){
+    return new Button(text,x,y,w,h);
+}
+
 GE::Button::Button(std::string text, int x,int y,int w,int h) : 
 Text(text,x,y),
 hitbox(x,y,w,h){
