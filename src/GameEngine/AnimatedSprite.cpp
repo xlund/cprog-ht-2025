@@ -3,6 +3,12 @@
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 
+GE::AnimatedSprite* GE::AnimatedSprite::create(int cols, int rows, int frameWidth, int frameHeight, int x,
+                 int y, int z, int r, std::string src){
+    return new GE::AnimatedSprite(cols,rows,frameWidth,frameHeight,x,y,z,r,src);
+}
+
+
 GE::AnimatedSprite::AnimatedSprite(int cols, int rows, int frameWidth,
                                    int frameHeight, int x, int y, int z, int r,
                                    std::string src)
