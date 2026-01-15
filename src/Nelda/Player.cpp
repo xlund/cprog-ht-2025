@@ -39,13 +39,12 @@ void Player::setup(GameEngine *engine) {
 void Player::update() {
 
   handleMovement();
-  wallDetection(*hitbox, "Wall", x, y);
 
   hitbox->setPosition(x, y);
 
   sprite->setX(x + (TILE_SIZE - spriteWidth) / 2);
   sprite->setY(y + (TILE_SIZE - spriteHeight));
-
+  wallDetection(*hitbox, "Wall", x, y);
   sprite->draw();
 }
 
