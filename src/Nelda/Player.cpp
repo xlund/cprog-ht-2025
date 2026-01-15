@@ -35,13 +35,7 @@ void Player::setup(GE::GameEngine* engine) {
     );
 
 
-    hitboxWidth  = static_cast<int>(spriteWidth  * 0.6f);
-    hitboxHeight = static_cast<int>(spriteHeight * 0.35f);
-
-    hitbox = GE::Hitbox::create(hitboxX(),
-        hitboxY(),
-        hitboxWidth,
-        hitboxHeight);
+    hitbox = GE::Hitbox::create(x,y,spriteWidth,spriteHeight);
 
     hitbox->setTag("player");
 
@@ -56,9 +50,10 @@ void Player::update() {
     if (GE::InputManager::isKeyDown("a")) x -= speed;
     if (GE::InputManager::isKeyDown("d")) x += speed;
 
-    wallDetection(*hitbox, "Wall", x, y);
 
     hitbox->setPosition(x, y);
+
+    wallDetection(*hitbox, "Wall", x, y);
 
     sprite->setX(x);
     sprite->setY(y);
