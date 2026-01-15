@@ -9,6 +9,9 @@
 
 std::vector<GE::Hitbox*> GE::Hitbox::allHitboxes;
 
+GE::Hitbox* GE::Hitbox::create(float x, float y, float width, float height){
+    return new Hitbox(x,y,width,height);
+}
 
 GE::Hitbox::Hitbox(float x, float y, float width, float height){
     hitbox={x,y,width,height};

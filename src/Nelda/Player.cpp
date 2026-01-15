@@ -40,12 +40,10 @@ void Player::setup(GE::GameEngine* engine) {
     hitboxWidth  = static_cast<int>(spriteWidth  * 0.6f);
     hitboxHeight = static_cast<int>(spriteHeight * 0.35f);
 
-    hitbox = new GE::Hitbox(
-        hitboxX(),
+    hitbox = GE::Hitbox::create(hitboxX(),
         hitboxY(),
         hitboxWidth,
-        hitboxHeight
-    );
+        hitboxHeight);
 
     hitbox->setTag("player");
 

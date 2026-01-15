@@ -16,7 +16,7 @@ namespace GE {
     Button(std::string,int,int,int,int);
     Button(const Button&)=delete;
     Button& operator=(const Button&)=delete;
-      GE::Hitbox hitbox;
+      GE::Hitbox* hitbox;
       std::function<void()> onClick;
 
   };

@@ -11,8 +11,8 @@ GE::Button* GE::Button::create(std::string text, int x,int y,int w,int h){
 }
 
 GE::Button::Button(std::string text, int x,int y,int w,int h) : 
-Text(text,x,y),
-hitbox(x,y,w,h){
+Text(text,x,y){
+    hitbox = Hitbox::create(x,y,w,h);
 }
 
 void GE::Button::setOnClick(std::function<void()> func){
@@ -25,7 +25,7 @@ void GE::Button::update(){
     setColor(255,255,255,255);
     Text::update();
 
-    bool isClicked = hitbox.isClicked();
+    bool isClicked = hitbox->isClicked();
     if(isClicked && onClick){
         onClick();
     }

@@ -13,7 +13,7 @@ void Goal::setup(GE::GameEngine *ge) {
   y = 300.0f;
 
   // Skapa hitbox (syns ej, men används för kollision)
-  hitbox = new Hitbox(x, y, 40.0f, 40.0f);
+  hitbox = GE::Hitbox::create(x, y, 40.0f, 40.0f);
 
   hitbox->setTag("Goal");
 }
