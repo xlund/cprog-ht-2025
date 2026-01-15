@@ -9,12 +9,12 @@ GE::Sprite::Sprite(int x, int y, int z, int r, std::string src)
 
   std::cout << "Creating sprite: " << src << std::endl;
   SDL_Renderer *renderer = GE::GameEngine::getRenderer();
-  texture = IMG_LoadTexture(renderer, src.c_str());
   if (!renderer) {
     std::cerr << "Renderer is null when creating sprite: " << src << "\n";
     texture = nullptr;
     return;
   }
+  texture = IMG_LoadTexture(renderer, src.c_str());
   if (!texture) {
     std::cerr << "Failed to load texture: " << src << "\n";
     return;
