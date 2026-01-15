@@ -26,16 +26,24 @@ void Player::setup(GE::GameEngine* engine) {
     spriteWidth  = static_cast<int>(std::round(PLAYER_SPRITE_WIDTH  * scale));
     spriteHeight = static_cast<int>(std::round(PLAYER_SPRITE_HEIGHT * scale));
 
-    hitbox = new GE::Hitbox(x, y, spriteWidth, spriteHeight);
-    hitbox->setTag("player");
-
-    sprite = new GE::Sprite(
+    sprite = GE::Sprite::create(
         x,
         y,
         spriteWidth,
         spriteHeight,
         constants::player_sprite
     );
+
+
+    hitboxWidth  = static_cast<int>(spriteWidth  * 0.6f);
+    hitboxHeight = static_cast<int>(spriteHeight * 0.35f);
+
+    hitbox = GE::Hitbox::create(hitboxX(),
+        hitboxY(),
+        hitboxWidth,
+        hitboxHeight);
+
+    hitbox->setTag("player");
 
     engine->addComponent(hitbox);
     engine->addComponent(sprite);

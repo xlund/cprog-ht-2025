@@ -15,6 +15,8 @@ public:
 protected:
   GameObject();
   GameObject(float, float);
+  GameObject(const GameObject&) = delete;
+  GameObject& operator=(const GameObject&)=delete;
   float x;
   float y;
 };

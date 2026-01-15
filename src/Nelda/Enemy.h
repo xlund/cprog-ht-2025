@@ -10,19 +10,19 @@
 
 class Enemy : public GE::GameObject {
 public:
-  static Enemy *create(TempObject, int, int, int, GameState &);
+  static Enemy *create(GE::GameObject*, int, int, int, GameState &);
   void setup(GE::GameEngine *);
   void update();
   GE::Hitbox *getHitbox() const;
   Health getHealth();
 
 private:
-  Enemy(TempObject, int, int, int, GameState &);
+  Enemy(GE::GameObject*, int, int, int, GameState &);
   Health hp;
   int speed;
   int targetX;
   int targetY;
-  TempObject target;
+  GE::GameObject* target;
   GE::Hitbox *hitbox;
   GE::Sprite* sprite;
   // void wallDetection(GE::Hitbox*);
