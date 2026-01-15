@@ -1,8 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../GameEngine/GameEngine.h"
 #include "../GameEngine/GameObject.h"
+#include "../GameEngine/GameEngine.h"
 #include "../GameEngine/Hitbox.h"
 #include "../GameEngine/Sprite.h"
 #include "Game.h"
@@ -18,21 +18,28 @@ public:
 private:
     Player(GameState&);
 
-    void handleMovement();
+    void handleMovementX();
+    void handleMovementY();
+
+    // Helpers
+    int hitboxX() const;
+    int hitboxY() const;
 
     GameState& gameState_;
 
+    // Stats
     Health hp;
-
     float speed{3.0f};
 
+    // Sprite
     GE::Sprite* sprite{nullptr};
     int spriteWidth{0};
     int spriteHeight{0};
 
+    // Tight feet hitbox
     GE::Hitbox* hitbox{nullptr};
     int hitboxWidth{0};
     int hitboxHeight{0};
 };
 
-#endif 
+#endif // PLAYER_H
