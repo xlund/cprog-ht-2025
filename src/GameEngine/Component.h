@@ -5,8 +5,6 @@
 namespace GE {
 class Component {
 public:
-  Component();
-  Component(int, int, int);
   virtual void update() = 0;
   int getX() const;
   int getY() const;
@@ -16,6 +14,10 @@ public:
   void setRotation(const int);
 
 protected:
+  Component();
+  Component(int, int, int);
+  Component(const Component&) = delete;
+  Component& operator=(const Component&)=delete;
   float x;
   float y;
   float rotation;
