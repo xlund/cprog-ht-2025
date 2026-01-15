@@ -23,7 +23,7 @@ Health Enemy::getHealth() { return hp; }
 GE::Hitbox *Enemy::getHitbox() const { return hitbox; }
 void Enemy::setup(GE::GameEngine *engine) {
   hitbox = GE::Hitbox::create(x,y,32,54);
-  sprite = new GE::Sprite(x,y,0,0,constants::enemy_image);
+  sprite = GE::Sprite::create(x,y,0,0,constants::enemy_image);
   engine->addComponent(hitbox);
   hitbox->setOnEnter([this](GE::Hitbox *other) {
     // wallDetection(other);

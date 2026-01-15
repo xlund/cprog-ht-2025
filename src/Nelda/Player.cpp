@@ -28,7 +28,7 @@ void Player::setup(GE::GameEngine* engine) {
     spriteWidth  = static_cast<int>(std::round(PLAYER_SPRITE_WIDTH  * scale));
     spriteHeight = static_cast<int>(std::round(PLAYER_SPRITE_HEIGHT * scale));
 
-    sprite = new GE::Sprite(
+    sprite = GE::Sprite::create(
         x,
         y,
         spriteWidth,

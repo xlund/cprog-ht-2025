@@ -9,7 +9,7 @@ namespace GE {
 
 class Sprite : public GE::Component {
 public:
-  Sprite(int x, int y, int z, int r, std::string src);
+  static Sprite* create(int x, int y, int z, int r, std::string src);
   ~Sprite();
 
   int getX() const;
@@ -34,6 +34,9 @@ public:
   SDL_Texture *getTexture() const;
 
 protected:
+  Sprite(int x, int y, int z, int r, std::string src);
+  Sprite(const Sprite&) = delete;
+  Sprite& operator=(const Sprite&) = delete;
   int x{0};
   int y{0};
   int z{0};

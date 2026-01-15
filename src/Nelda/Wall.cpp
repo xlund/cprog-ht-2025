@@ -47,7 +47,7 @@ void Wall::setup(GE::GameEngine* engin){
     //hitbox->setTag("Wall");
     //engin->addComponent(hitbox);
 
-    sprite = new GE::Sprite(x,y,0,0,constants::wall_image);
+    sprite = GE::Sprite::create(x,y,0,0,constants::wall_image);
     
 }
 void Wall::update(){
