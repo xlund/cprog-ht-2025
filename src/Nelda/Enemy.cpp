@@ -67,10 +67,10 @@ void Enemy::update() {
     x += speed;
   }
 
+
+  hitbox->setPosition(x, y);
+  wallDetection(*hitbox, "Wall", x, y);
   sprite->setX(x);
   sprite->setY(y);
   sprite->draw();
-  wallDetection(*hitbox, "Wall", x, y);
-
-  hitbox->setPosition(x, y);
 }
