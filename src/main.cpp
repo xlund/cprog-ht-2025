@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 
   GameState gameState;
 
-  LevelCreator level("./src/Nelda/level2.txt", 64);
+  LevelCreator level("./src/Nelda/level.txt", 64);
 
   level.setGameObject('w', []() { return Wall::create(200, 200, 64); });
 
