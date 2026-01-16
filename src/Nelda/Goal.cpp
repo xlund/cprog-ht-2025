@@ -2,11 +2,11 @@
 #include "Game.h"
 #include <iostream>
 
-Goal* Goal::create(GE::GameEngine* ge,Game* game) {
-    return new Goal(ge,game);
+Goal* Goal::create(Game* game) {
+    return new Goal(game);
 }
 
-Goal::Goal(GE::GameEngine* ge,Game* game): GameObject(ge),game(game){}
+Goal::Goal(Game* game) : game(game){}
 
 void Goal::setup(GE::GameEngine* engine) {
     hitbox = GE::Hitbox::create(x, y, 64.0f, 64.0f, engine);

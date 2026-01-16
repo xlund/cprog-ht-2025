@@ -9,7 +9,7 @@
 
 class Enemy : public GE::GameObject {
 public:
-  static Enemy *create(GE::GameObject*, int, GameState &,GE::GameEngine*);
+  static Enemy *create(GE::GameObject*, int, GameState &);
   ~Enemy();
   void setup(GE::GameEngine *);
   void update();
@@ -17,7 +17,7 @@ public:
   Health getHealth();
 
 private:
-  Enemy(GE::GameObject*, int, GameState &, GE::GameEngine*);
+  Enemy(GE::GameObject*, int, GameState &);
   Health hp;
   int speed;
   int targetX;

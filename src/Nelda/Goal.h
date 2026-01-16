@@ -8,7 +8,7 @@ class Game;   // forward declaration
 
 class Goal : public GE::GameObject {
 public:
-    static Goal* create(GE::GameEngine*,Game* game);
+    static Goal* create(Game* game);
 
     ~Goal() {}
     void setup(GE::GameEngine* engine) override;
@@ -18,7 +18,7 @@ public:
     bool isCollected() const;
 
 private:
-    Goal(GE::GameEngine*,Game* game);
+    Goal(Game* game);
 
     Game* game;
     bool collected{false};
