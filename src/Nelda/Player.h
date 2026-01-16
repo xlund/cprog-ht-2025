@@ -10,7 +10,7 @@
 
 class Player : public GE::GameObject {
 public:
-    static Player* create(GameState&);
+    static Player* create(GameState&,GE::GameEngine*);
 
     ~Player();
 
@@ -18,7 +18,7 @@ public:
     void update() override;
 
 private:
-    Player(GameState&);
+    Player(GameState&,GE::GameEngine*);
 
     GameState& gameState_;
 

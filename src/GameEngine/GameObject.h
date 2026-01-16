@@ -13,10 +13,11 @@ public:
   void getPos(float &, float &);
 
 protected:
-  GameObject();
-  GameObject(float, float);
+  GameObject(GameEngine*);
+  GameObject(GameEngine*,float, float);
   GameObject(const GameObject&) = delete;
   GameObject& operator=(const GameObject&)=delete;
+  GameEngine* gameEngine;
   float x;
   float y;
 };

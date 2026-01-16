@@ -1,13 +1,14 @@
 #include "Goal.h"
 
-Goal* Goal::create() {
-    return new Goal();
+Goal* Goal::create(GE::GameEngine* ge) {
+    return new Goal(ge);
 }
 
-Goal::Goal() {}
+Goal::Goal(GE::GameEngine* ge): GameObject(ge){}
 
 Goal::~Goal() {
   delete hitbox;
+  gameEngine->removeGameObject(this);
 }
 
 void Goal::setup(GE::GameEngine* ge) {

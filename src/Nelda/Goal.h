@@ -7,7 +7,7 @@
 
 class Goal : public GE::GameObject {
 public:
-    static Goal* create();
+    static Goal* create(GE::GameEngine*);
 
     ~Goal();
 
@@ -17,8 +17,7 @@ public:
     bool isCollected() const;
 
 private:
-    Goal();
-
+    Goal(GE::GameEngine*);
     bool collected{false};
     GE::Hitbox* hitbox{nullptr};
 };
