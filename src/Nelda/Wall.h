@@ -8,11 +8,11 @@
 class Wall : public GE::GameObject{
 public:
     ~Wall();
-    static Wall* create(float,float,float,GE::GameEngine*);
+    static Wall* create(float,float,float);
     void setup(GE::GameEngine*);
     void update();
 private:
-    Wall(float,float,float, GE::GameEngine*);
+    Wall(float,float,float);
     std::vector<GE::Hitbox*> hitboxes;
     float length;
     GE::Sprite* sprite;

@@ -15,11 +15,10 @@ public:
   void setToDelete();
 
 protected:
-  GameObject(GameEngine*);
-  GameObject(GameEngine*,float, float);
+  GameObject();
+  GameObject(float, float);
   GameObject(const GameObject&) = delete;
   GameObject& operator=(const GameObject&)=delete;
-  GameEngine* gameEngine;
   float x;
   float y;
   bool deleteable{false};

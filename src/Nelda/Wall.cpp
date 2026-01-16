@@ -6,10 +6,10 @@
 
 
 
-Wall::Wall(float x,float y,float length,GE::GameEngine* ge) : GameObject(ge),length(length){}
+Wall::Wall(float x,float y,float length) : length(length){}
 
-Wall* Wall::create(float x,float y,float length, GE::GameEngine* ge){
-    return new Wall(x,y,length,ge);
+Wall* Wall::create(float x,float y,float length){
+    return new Wall(x,y,length);
 }
 
 Wall::~Wall(){

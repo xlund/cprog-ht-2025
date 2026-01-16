@@ -16,11 +16,11 @@ int main(int argc, char *argv[]) {
 
   LevelCreator level("./src/Nelda/level.txt", 64);
 
-  level.setGameObject('w', [&engine]() { return Wall::create(200, 200, 64,&engine); });
+  level.setGameObject('w', []() { return Wall::create(200, 200, 64); });
 
-  level.setGameObject('p', [&game, &engine]() { return Player::create(game.state(),&engine); });
-  level.setGameObject('e', [&game,&engine]() {
-    return Enemy::create(nullptr, 1, game.state(),&engine);
+  level.setGameObject('p', [&game]() { return Player::create(game.state()); });
+  level.setGameObject('e', [&game]() {
+    return Enemy::create(nullptr, 1, game.state());
   });
 
   level.make(engine);
