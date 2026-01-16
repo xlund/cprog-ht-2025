@@ -1,27 +1,27 @@
 #include "Goal.h"
+#include "Game.h"
+#include <iostream>
 
-Goal* Goal::create(GE::GameEngine* ge) {
-    return new Goal(ge);
+Goal* Goal::create(GE::GameEngine* ge,Game* game) {
+    return new Goal(ge,game);
 }
 
-Goal::Goal(GE::GameEngine* ge): GameObject(ge){}
+Goal::Goal(GE::GameEngine* ge,Game* game): GameObject(ge),game(game){}
 
-Goal::~Goal() {
-  delete hitbox;
-}
+void Goal::setup(GE::GameEngine* engine) {
+    hitbox = GE::Hitbox::create(x, y, 64.0f, 64.0f, engine);
+    hitbox->setTag("Goal");
 
-void Goal::setup(GE::GameEngine* ge) {
-    x = 400.0f;
-    y = 300.0f;
-
-  // Skapa hitbox (syns ej, men används för kollision)
-  hitbox = GE::Hitbox::create(x, y, 40.0f, 40.0f,ge);
-
-  hitbox->setTag("Goal");
+    hitbox->setOnEnter([this](GE::Hitbox* other) {
+        if (other->getTag() == "player" && !collected) {
+            collected = true;
+            game->winGame();
+        }
+    });
 }
 
 void Goal::update() {
-    if (collected) return;
+    hitbox->setPosition(x, y);
 }
 
 bool Goal::isCollected() const {

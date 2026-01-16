@@ -15,6 +15,10 @@ GE::Text *Score::getText() const { return text_; }
 
 int Score::value() const { return score_; }
 
+void Score::setText(const std::string& text) {
+    text_->setString(text);
+}
+
 Score::Score(GE::GameEngine &ge) {
   std::cout << "Create score display\n";
   text_ = GE::Text::create("Score: " + std::to_string(score_), 10, 600, &ge);

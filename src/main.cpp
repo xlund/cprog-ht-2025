@@ -5,6 +5,7 @@
 #include "Nelda/Game.h"
 #include "Nelda/LevelCreator.h"
 #include "Nelda/Player.h"
+#include "Nelda/Goal.h"
 #include "Nelda/Wall.h"
 
 int main(int argc, char *argv[]) {

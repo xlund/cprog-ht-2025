@@ -3,21 +3,24 @@
 
 #include "../GameEngine/GameObject.h"
 #include "../GameEngine/Hitbox.h"
-#include "../GameEngine/GameEngine.h"
+
+class Game;   // forward declaration
 
 class Goal : public GE::GameObject {
 public:
-    static Goal* create(GE::GameEngine*);
+    static Goal* create(GE::GameEngine*,Game* game);
 
-    ~Goal();
+    ~Goal() {}
+    void setup(GE::GameEngine* engine) override;
 
-    void setup(GE::GameEngine*) override;
     void update() override;
 
     bool isCollected() const;
 
 private:
-    Goal(GE::GameEngine*);
+    Goal(GE::GameEngine*,Game* game);
+
+    Game* game;
     bool collected{false};
     GE::Hitbox* hitbox{nullptr};
 };
