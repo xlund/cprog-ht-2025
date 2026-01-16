@@ -36,6 +36,7 @@ void Enemy::setup(GE::GameEngine *engine) {
       this->hp.current -= 50;
       if (this->hp.isDead()) {
         gameState_.score->add(100);
+        setToDelete();
       }
     }
   });
@@ -44,7 +45,7 @@ void Enemy::setup(GE::GameEngine *engine) {
 
 void Enemy::update() {
 
-  /*target.getPos(targetX,targetY);
+  target->getPos(targetX,targetY);
   if(targetX<x){
       x-=speed;
   }
@@ -56,19 +57,6 @@ void Enemy::update() {
   }
   if(targetY>y){
       y+=speed;
-  }*/
-
-  if (GE::InputManager::isKeyDown("w")) {
-    y -= speed;
-  }
-  if (GE::InputManager::isKeyDown("s")) {
-    y += speed;
-  }
-  if (GE::InputManager::isKeyDown("a")) {
-    x -= speed;
-  }
-  if (GE::InputManager::isKeyDown("d")) {
-    x += speed;
   }
 
   hitbox->setPosition(x, y);

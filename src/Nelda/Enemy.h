@@ -20,8 +20,8 @@ private:
   Enemy(GE::GameObject*, int, GameState &);
   Health hp;
   int speed;
-  int targetX;
-  int targetY;
+  float targetX;
+  float targetY;
   GE::GameObject* target;
   GE::Hitbox *hitbox;
   GE::Sprite* sprite;
