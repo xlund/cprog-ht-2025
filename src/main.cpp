@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 
   level.setGameObject('p', [&game]() { return Player::create(game.state()); });
   level.setGameObject('e', [&game]() {
-    return Enemy::create(TempObject(400, 500), 10, 10, 1, game.state());
+    return Enemy::create(nullptr, 10, 10, 1, game.state());
   });
 
   level.make(engine);

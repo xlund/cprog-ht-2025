@@ -7,34 +7,49 @@
 #include <string>
 
 namespace GE {
+
+class Button;
+
 class Text : public GE::Component {
 public:
-  Text(std::string, int, int);
-  Text(std::string, std::string, int, int, int);
-  ~Text();
-  void setString(const std::string &);
-  std::string getString() const;
-  void setColor(unsigned char, unsigned char, unsigned char, unsigned char);
-  void setFont(const std::string &);
-  void setFontSize(const int);
-  void setWidth(const int);
-  void setHeight(const int);
-  void draw();
-  void hide();
-  void erase();
-  void update();
+    static Text* create(std::string, int, int);
+    static Text* create(std::string, std::string, int, int, int);
+
+    ~Text();
+
+    Text(const Text&) = delete;
+    Text& operator=(const Text&) = delete;
+    Text(Text&&) = delete;
+    Text& operator=(Text&&) = delete;
+
+    void setString(const std::string&);
+    std::string getString() const;
+    void setColor(unsigned char, unsigned char, unsigned char, unsigned char);
+    void setFont(const std::string&);
+    void setFontSize(int);
+    void setWidth(int);
+    void setHeight(int);
+    void draw();
+    void hide();
+    void erase();
+    void update();
 
 private:
-  std::string str{""};
-  TTF_Font *font{};
-  std::string fontPath{""};
-  int fontSize{0};
-  SDL_Color color{0, 0, 0, 0};
-  bool isSeen{false};
+    friend class Button;
 
-  int width;
-  int height;
+    Text(std::string, int, int);
+    Text(std::string, std::string, int, int, int);
+
+    std::string str;
+    TTF_Font* font{};
+    std::string fontPath;
+    int fontSize{};
+    SDL_Color color{0, 0, 0, 0};
+    bool isSeen{false};
+    int width{};
+    int height{};
 };
-} // namespace GE
+
+}
 
 #endif

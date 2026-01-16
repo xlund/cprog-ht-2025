@@ -4,6 +4,10 @@
 #include <SDL3_image/SDL_image.h>
 #include <iostream>
 
+GE::Sprite* GE::Sprite::create(int x, int y, int z, int r, std::string src){
+  return new Sprite(x,y,z,r,src);
+}
+
 GE::Sprite::Sprite(int x, int y, int z, int r, std::string src)
     : Component(), x(x), y(y), z(z), rotation(r), srcPath(src) {
 

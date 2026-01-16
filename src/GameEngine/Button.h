@@ -9,11 +9,14 @@
 namespace GE {
   class Button : public Text{
     public:
-      Button(std::string,int,int,int,int);
+      Button* create(std::string,int,int,int,int);
       void setOnClick(std::function<void()>);
       void update();
     private:
-      GE::Hitbox hitbox;
+    Button(std::string,int,int,int,int);
+    Button(const Button&)=delete;
+    Button& operator=(const Button&)=delete;
+      GE::Hitbox* hitbox;
       std::function<void()> onClick;
 
   };

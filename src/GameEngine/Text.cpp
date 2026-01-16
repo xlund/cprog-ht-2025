@@ -2,9 +2,16 @@
 #include "../include/Constants.h"
 #include "GameEngine.h"
 #include <algorithm>
-#include <iostream>
 #include <stdexcept>
-#include <string>
+
+GE::Text *GE::Text::create(std::string text, int x, int y) {
+  return new Text(text, x, y);
+}
+
+GE::Text *GE::Text::create(std::string text, std::string path, int fontSize,
+                           int x, int y) {
+  return new Text(text, path, fontSize, x, y);
+}
 
 GE::Text::Text(std::string text, int x, int y)
     : Component(x, y, 0), str(text),
@@ -12,9 +19,9 @@ GE::Text::Text(std::string text, int x, int y)
       fontPath(constants::STANDARD_FONT), fontSize(24), width(100000),
       height(24) {}
 
-GE::Text::Text(std::string text, std::string path, int fontSize, int x, int y)
-    : Component(x, y, 0), str(text), font(TTF_OpenFont(path.c_str(), fontSize)),
-      fontPath(path), fontSize(fontSize), width(1080), height(fontSize) {}
+GE::Text::Text(std::string text, std::string path, int size, int x, int y)
+    : Component(x, y, 0), str(text), font(TTF_OpenFont(path.c_str(), size)),
+      fontPath(path), fontSize(size), width(1080), height(size) {}
 
 GE::Text::~Text() {
   if (font) {
@@ -22,32 +29,40 @@ GE::Text::~Text() {
   }
 }
 
-void GE::Text::setString(const std::string &text) { this->str = text; }
+void GE::Text::setString(const std::string &text) { str = text; }
 
-void GE::Text::erase() { str = ""; }
-
-std::string GE::Text::getString() const { return this->str; }
+std::string GE::Text::getString() const { return str; }
 
 void GE::Text::setColor(unsigned char r, unsigned char g, unsigned char b,
-                        unsigned char brightnes) {
-  color = {r, g, b, brightnes};
+                        unsigned char a) {
+  color = {r, g, b, a};
 }
 
 void GE::Text::setFont(const std::string &path) {
   font = TTF_OpenFont(path.c_str(), fontSize);
+  fontPath = path;
 }
 
-void GE::Text::setFontSize(const int size) {
+void GE::Text::setFontSize(int size) {
+  fontSize = size;
   font = TTF_OpenFont(fontPath.c_str(), size);
 }
 
-void GE::Text::setWidth(const int w) { width = w; }
+void GE::Text::setWidth(int w) { width = w; }
 
-void GE::Text::setHeight(const int h) { height = h; }
+void GE::Text::setHeight(int h) { height = h; }
 
 void GE::Text::draw() { isSeen = true; }
 
+void GE::Text::hide() { isSeen = false; }
+
+void GE::Text::erase() { str.clear(); }
+
 void GE::Text::update() {
+  if (!isSeen || str.empty())
+    return;
+  if (!font)
+    throw std::invalid_argument("Font does not exist");
 
   SDL_Renderer *renderer = GE::GameEngine::getRenderer();
   if (str.empty()) {
@@ -65,22 +80,14 @@ void GE::Text::update() {
 
     float texW, texH;
     SDL_GetTextureSize(texture, &texW, &texH);
-    int intTexH = static_cast<int>(texH);
-    intTexH = 1000;
-    int clippedHeight = std::min(height, intTexH);
 
-    // beskär
-    SDL_FRect srcRect = {0.0f, 0.0f, static_cast<float>(texW),
-                         static_cast<float>(clippedHeight)};
-    // ritar det beskärda
-    SDL_FRect destRect = {static_cast<float>(x), static_cast<float>(y),
-                          static_cast<float>(texW),
-                          static_cast<float>(clippedHeight)};
+    int clippedHeight = std::min(height, static_cast<int>(texH));
+
+    SDL_FRect srcRect{0.f, 0.f, texW, static_cast<float>(clippedHeight)};
+    SDL_FRect destRect{static_cast<float>(x), static_cast<float>(y), texW,
+                       static_cast<float>(clippedHeight)};
 
     SDL_RenderTextureRotated(renderer, texture, &srcRect, &destRect, rotation,
-                             NULL, SDL_FLIP_NONE);
+                             nullptr, SDL_FLIP_NONE);
     SDL_DestroyTexture(texture);
   }
-}
-
-void GE::Text::hide() { isSeen = false; }

@@ -9,7 +9,7 @@ namespace GE {
 
 class AnimatedSprite : public GE::Sprite {
 public:
-  AnimatedSprite(int cols, int rows, int frameWidth, int frameHeight, int x,
+  static AnimatedSprite* create(int cols, int rows, int frameWidth, int frameHeight, int x,
                  int y, int z, int r, std::string src);
 
   const std::vector<SDL_FRect> &getFrames() const;
@@ -19,6 +19,11 @@ public:
   setCurrentAnimation(const std::vector<std::pair<size_t, size_t>> &animation);
 
 private:
+  AnimatedSprite(int cols, int rows, int frameWidth, int frameHeight, int x,
+                 int y, int z, int r, std::string src);
+  AnimatedSprite(const AnimatedSprite&) = delete;
+  AnimatedSprite& operator=(const AnimatedSprite&) = delete;
+  
   int cols{0};
   int rows{0};
   int frameWidth{0};
