@@ -37,8 +37,9 @@ GE::GameEngine::GameEngine(std::string windowName) {
   }
 }
 
-void GE::GameEngine::setBackgroundColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a){
-  backgroundColor = {r,g,b,a};
+void GE::GameEngine::setBackgroundColor(unsigned char r, unsigned char g,
+                                        unsigned char b, unsigned char a) {
+  backgroundColor = {r, g, b, a};
 }
 
 void GE::GameEngine::setFps(const int fps) {
@@ -60,8 +61,8 @@ void GE::GameEngine::removeComponent(GE::Component *component) {
 }
 
 void GE::GameEngine::addGameObject(GE::GameObject *object) {
-  gameObjects.push_back(object);
   object->setup(this);
+  gameObjects.push_back(object);
 }
 
 void GE::GameEngine::removeGameObject(GE::GameObject *object) {
@@ -81,6 +82,10 @@ void GE::GameEngine::run() {
   }
 }
 
+void GE::GameEngine::setInputCallback(std::function<void()> cb) {
+  inputCallback_ = cb;
+}
+
 void GE::GameEngine::handleGameKeys() {
 
   if (GE::InputManager::isKeyPressed("p")) {
@@ -93,6 +98,23 @@ void GE::GameEngine::handleGameKeys() {
   if (GE::InputManager::isKeyPressed("q")) {
     state_ = GE::GameState::Stopped;
   }
+
+  if (inputCallback_)
+    inputCallback_();
+}
+
+void GE::GameEngine::clearAll() {
+  clearGameObjects();
+  clearComponents();
+}
+
+SDL_FRect GE::GameEngine::createRect(float x, float y, float w, float h,
+                                     Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+  SDL_Renderer *renderer = getRenderer();
+  SDL_SetRenderDrawColor(renderer, r, g, b, a);
+  SDL_FRect rect{x, y, w, h};
+  SDL_RenderFillRect(renderer, &rect);
+  return rect;
 }
 
 void GE::GameEngine::update() {
@@ -103,15 +125,24 @@ void GE::GameEngine::update() {
 
   for (GE::Component *component : components)
     component->update();
-  
+
   gameObjectCleanUp();
 }
 
+void GE::GameEngine::setup() {
+  for (GE::GameObject *object : gameObjects)
+    object->setup(this);
+}
+
 void GE::GameEngine::render() {
-  SDL_SetRenderDrawColor(renderer, backgroundColor.r,backgroundColor.g,backgroundColor.b,backgroundColor.a);
+  SDL_SetRenderDrawColor(renderer, backgroundColor.r, backgroundColor.g,
+                         backgroundColor.b, backgroundColor.a);
   SDL_RenderClear(renderer);
   for (auto ge : gameObjects) {
     ge->render();
+  }
+  for (auto comp : components) {
+    comp->render();
   }
   SDL_RenderPresent(renderer);
 }
@@ -130,6 +161,13 @@ void GE::GameEngine::clearGameObjects() {
   gameObjects.clear();
 }
 
+void GE::GameEngine::clearComponents() {
+  for (auto *comp : components)
+    delete comp;
+
+  components.clear();
+}
+
 void GE::GameEngine::capFrameRate(Uint64 frameStart) {
   Uint64 frameTime = SDL_GetTicks() - frameStart;
   if (frameTime < tickInterval) {
@@ -137,7 +175,7 @@ void GE::GameEngine::capFrameRate(Uint64 frameStart) {
   }
 }
 void GE::GameEngine::shutdown() {
-  for(GameObject* go : gameObjects)
+  for (GameObject *go : gameObjects)
     go->setToDelete();
   gameObjectCleanUp();
   gameObjects.clear();
@@ -148,13 +186,14 @@ void GE::GameEngine::shutdown() {
   SDL_Quit();
 }
 
-void GE::GameEngine::gameObjectCleanUp(){
-    gameObjects.erase(std::remove_if(gameObjects.begin(),gameObjects.end(),[](GameObject* go){
-      if(go->isDeleteable()){
-        delete go;
-        return true;
-      }
-      return false;
-    }),
-  gameObjects.end());
+void GE::GameEngine::gameObjectCleanUp() {
+  gameObjects.erase(std::remove_if(gameObjects.begin(), gameObjects.end(),
+                                   [](GameObject *go) {
+                                     if (go->isDeleteable()) {
+                                       delete go;
+                                       return true;
+                                     }
+                                     return false;
+                                   }),
+                    gameObjects.end());
 }

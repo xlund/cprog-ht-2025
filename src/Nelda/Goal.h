@@ -3,26 +3,28 @@
 
 #include "../GameEngine/GameObject.h"
 #include "../GameEngine/Hitbox.h"
+#include "../GameEngine/Rectangle.h"
 
-class Game;   // forward declaration
+class Game; // forward declaration
 
 class Goal : public GE::GameObject {
 public:
-    static Goal* create(Game* game);
+  static Goal *create(Game *game);
 
-    ~Goal() {}
-    void setup(GE::GameEngine* engine) override;
+  ~Goal() {}
+  void setup(GE::GameEngine *engine) override;
 
-    void update() override;
+  void update() override;
 
-    bool isCollected() const;
+  bool isCollected() const;
 
 private:
-    Goal(Game* game);
+  Goal(Game *game);
 
-    Game* game;
-    bool collected{false};
-    GE::Hitbox* hitbox{nullptr};
+  Game *game;
+  bool collected{false};
+  GE::Hitbox *hitbox{nullptr};
+  GE::Rectangle *rect_;
 };
 
 #endif

@@ -4,7 +4,8 @@
 #include "../GameEngine/GameObject.h"
 #include "../GameEngine/Hitbox.h"
 #include "../GameEngine/Sprite.h"
-#include <vector>
+#include <vector>
+
 class Wall : public GE::GameObject {
 public:
   ~Wall();

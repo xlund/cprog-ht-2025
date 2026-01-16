@@ -26,6 +26,8 @@ const std::string level_file{"./src/level.txt"};
 const std::string enemy_image{gResPath + "images/Enemy.png"};
 const std::string wall_image{gResPath + "images/Wall.png"};
 
+const std::string labyrinth_level_path{gResPath + "levels/labyrinth.txt"};
+
 const int clockSpeed{1000};
 
 } // namespace constants
