@@ -37,6 +37,10 @@ GE::GameEngine::GameEngine(std::string windowName) {
   }
 }
 
+void GE::GameEngine::setBackgroundColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a){
+  backgroundColor = {r,g,b,a};
+}
+
 void GE::GameEngine::setFps(const int fps) {
   this->fps = fps;
   this->tickInterval = constants::clockSpeed / this->fps;
@@ -104,7 +108,7 @@ void GE::GameEngine::update() {
 }
 
 void GE::GameEngine::render() {
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_SetRenderDrawColor(renderer, backgroundColor.r,backgroundColor.g,backgroundColor.b,backgroundColor.a);
   SDL_RenderClear(renderer);
   for (auto ge : gameObjects) {
     ge->render();
