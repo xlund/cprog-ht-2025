@@ -11,6 +11,7 @@ namespace GE {
 class Component {
 public:
   virtual void update() = 0;
+  virtual ~Component() = default;
   int getX() const;
   int getY() const;
   int getRotation() const;
