@@ -7,6 +7,7 @@
 struct GameState {
   Score *score;
   bool gameOver{false};
+  bool gameWon;   
 };
 
 class Game {
@@ -15,6 +16,7 @@ public:
   GameState &state();
   void addScore(int points);
   bool isOver() const;
+  void winGame();
 
 private:
   int targetScore_{1000};
