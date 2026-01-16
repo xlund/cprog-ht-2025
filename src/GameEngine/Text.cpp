@@ -91,3 +91,4 @@ void GE::Text::update() {
                              nullptr, SDL_FLIP_NONE);
     SDL_DestroyTexture(texture);
   }
+}
