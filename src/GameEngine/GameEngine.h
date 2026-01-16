@@ -49,6 +49,7 @@ private:
   SDL_Window *window;
   std::vector<GE::Component *> components;
   std::vector<GE::GameObject *> gameObjects;
+  void gameObjectCleanUp();
 };
 
 } // namespace GE

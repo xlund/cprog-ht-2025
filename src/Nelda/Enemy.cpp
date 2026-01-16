@@ -6,18 +6,16 @@
 #include "Game.h"
 #include "Goal.h"
 #include "Health.h"
-#include "TempObject.h"
 #include "WallDetection.h"
 #include <iostream>
 
-Enemy::Enemy(GE::GameObject *target, int x, int y, int speed, GameState &gs)
-    : GameObject(x, y), speed(speed), target(target), gameState_(gs) {
-  // std::cout<<"Enemy::Enemy()\n";
+Enemy::Enemy(GE::GameObject* target, int speed, GameState &gs) : speed(speed), target(target), gameState_(gs) {
+      //std::cout<<"Enemy::Enemy()\n";
 }
 
-Enemy *Enemy::create(GE::GameObject *target, int x, int y, int speed,
-                     GameState &gs) {
-  return new Enemy(target, x, y, speed, gs);
+
+Enemy *Enemy::create(GE::GameObject* target, int speed, GameState &gs) {
+  return new Enemy(target, speed, gs);
 }
 
 Enemy::~Enemy() {
@@ -38,6 +36,7 @@ void Enemy::setup(GE::GameEngine *engine) {
       this->hp.current -= 50;
       if (this->hp.isDead()) {
         gameState_.score->add(100);
+        setToDelete();
       }
     }
   });
@@ -46,7 +45,7 @@ void Enemy::setup(GE::GameEngine *engine) {
 
 void Enemy::update() {
 
-  /*target.getPos(targetX,targetY);
+  target->getPos(targetX,targetY);
   if(targetX<x){
       x-=speed;
   }
@@ -58,19 +57,6 @@ void Enemy::update() {
   }
   if(targetY>y){
       y+=speed;
-  }*/
-
-  if (GE::InputManager::isKeyDown("w")) {
-    y -= speed;
-  }
-  if (GE::InputManager::isKeyDown("s")) {
-    y += speed;
-  }
-  if (GE::InputManager::isKeyDown("a")) {
-    x -= speed;
-  }
-  if (GE::InputManager::isKeyDown("d")) {
-    x += speed;
   }
 
   hitbox->setPosition(x, y);

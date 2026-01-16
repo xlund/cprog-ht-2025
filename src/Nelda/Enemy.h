@@ -6,11 +6,10 @@
 #include "../GameEngine/Sprite.h"
 #include "Game.h"
 #include "Health.h"
-#include "TempObject.h"
 
 class Enemy : public GE::GameObject {
 public:
-  static Enemy *create(GE::GameObject *, int, int, int, GameState &);
+  static Enemy *create(GE::GameObject*, int, GameState &);
   ~Enemy();
   void setup(GE::GameEngine *) override;
   void update() override;
@@ -20,12 +19,12 @@ public:
   Health getHealth();
 
 private:
-  Enemy(GE::GameObject *, int, int, int, GameState &);
+  Enemy(GE::GameObject*, int, GameState &);
   Health hp;
   int speed;
-  int targetX;
-  int targetY;
-  GE::GameObject *target;
+  float targetX;
+  float targetY;
+  GE::GameObject* target;
   GE::Hitbox *hitbox;
   GE::Sprite *sprite;
   // void wallDetection(GE::Hitbox*);

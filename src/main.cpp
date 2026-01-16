@@ -6,7 +6,7 @@
 #include "Nelda/Game.h"
 #include "Nelda/LevelCreator.h"
 #include "Nelda/Player.h"
-#include "Nelda/TempObject.h"
+#include "Nelda/Goal.h"
 #include "Nelda/Wall.h"
 
 int main(int argc, char *argv[]) {
@@ -19,9 +19,11 @@ int main(int argc, char *argv[]) {
 
   level.setGameObject('w', []() { return Wall::create(200, 200, 64); });
 
-  level.setGameObject('p', [&game]() { return Player::create(game.state()); });
-  level.setGameObject('e', [&game]() {
-    return Enemy::create(nullptr, 10, 10, 1, game.state());
+  Player* player = Player::create(game.state());
+
+  level.setGameObject('p', [&player]() { return player;});
+  level.setGameObject('e', [&game,&player]() {
+    return Enemy::create(player, 1, game.state());
   });
 
   level.make(engine);

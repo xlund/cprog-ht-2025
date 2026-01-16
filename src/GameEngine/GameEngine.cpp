@@ -99,6 +99,8 @@ void GE::GameEngine::update() {
 
   for (GE::Component *component : components)
     component->update();
+  
+  gameObjectCleanUp();
 }
 
 void GE::GameEngine::render() {
@@ -131,13 +133,24 @@ void GE::GameEngine::capFrameRate(Uint64 frameStart) {
   }
 }
 void GE::GameEngine::shutdown() {
-  for (GameObject *go : gameObjects) {
-    delete go;
-  }
+  for(GameObject* go : gameObjects)
+    go->setToDelete();
+  gameObjectCleanUp();
   gameObjects.clear();
 
   TTF_Quit();
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
+}
+
+void GE::GameEngine::gameObjectCleanUp(){
+    gameObjects.erase(std::remove_if(gameObjects.begin(),gameObjects.end(),[](GameObject* go){
+      if(go->isDeleteable()){
+        delete go;
+        return true;
+      }
+      return false;
+    }),
+  gameObjects.end());
 }

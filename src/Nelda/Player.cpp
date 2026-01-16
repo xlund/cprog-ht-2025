@@ -9,8 +9,8 @@ constexpr int PLAYER_SPRITE_WIDTH = 36;
 constexpr int PLAYER_SPRITE_HEIGHT = 63;
 constexpr int PLAYER_WORLD_HEIGHT = 64;
 
-Player::Player(GameState &gs)
-    : GE::GameObject(0, 0), gameState_(gs), hp(100, 100) {}
+Player::Player(GameState& gs)
+    : gameState_(gs), hp(100, 100) {}
 
 Player::~Player() {
   delete sprite;

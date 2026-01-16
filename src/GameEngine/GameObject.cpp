@@ -12,3 +12,11 @@ void GE::GameObject::getPos(float &x, float &y){
     x = this->x;
     y = this->y;
 }
+
+bool GE::GameObject::isDeleteable(){
+    return deleteable;
+}
+
+void GE::GameObject::setToDelete(){
+    deleteable = true;
+}
