@@ -5,7 +5,9 @@
 #include <iostream>
 
 GE::Sprite* GE::Sprite::create(int x, int y, int z, int r, std::string src,GE::GameEngine* ge){
-  return new Sprite(x,y,z,r,src,ge);
+  GE::Sprite* s = new Sprite(x,y,z,r,src,ge);
+  ge->addComponent(s);
+  return s;
 }
 
 GE::Sprite::Sprite(int x, int y, int z, int r, std::string src,GE::GameEngine* ge)
@@ -36,6 +38,9 @@ GE::Sprite::~Sprite() {
   if (texture) {
     SDL_DestroyTexture(texture);
   }
+
+  gameEngine->removeComponent(this);
+
 }
 
 void GE::Sprite::draw() {
