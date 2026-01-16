@@ -25,7 +25,8 @@ int main(int argc, char *argv[]) {
 
   level.make(engine);
 
-  engine.start();
+  engine.run();
+  engine.shutdown();
 
   return 0;
 }

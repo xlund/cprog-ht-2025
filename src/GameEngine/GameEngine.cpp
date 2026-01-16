@@ -37,40 +37,6 @@ GE::GameEngine::GameEngine(std::string windowName) {
   }
 }
 
-bool GE::GameEngine::tick() {
-
-  if(GE::InputManager::isKeyPressed("l")){
-    std::cout << "GameObjects: " << gameObjects.size() << "  components: "<<components.size();
-  }
-
-  Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
-  GE::InputManager::fetchKeys();
-
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-  SDL_RenderClear(renderer);
-
-  // Process events
-  for (GE::GameObject *object : gameObjects) {
-    object->update();
-  }
-  for (GE::Component *component : components) {
-    component->update();
-  }
-
-  if (GE::InputManager::isKeyPressed("q")) {
-    return false;
-  }
-
-  long delay = nextTick - SDL_GetTicks();
-  if (delay > 0)
-    SDL_Delay(delay);
-
-  // Update objects
-  // Render Changes
-  SDL_RenderPresent(renderer);
-  return true;
-}
-
 void GE::GameEngine::setFps(const int fps) {
   this->fps = fps;
   this->tickInterval = constants::clockSpeed / this->fps;
@@ -91,6 +57,7 @@ void GE::GameEngine::removeComponent(GE::Component *component) {
 
 void GE::GameEngine::addGameObject(GE::GameObject *object) {
   gameObjects.push_back(object);
+  object->setup(this);
 }
 
 void GE::GameEngine::removeGameObject(GE::GameObject *object) {
@@ -98,25 +65,54 @@ void GE::GameEngine::removeGameObject(GE::GameObject *object) {
   gameObjects.erase(i);
 }
 
-void GE::GameEngine::start() {
+void GE::GameEngine::run() {
+  bool running = true;
+  while (running) {
+    Uint64 frameStart = SDL_GetTicks();
+    running = !shouldQuit();
+    GE::InputManager::fetchKeys();
+    update();
+    render();
+    capFrameRate(frameStart);
+  }
+}
 
-  // Loop
+void GE::GameEngine::update() {
   for (GE::GameObject *object : gameObjects) {
-    object->setup(this);
+    object->update();
   }
 
-  while (tick()) {
+  for (GE::Component *component : components) {
+    component->update();
   }
+}
 
-  for(GameObject* go : gameObjects){
+void GE::GameEngine::render() {
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_RenderClear(renderer);
+  for (auto ge : gameObjects) {
+    ge->update();
+  }
+  SDL_RenderPresent(renderer);
+}
+
+void GE::GameEngine::capFrameRate(Uint64 frameStart) {
+  Uint64 frameTime = SDL_GetTicks() - frameStart;
+  if (frameTime < tickInterval) {
+    SDL_Delay(tickInterval - frameTime);
+  }
+}
+
+bool GE::GameEngine::shouldQuit() {
+  return GE::InputManager::isKeyPressed("q");
+}
+
+void GE::GameEngine::shutdown() {
+  for (GameObject *go : gameObjects) {
     delete go;
   }
-
-  //std::cout<<components.size();
-
   gameObjects.clear();
 
-  // Shutdown
   TTF_Quit();
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
