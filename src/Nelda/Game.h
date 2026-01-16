@@ -1,31 +1,26 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "../GameEngine/GameEngine.h"
 #include "Score.h"
 
 struct GameState {
-  Score score;
+  Score *score;
   bool gameOver{false};
 };
 
 class Game {
 public:
-  GameState &state() { return state_; }
-  void addScore(int points) {
-    state_.score.add(points);
-    checkWinCondition();
-  };
+  Game(GE::GameEngine &);
+  GameState &state();
+  void addScore(int points);
   bool isOver() const;
 
 private:
   int targetScore_{1000};
   GameState state_;
-  void checkWinCondition() {
-    if (state_.score.value() >= targetScore_) {
-      endGame();
-    }
-  };
-  void endGame() { state_.gameOver = true; };
+  void checkWinCondition();
+  void endGame();
 };
 
 #endif

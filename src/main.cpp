@@ -12,23 +12,16 @@ int main(int argc, char *argv[]) {
 
   GE::GameEngine engine("Nelda");
 
-  GameState gameState;
+  Game game = Game(engine);
 
   LevelCreator level("./src/Nelda/level.txt", 64);
 
   level.setGameObject('w', []() { return Wall::create(200, 200, 64); });
 
-  level.setGameObject(
-    'p',
-    [&gameState]() { return Player::create(gameState); }
-    );
-  level.setGameObject('e', [&gameState]() {
-    return Enemy::create(nullptr, 10, 10, 1, gameState);
+  level.setGameObject('p', [&game]() { return Player::create(game.state()); });
+  level.setGameObject('e', [&game]() {
+    return Enemy::create(nullptr, 10, 10, 1, game.state());
   });
-
-  level.make(engine);
-
-  engine.start();
 
   level.make(engine);
 

@@ -10,10 +10,10 @@
 #include "WallDetection.h"
 #include <iostream>
 
-Enemy::Enemy(GE::GameObject* target, int x, int y, int speed, GameState &gs)
+Enemy::Enemy(GE::GameObject *target, int x, int y, int speed, GameState &gs)
     : GameObject(x, y), speed(speed), target(target), gameState_(gs) {}
 
-Enemy *Enemy::create(GE::GameObject* target, int x, int y, int speed,
+Enemy *Enemy::create(GE::GameObject *target, int x, int y, int speed,
                      GameState &gs) {
   return new Enemy(target, x, y, speed, gs);
 }
@@ -22,20 +22,19 @@ Health Enemy::getHealth() { return hp; }
 
 GE::Hitbox *Enemy::getHitbox() const { return hitbox; }
 void Enemy::setup(GE::GameEngine *engine) {
-  hitbox = GE::Hitbox::create(x,y,32,54);
-  sprite = GE::Sprite::create(x,y,0,0,constants::enemy_image);
+  hitbox = GE::Hitbox::create(x, y, 32, 54);
+  sprite = GE::Sprite::create(x, y, 0, 0, constants::enemy_image);
   engine->addComponent(hitbox);
   hitbox->setOnEnter([this](GE::Hitbox *other) {
     // wallDetection(other);
     if (other->getTag() == "player") {
       this->hp.current -= 50;
       if (this->hp.isDead()) {
-        gameState_.score.add(100);
+        gameState_.score->add(100);
       }
     }
   });
   speed = 1;
-  
 }
 
 void Enemy::update() {
@@ -66,7 +65,6 @@ void Enemy::update() {
   if (GE::InputManager::isKeyDown("d")) {
     x += speed;
   }
-
 
   hitbox->setPosition(x, y);
   wallDetection(*hitbox, "Wall", x, y);
