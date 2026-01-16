@@ -5,22 +5,27 @@
 #include <functional>
 #include "InputManager.h"
 #include "GameEngine.h"
-
+#include <iostream>
 
 std::vector<GE::Hitbox*> GE::Hitbox::allHitboxes;
 
-GE::Hitbox* GE::Hitbox::create(float x, float y, float width, float height){
-    return new Hitbox(x,y,width,height);
+GE::Hitbox* GE::Hitbox::create(float x, float y, float width, float height,GE::GameEngine* ge){
+    GE:: Hitbox* h = new Hitbox(x,y,width,height,ge);
+    ge->addComponent(h);
+    return h;
 }
 
-GE::Hitbox::Hitbox(float x, float y, float width, float height){
+GE::Hitbox::Hitbox(float x, float y, float width, float height,GE::GameEngine* ge): Component(ge){
     hitbox={x,y,width,height};
     allHitboxes.push_back(this);
 }
 
 GE::Hitbox::~Hitbox(){
+    //std::cout<<"GE::Hitbox::~Hitbox()\n";
     auto i = std::find(allHitboxes.begin(), allHitboxes.end(), this);
     allHitboxes.erase(i);
+    
+    gameEngine->removeComponent(this);
 }
 
 std::string GE::Hitbox::getTag() const {

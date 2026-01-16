@@ -38,6 +38,11 @@ GE::GameEngine::GameEngine(std::string windowName) {
 }
 
 bool GE::GameEngine::tick() {
+
+  if(GE::InputManager::isKeyPressed("l")){
+    std::cout << "GameObjects: " << gameObjects.size() << "  components: "<<components.size();
+  }
+
   Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
   GE::InputManager::fetchKeys();
 
@@ -102,6 +107,12 @@ void GE::GameEngine::start() {
 
   while (tick()) {
   }
+
+  for(GameObject* go : gameObjects){
+    delete go;
+  }
+
+  //std::cout<<components.size();
 
   gameObjects.clear();
 

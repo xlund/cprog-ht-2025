@@ -4,29 +4,39 @@
 #include <algorithm>
 #include <stdexcept>
 
-GE::Text *GE::Text::create(std::string text, int x, int y) {
-  return new Text(text, x, y);
+GE::Text* GE::Text::create(std::string text, int x, int y,GE::GameEngine* ge) {
+    GE::Text* t = new Text(text, x, y,ge);
+    ge->addComponent(t);
+    return t;
 }
 
-GE::Text *GE::Text::create(std::string text, std::string path, int fontSize,
-                           int x, int y) {
-  return new Text(text, path, fontSize, x, y);
+GE::Text* GE::Text::create(std::string text, std::string path, int fontSize, int x, int y,GE::GameEngine* ge) {
+    GE::Text* t = new Text(text, path, fontSize, x, y,ge);
+    ge->addComponent(t);
+    return t;
 }
 
-GE::Text::Text(std::string text, int x, int y)
-    : Component(x, y, 0), str(text),
+GE::Text::Text(std::string text, int x, int y , GE::GameEngine*ge)
+    : Component(ge, x, y, 0),
+      str(text),
       font(TTF_OpenFont(constants::STANDARD_FONT.c_str(), 24)),
       fontPath(constants::STANDARD_FONT), fontSize(24), width(100000),
       height(24) {}
 
-GE::Text::Text(std::string text, std::string path, int size, int x, int y)
-    : Component(x, y, 0), str(text), font(TTF_OpenFont(path.c_str(), size)),
-      fontPath(path), fontSize(size), width(1080), height(size) {}
+GE::Text::Text(std::string text, std::string path, int size, int x, int y, GE::GameEngine* ge)
+    : Component(ge ,x, y, 0),
+      str(text),
+      font(TTF_OpenFont(path.c_str(), size)),
+      fontPath(path),
+      fontSize(size),
+      width(1080),
+      height(size) {}
 
 GE::Text::~Text() {
-  if (font) {
-    TTF_CloseFont(font);
-  }
+    if (font) {
+        TTF_CloseFont(font);
+    }
+    gameEngine->removeComponent(this);
 }
 
 void GE::Text::setString(const std::string &text) { str = text; }

@@ -4,14 +4,20 @@
 #include "Sprite.h"
 #include <utility>
 #include <vector>
+#include "GameEngine.h"
 
 namespace GE {
 
 class AnimatedSprite : public GE::Sprite {
 public:
-  static AnimatedSprite* create(int cols, int rows, int frameWidth, int frameHeight, int x,
-                 int y, int z, int r, std::string src);
 
+  
+
+  static AnimatedSprite* create(int cols, int rows, int frameWidth, int frameHeight, int x,
+                 int y, int z, int r, std::string src,GE::GameEngine* ge);
+                
+  ~AnimatedSprite();
+ 
   const std::vector<SDL_FRect> &getFrames() const;
 
   void update();
@@ -20,7 +26,7 @@ public:
 
 private:
   AnimatedSprite(int cols, int rows, int frameWidth, int frameHeight, int x,
-                 int y, int z, int r, std::string src);
+                 int y, int z, int r, std::string src, GE::GameEngine* ge);
   AnimatedSprite(const AnimatedSprite&) = delete;
   AnimatedSprite& operator=(const AnimatedSprite&) = delete;
   

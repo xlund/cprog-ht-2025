@@ -12,7 +12,10 @@ constexpr int PLAYER_WORLD_HEIGHT = 64;
 Player::Player(GameState& gs)
     : GE::GameObject(0, 0), gameState_(gs), hp(100, 100) {}
 
-Player::~Player() {}
+Player::~Player() {
+    delete sprite;
+    delete hitbox;
+}
 
 Player* Player::create(GameState& gs) {
     return new Player(gs);
@@ -31,16 +34,14 @@ void Player::setup(GE::GameEngine* engine) {
         y,
         spriteWidth,
         spriteHeight,
-        constants::player_sprite
+        constants::player_sprite,
+        engine
     );
 
 
-    hitbox = GE::Hitbox::create(x,y,spriteWidth,spriteHeight);
+    hitbox = GE::Hitbox::create(x,y,spriteWidth,spriteHeight, engine);
 
     hitbox->setTag("player");
-
-    engine->addComponent(hitbox);
-    engine->addComponent(sprite);
 }
 
 void Player::update() {
