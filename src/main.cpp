@@ -18,6 +18,10 @@ int main(int argc, char *argv[]) {
 
   level.setGameObject('w', []() { return Wall::create(200, 200, 64); });
 
+  level.setGameObject('g', [&game]() {
+    return Goal::create(&game);});
+
+
   level.setGameObject('p', [&game]() { return Player::create(game.state()); });
   level.setGameObject('e', [&game]() {
     return Enemy::create(nullptr, 1, game.state());
