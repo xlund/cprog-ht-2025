@@ -1,6 +1,5 @@
 #include "Text.h"
-#include"../include/Constants.h"
-#include <stdexcept>
+#include "../include/Constants.h"
 #include "GameEngine.h"
 #include <algorithm>
 #include <iostream>
@@ -50,7 +49,7 @@ void GE::Text::draw() { isSeen = true; }
 
 void GE::Text::update() {
 
-  SDL_Renderer* renderer = GE::GameEngine::getRenderer();
+  SDL_Renderer *renderer = GE::GameEngine::getRenderer();
   if (str.empty()) {
     return;
   }
@@ -59,8 +58,8 @@ void GE::Text::update() {
   }
 
   if (isSeen) {
-    SDL_Surface *surface =
-        TTF_RenderText_Blended_Wrapped(font, str.c_str(), 0, color, width);
+    SDL_Surface *surface = TTF_RenderText_Blended_Wrapped(
+        font, str.c_str(), str.length(), color, width);
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 
