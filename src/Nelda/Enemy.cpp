@@ -6,7 +6,6 @@
 #include "Game.h"
 #include "Goal.h"
 #include "Health.h"
-#include "TempObject.h"
 #include "WallDetection.h"
 #include <iostream>
 

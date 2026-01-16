@@ -6,7 +6,7 @@
 #include "../GameEngine/Sprite.h"
 #include "Game.h"
 #include "Health.h"
-#include "TempObject.h"
+
 
 class Enemy : public GE::GameObject {
 public:

@@ -12,6 +12,7 @@ public:
   void reset();
   GE::Text display();
   GE::Text *getText() const;
+  void setText(const std::string& text);
 
 private:
   int score_{0};
