@@ -13,7 +13,7 @@ void Goal::setup(GE::GameEngine* engine) {
     hitbox->setTag("Goal");
 
     hitbox->setOnEnter([this](GE::Hitbox* other) {
-        if (other->getTag() == "Player" && !collected) {
+        if (other->getTag() == "player" && !collected) {
             collected = true;
             game->winGame();
         }
