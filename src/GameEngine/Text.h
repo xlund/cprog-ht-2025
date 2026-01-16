@@ -12,44 +12,54 @@ class Button;
 
 class Text : public GE::Component {
 public:
-    static Text* create(std::string, int, int,GE::GameEngine*);
-    static Text* create(std::string, std::string, int, int, int,GE::GameEngine*);
+  static Text *create(std::string, int, int, GE::GameEngine *);
+  static Text *create(std::string, std::string, int, int, int,
+                      GE::GameEngine *);
 
-    ~Text();
+  ~Text();
 
-    Text(const Text&) = delete;
-    Text& operator=(const Text&) = delete;
-    Text(Text&&) = delete;
-    Text& operator=(Text&&) = delete;
+  Text(const Text &) = delete;
+  Text &operator=(const Text &) = delete;
+  Text(Text &&) = delete;
+  Text &operator=(Text &&) = delete;
 
-    void setString(const std::string&);
-    std::string getString() const;
-    void setColor(unsigned char, unsigned char, unsigned char, unsigned char);
-    void setFont(const std::string&);
-    void setFontSize(int);
-    void setWidth(int);
-    void setHeight(int);
-    void draw();
-    void hide();
-    void erase();
-    void update();
+  void setString(const std::string &);
+  std::string getString() const;
+  void setColor(unsigned char, unsigned char, unsigned char, unsigned char);
+  void setFont(const std::string &);
+  void setFontSize(int);
+  void setWidth(int);
+  void setHeight(int);
+  void draw();
+  void hide();
+  void erase();
+  void update() override;
+  void render() override;
 
 private:
-    friend class Button;
+  friend class Button;
+  void rebuildTexture();
 
-    Text(std::string, int, int,GE::GameEngine*);
-    Text(std::string, std::string, int, int, int,GE::GameEngine*);
+  bool shouldUpdate{true};
+  SDL_Texture *texture{nullptr};
 
-    std::string str;
-    TTF_Font* font{};
-    std::string fontPath;
-    int fontSize{};
-    SDL_Color color{0, 0, 0, 0};
-    bool isSeen{false};
-    int width{};
-    int height{};
+  Text(std::string, int, int, GE::GameEngine *);
+  Text(std::string, std::string, int, int, int, GE::GameEngine *);
+
+  GameEngine *engine_;
+
+  std::string str;
+  TTF_Font *font{};
+  std::string fontPath;
+  int fontSize{};
+  SDL_Color color{0, 0, 0, 0};
+  bool isSeen{false};
+  int width{};
+  int height{};
+  float textH;
+  float textW;
 };
 
-}
+} // namespace GE
 
 #endif
