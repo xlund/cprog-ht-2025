@@ -106,6 +106,9 @@ void GE::GameEngine::start() {
   while (tick()) {
   }
 
+  for(GameObject* go : gameObjects){
+    delete go;
+  }
   gameObjects.clear();
 
   // Shutdown

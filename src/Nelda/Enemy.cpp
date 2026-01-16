@@ -11,7 +11,9 @@
 #include <iostream>
 
 Enemy::Enemy(GE::GameObject* target, int x, int y, int speed, GameState &gs)
-    : GameObject(x, y), speed(speed), target(target), gameState_(gs) {}
+    : GameObject(x, y), speed(speed), target(target), gameState_(gs) {
+      std::cout<<"Enemy::Enemy()\n";
+    }
 
 Enemy *Enemy::create(GE::GameObject* target, int x, int y, int speed,
                      GameState &gs) {
@@ -19,6 +21,7 @@ Enemy *Enemy::create(GE::GameObject* target, int x, int y, int speed,
 }
 
 Enemy::~Enemy(){
+  std::cout<<"Enemy::~Enemy()\n";
   delete sprite;
   delete hitbox;
 }

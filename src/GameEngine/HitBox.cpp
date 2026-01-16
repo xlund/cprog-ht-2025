@@ -5,7 +5,7 @@
 #include <functional>
 #include "InputManager.h"
 #include "GameEngine.h"
-
+#include <iostream>
 
 std::vector<GE::Hitbox*> GE::Hitbox::allHitboxes;
 
@@ -23,6 +23,7 @@ GE::Hitbox::Hitbox(float x, float y, float width, float height,GE::GameEngine* g
 GE::Hitbox::~Hitbox(){
     auto i = std::find(allHitboxes.begin(), allHitboxes.end(), this);
     allHitboxes.erase(i);
+    
     gameEngine->removeComponent(this);
 }
 

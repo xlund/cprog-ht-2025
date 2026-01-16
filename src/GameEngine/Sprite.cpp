@@ -38,7 +38,7 @@ GE::Sprite::~Sprite() {
   if (texture) {
     SDL_DestroyTexture(texture);
   }
-  std::cout<<"tar bort sprite";
+  std::cout<<"GE::Sprite::~Sprite()"<<std::endl;
   gameEngine->removeComponent(this);
 
 }
