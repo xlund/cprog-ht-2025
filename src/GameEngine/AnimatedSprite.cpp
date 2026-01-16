@@ -5,8 +5,11 @@
 
 GE::AnimatedSprite* GE::AnimatedSprite::create(int cols, int rows, int frameWidth, int frameHeight, int x,
                  int y, int z, int r, std::string src, GE::GameEngine* ge){
-    return new GE::AnimatedSprite(cols,rows,frameWidth,frameHeight,x,y,z,r,src,ge);
+    GE::AnimatedSprite* as = new GE::AnimatedSprite(cols,rows,frameWidth,frameHeight,x,y,z,r,src,ge);
+    ge->addComponent(as);
+    return as;
 }
+
 
 
 GE::AnimatedSprite::AnimatedSprite(int cols, int rows, int frameWidth,
@@ -25,6 +28,10 @@ GE::AnimatedSprite::AnimatedSprite(int cols, int rows, int frameWidth,
                                  static_cast<float>(frameHeight)});
     }
   }
+}
+
+GE::AnimatedSprite::~AnimatedSprite(){
+  gameEngine->removeComponent(this);
 }
 
 const std::vector<SDL_FRect> &GE::AnimatedSprite::getFrames() const {
