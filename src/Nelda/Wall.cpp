@@ -4,13 +4,10 @@
 #include "../GameEngine/Hitbox.h"
 #include "../GameEngine/Sprite.h"
 
-Wall::Wall(float x, float y, float length) : GameObject(x, y), length(length) {}
+Wall::Wall(float x, float y, float length) : length(length) {}
 
-
-Wall::Wall(float x,float y,float length) : length(length){}
-
-Wall* Wall::create(float x,float y,float length){
-    return new Wall(x,y,length);
+Wall *Wall::create(float x, float y, float length) {
+  return new Wall(x, y, length);
 }
 
 Wall::~Wall() {
