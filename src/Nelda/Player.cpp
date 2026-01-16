@@ -39,9 +39,6 @@ void Player::setup(GE::GameEngine* engine) {
     hitbox = GE::Hitbox::create(x,y,spriteWidth,spriteHeight, engine);
 
     hitbox->setTag("player");
-
-    engine->addComponent(hitbox);
-    engine->addComponent(sprite);
 }
 
 void Player::update() {
