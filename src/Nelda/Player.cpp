@@ -15,7 +15,6 @@ Player::Player(GameState& gs,GE::GameEngine* ge)
 Player::~Player() {
     delete sprite;
     delete hitbox;
-    gameEngine -> removeGameObject(this);
 }
 
 Player* Player::create(GameState& gs, GE::GameEngine* ge) {

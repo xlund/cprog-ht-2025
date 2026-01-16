@@ -8,7 +8,6 @@ Goal::Goal(GE::GameEngine* ge): GameObject(ge){}
 
 Goal::~Goal() {
   delete hitbox;
-  gameEngine->removeGameObject(this);
 }
 
 void Goal::setup(GE::GameEngine* ge) {

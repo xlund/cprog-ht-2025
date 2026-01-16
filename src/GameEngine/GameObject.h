@@ -11,6 +11,8 @@ public:
   virtual void update(){};
   void setPos(float, float);
   void getPos(float &, float &);
+  bool isDeleteable();
+  void setToDelete();
 
 protected:
   GameObject(GameEngine*);
@@ -20,6 +22,7 @@ protected:
   GameEngine* gameEngine;
   float x;
   float y;
+  bool deleteable{false};
 };
 } // namespace GE
 

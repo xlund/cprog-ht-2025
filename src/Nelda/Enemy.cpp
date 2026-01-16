@@ -22,7 +22,6 @@ Enemy::~Enemy(){
   //std::cout<<"Enemy::~Enemy()\n";
   delete sprite;
   delete hitbox;
-  gameEngine->removeGameObject(this);
 }
 
 Health Enemy::getHealth() { return hp; }

@@ -17,8 +17,6 @@ Wall::~Wall(){
         delete h;
     }
     delete sprite;
-
-    gameEngine->removeGameObject(this);
 }
 
 
