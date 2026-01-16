@@ -1,8 +1,14 @@
 #include "Component.h"
 #include "GameEngine.h"
+#include <iostream>
 
 GE::Component::Component(GE::GameEngine* ge): gameEngine(ge){};
 GE::Component::Component(GE::GameEngine* ge,float x,float y, float r) : x(x),y(y),rotation(r),gameEngine(ge){};
+
+GE::Component::~Component(){
+    std::cout<<"Nu sker något";
+}
+
 int GE::Component::getX()const{
     return x;
 }

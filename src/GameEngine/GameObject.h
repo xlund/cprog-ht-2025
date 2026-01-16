@@ -6,7 +6,7 @@ class GameEngine;
 
 class GameObject {
 public:
-  ~GameObject() = default;
+  virtual ~GameObject() = default;
   virtual void setup(GameEngine *){};
   virtual void update(){};
   void setPos(float, float);

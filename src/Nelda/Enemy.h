@@ -11,6 +11,7 @@
 class Enemy : public GE::GameObject {
 public:
   static Enemy *create(GE::GameObject*, int, int, int, GameState &);
+  ~Enemy();
   void setup(GE::GameEngine *);
   void update();
   GE::Hitbox *getHitbox() const;

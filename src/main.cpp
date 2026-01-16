@@ -26,9 +26,9 @@ int main(int argc, char *argv[]) {
     return Enemy::create(nullptr, 10, 10, 1, gameState);
   });
 
-  level.make(engine);
-
-  engine.start();
+  Enemy* e = Enemy::create(nullptr,10,10,1,gameState);
+  engine.addGameObject(e);
+  delete e;
 
   level.make(engine);
 

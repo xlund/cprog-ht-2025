@@ -18,6 +18,11 @@ Enemy *Enemy::create(GE::GameObject* target, int x, int y, int speed,
   return new Enemy(target, x, y, speed, gs);
 }
 
+Enemy::~Enemy(){
+  delete sprite;
+  delete hitbox;
+}
+
 Health Enemy::getHealth() { return hp; }
 
 GE::Hitbox *Enemy::getHitbox() const { return hitbox; }
