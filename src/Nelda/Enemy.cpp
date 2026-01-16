@@ -15,7 +15,7 @@ Enemy::Enemy(GE::GameObject* target, int x, int y, int speed, GameState &gs)
       //std::cout<<"Enemy::Enemy()\n";
     }
 
-Enemy *Enemy::create(GE::GameObject* target, int x, int y, int speed,
+Enemy *Enemy::create(GE::GameObject *target, int x, int y, int speed,
                      GameState &gs) {
   return new Enemy(target, x, y, speed, gs);
 }
@@ -37,12 +37,11 @@ void Enemy::setup(GE::GameEngine *engine) {
     if (other->getTag() == "player") {
       this->hp.current -= 50;
       if (this->hp.isDead()) {
-        gameState_.score.add(100);
+        gameState_.score->add(100);
       }
     }
   });
   speed = 1;
-  
 }
 
 void Enemy::update() {
@@ -73,7 +72,6 @@ void Enemy::update() {
   if (GE::InputManager::isKeyDown("d")) {
     x += speed;
   }
-
 
   hitbox->setPosition(x, y);
   wallDetection(*hitbox, "Wall", x, y);

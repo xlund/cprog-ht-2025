@@ -15,7 +15,8 @@ SDL_Renderer *GE::GameEngine::renderer = nullptr;
 void GE::GameEngine::setRenderer(SDL_Renderer *r) { renderer = r; }
 
 GE::GameEngine::GameEngine(int fps, std::string windowName) : fps(fps) {
-  window = SDL_CreateWindow(windowName.c_str(), 500, 500, 0);
+  window = SDL_CreateWindow(windowName.c_str(), constants::gScreenWidth,
+                            constants::gScreenHeight, 0);
   SDL_Renderer *r = SDL_CreateRenderer(window, NULL);
   GE::GameEngine::setRenderer(r);
 
@@ -25,7 +26,8 @@ GE::GameEngine::GameEngine(int fps, std::string windowName) : fps(fps) {
   }
 }
 GE::GameEngine::GameEngine(std::string windowName) {
-  window = SDL_CreateWindow(windowName.c_str(), 1080, 1080, 0);
+  window = SDL_CreateWindow(windowName.c_str(), constants::gScreenWidth,
+                            constants::gScreenHeight, 0);
   SDL_Renderer *r = SDL_CreateRenderer(window, NULL);
   GE::GameEngine::setRenderer(r);
 
