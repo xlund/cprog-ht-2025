@@ -3,19 +3,21 @@
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 
-GE::AnimatedSprite* GE::AnimatedSprite::create(int cols, int rows, int frameWidth, int frameHeight, int x,
-                 int y, int z, int r, std::string src, GE::GameEngine* ge){
-    GE::AnimatedSprite* as = new GE::AnimatedSprite(cols,rows,frameWidth,frameHeight,x,y,z,r,src,ge);
-    ge->addComponent(as);
-    return as;
+GE::AnimatedSprite *GE::AnimatedSprite::create(int cols, int rows,
+                                               int frameWidth, int frameHeight,
+                                               int x, int y, int z, int r,
+                                               std::string src,
+                                               GE::GameEngine *ge) {
+  GE::AnimatedSprite *as = new GE::AnimatedSprite(
+      cols, rows, frameWidth, frameHeight, x, y, z, r, src, ge);
+  ge->addComponent(as);
+  return as;
 }
-
-
 
 GE::AnimatedSprite::AnimatedSprite(int cols, int rows, int frameWidth,
                                    int frameHeight, int x, int y, int z, int r,
-                                   std::string src, GE::GameEngine* ge)
-    : GE::Sprite(x, y, z, r, src,ge), cols(cols), rows(rows),
+                                   std::string src, GE::GameEngine *ge)
+    : GE::Sprite(x, y, z, r, src, ge), cols(cols), rows(rows),
       frameWidth(frameWidth), frameHeight(frameHeight) {
 
   frames.reserve(cols * rows);
@@ -30,9 +32,7 @@ GE::AnimatedSprite::AnimatedSprite(int cols, int rows, int frameWidth,
   }
 }
 
-GE::AnimatedSprite::~AnimatedSprite(){
-  gameEngine->removeComponent(this);
-}
+GE::AnimatedSprite::~AnimatedSprite() { gameEngine->removeComponent(this); }
 
 const std::vector<SDL_FRect> &GE::AnimatedSprite::getFrames() const {
   return frames;
@@ -43,6 +43,8 @@ void GE::AnimatedSprite::setCurrentAnimation(
   currentAnimation = animation;
   index = 0;
 }
+
+void GE::AnimatedSprite::render(){};
 
 void GE::AnimatedSprite::update() {
   if (currentAnimation.empty()) {

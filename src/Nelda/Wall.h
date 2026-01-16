@@ -1,21 +1,23 @@
 #ifndef WALL_H
 #define WALL_H
 
-#include "../GameEngine/Hitbox.h"
 #include "../GameEngine/GameObject.h"
-#include <vector>
+#include "../GameEngine/Hitbox.h"
 #include "../GameEngine/Sprite.h"
-class Wall : public GE::GameObject{
+#include <vector>
+class Wall : public GE::GameObject {
 public:
-    ~Wall();
-    static Wall* create(float,float,float);
-    void setup(GE::GameEngine*);
-    void update();
+  ~Wall();
+  static Wall *create(float, float, float);
+  void setup(GE::GameEngine *);
+  void update();
+  void render();
+
 private:
-    Wall(float,float,float);
-    std::vector<GE::Hitbox*> hitboxes;
-    float length;
-    GE::Sprite* sprite;
+  Wall(float, float, float);
+  std::vector<GE::Hitbox *> hitboxes;
+  float length;
+  GE::Sprite *sprite;
 };
 
 #endif

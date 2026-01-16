@@ -1,6 +1,7 @@
 #include "Constants.h"
 #include "GameEngine/GameEngine.h"
 
+#include "GameEngine/InputManager.h"
 #include "Nelda/Enemy.h"
 #include "Nelda/Game.h"
 #include "Nelda/LevelCreator.h"
@@ -19,6 +20,10 @@ int main(int argc, char *argv[]) {
 
   level.setGameObject('w', []() { return Wall::create(200, 200, 64); });
 
+  level.setGameObject('g', [&game]() {
+    return Goal::create(&game);});
+
+
   Player* player = Player::create(game.state());
 
   level.setGameObject('p', [&player]() { return player;});
@@ -28,7 +33,8 @@ int main(int argc, char *argv[]) {
 
   level.make(engine);
 
-  engine.start();
+  engine.run();
+  engine.shutdown();
 
   return 0;
 }
