@@ -35,14 +35,6 @@ void Wall::setup(GE::GameEngine* engin){
     GE::Hitbox* l = GE::Hitbox::create(x,y+(length*barThickness),(length*barThickness),length*barProcentage, engin);
     l->setTag("WallLeft");
 
-    hitboxes.push_back(d);
-    hitboxes.push_back(u);
-    hitboxes.push_back(l);
-    hitboxes.push_back(r);
-    
-    for(GE::Hitbox* h : hitboxes){
-        engin->addComponent(h);
-    }
     //hitbox = new GE::Hitbox(x,y,1000,100);
     //hitbox->setTag("Wall");
     //engin->addComponent(hitbox);

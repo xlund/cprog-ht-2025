@@ -10,7 +10,9 @@
 std::vector<GE::Hitbox*> GE::Hitbox::allHitboxes;
 
 GE::Hitbox* GE::Hitbox::create(float x, float y, float width, float height,GE::GameEngine* ge){
-    return new Hitbox(x,y,width,height,ge);
+    GE:: Hitbox* h = new Hitbox(x,y,width,height,ge);
+    ge->addComponent(h);
+    return h;
 }
 
 GE::Hitbox::Hitbox(float x, float y, float width, float height,GE::GameEngine* ge): Component(ge){
@@ -21,6 +23,7 @@ GE::Hitbox::Hitbox(float x, float y, float width, float height,GE::GameEngine* g
 GE::Hitbox::~Hitbox(){
     auto i = std::find(allHitboxes.begin(), allHitboxes.end(), this);
     allHitboxes.erase(i);
+    gameEngine->removeComponent(this);
 }
 
 std::string GE::Hitbox::getTag() const {
