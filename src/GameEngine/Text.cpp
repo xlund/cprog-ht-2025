@@ -5,11 +5,15 @@
 #include <stdexcept>
 
 GE::Text* GE::Text::create(std::string text, int x, int y,GE::GameEngine* ge) {
-    return new Text(text, x, y,ge);
+    GE::Text* t = new Text(text, x, y,ge);
+    ge->addComponent(t);
+    return t;
 }
 
 GE::Text* GE::Text::create(std::string text, std::string path, int fontSize, int x, int y,GE::GameEngine* ge) {
-    return new Text(text, path, fontSize, x, y,ge);
+    GE::Text* t = new Text(text, path, fontSize, x, y,ge);
+    ge->addComponent(t);
+    return t;
 }
 
 GE::Text::Text(std::string text, int x, int y , GE::GameEngine*ge)
@@ -34,6 +38,7 @@ GE::Text::~Text() {
     if (font) {
         TTF_CloseFont(font);
     }
+    gameEngine->removeComponent(this);
 }
 
 void GE::Text::setString(const std::string& text) {
