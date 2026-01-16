@@ -17,7 +17,7 @@ int Score::value() const { return score_; }
 
 Score::Score(GE::GameEngine &ge) {
   std::cout << "Create score display\n";
-  text_ = GE::Text::create("Score: " + std::to_string(score_), 10, 600);
+  text_ = GE::Text::create("Score: " + std::to_string(score_), 10, 600, &ge);
   text_->setColor(255, 255, 255, 255);
   text_->draw();
   ge.addComponent(text_);
