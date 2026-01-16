@@ -8,14 +8,14 @@ Goal* Goal::create(Game* game) {
 
 Goal::Goal(Game* game) : game(game) {}
 
-void Goal::setup(GE::GameEngine*) {
-    hitbox = GE::Hitbox::create(x, y, 64.0f, 64.0f);
+void Goal::setup(GE::GameEngine* engine) {
+    hitbox = GE::Hitbox::create(x, y, 64.0f, 64.0f, engine);
     hitbox->setTag("Goal");
 
     hitbox->setOnEnter([this](GE::Hitbox* other) {
         if (other->getTag() == "Player" && !collected) {
             collected = true;
-            game->winGame(); 
+            game->winGame();
         }
     });
 }

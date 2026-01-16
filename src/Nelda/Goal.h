@@ -11,8 +11,8 @@ public:
     static Goal* create(Game* game);
 
     ~Goal() {}
+    void setup(GE::GameEngine* engine) override;
 
-    void setup(GE::GameEngine*) override;
     void update() override;
 
     bool isCollected() const;
