@@ -5,10 +5,11 @@
 #include <functional>
 #include <vector>
 #include <string>
+#include "GameEngine.h"
 namespace GE {
   class Hitbox: public Component {
     public:
-      static Hitbox* create(float,float,float,float);
+      static Hitbox* create(float,float,float,float,GE::GameEngine*);
       ~Hitbox();
       std::string getTag() const;
       void setTag(const std::string&);
@@ -23,7 +24,7 @@ namespace GE {
       bool isTuching(std::string);
       bool isClicked();
     private:
-      Hitbox(float,float,float,float);
+      Hitbox(float,float,float,float,GE::GameEngine*);
       Hitbox(const Hitbox&)=delete;
       Hitbox& operator=(const Hitbox&)=delete;;
       static std::vector<Hitbox*> allHitboxes;

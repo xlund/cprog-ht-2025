@@ -2,11 +2,14 @@
 #define GAMEENGINE_H
 
 #include "../include/Constants.h"
-#include "Component.h"
 #include "GameObject.h"
 #include <SDL3/SDL.h>
 #include <string>
 #include <vector>
+
+namespace GE{
+  class Component;
+}
 
 namespace GE {
 

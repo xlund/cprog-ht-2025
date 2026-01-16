@@ -31,11 +31,12 @@ void Player::setup(GE::GameEngine* engine) {
         y,
         spriteWidth,
         spriteHeight,
-        constants::player_sprite
+        constants::player_sprite,
+        engine
     );
 
 
-    hitbox = GE::Hitbox::create(x,y,spriteWidth,spriteHeight);
+    hitbox = GE::Hitbox::create(x,y,spriteWidth,spriteHeight, engine);
 
     hitbox->setTag("player");
 

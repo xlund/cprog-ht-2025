@@ -6,13 +6,13 @@
 #include <stdexcept>
 
 
-GE::Button* GE::Button::create(std::string text, int x,int y,int w,int h){
-    return new Button(text,x,y,w,h);
+GE::Button* GE::Button::create(std::string text, int x,int y,int w,int h,GE::GameEngine* ge){
+    return new Button(text,x,y,w,h,ge);
 }
 
-GE::Button::Button(std::string text, int x,int y,int w,int h) : 
-Text(text,x,y){
-    hitbox = Hitbox::create(x,y,w,h);
+GE::Button::Button(std::string text, int x,int y,int w,int h, GE::GameEngine* ge) : 
+Text(text,x,y,ge){
+    hitbox = Hitbox::create(x,y,w,h,ge);
 }
 
 void GE::Button::setOnClick(std::function<void()> func){

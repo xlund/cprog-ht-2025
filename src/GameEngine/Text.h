@@ -12,8 +12,8 @@ class Button;
 
 class Text : public GE::Component {
 public:
-    static Text* create(std::string, int, int);
-    static Text* create(std::string, std::string, int, int, int);
+    static Text* create(std::string, int, int,GE::GameEngine*);
+    static Text* create(std::string, std::string, int, int, int,GE::GameEngine*);
 
     ~Text();
 
@@ -37,8 +37,8 @@ public:
 private:
     friend class Button;
 
-    Text(std::string, int, int);
-    Text(std::string, std::string, int, int, int);
+    Text(std::string, int, int,GE::GameEngine*);
+    Text(std::string, std::string, int, int, int,GE::GameEngine*);
 
     std::string str;
     TTF_Font* font{};

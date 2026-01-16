@@ -4,15 +4,15 @@
 #include <SDL3_image/SDL_image.h>
 
 GE::AnimatedSprite* GE::AnimatedSprite::create(int cols, int rows, int frameWidth, int frameHeight, int x,
-                 int y, int z, int r, std::string src){
-    return new GE::AnimatedSprite(cols,rows,frameWidth,frameHeight,x,y,z,r,src);
+                 int y, int z, int r, std::string src, GE::GameEngine* ge){
+    return new GE::AnimatedSprite(cols,rows,frameWidth,frameHeight,x,y,z,r,src,ge);
 }
 
 
 GE::AnimatedSprite::AnimatedSprite(int cols, int rows, int frameWidth,
                                    int frameHeight, int x, int y, int z, int r,
-                                   std::string src)
-    : GE::Sprite(x, y, z, r, src), cols(cols), rows(rows),
+                                   std::string src, GE::GameEngine* ge)
+    : GE::Sprite(x, y, z, r, src,ge), cols(cols), rows(rows),
       frameWidth(frameWidth), frameHeight(frameHeight) {
 
   frames.reserve(cols * rows);

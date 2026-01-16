@@ -26,13 +26,13 @@ void Wall::setup(GE::GameEngine* engin){
     float barProcentage = 0.85;
     float barThickness = (1-barProcentage)/2;
 
-    GE::Hitbox* u = GE::Hitbox::create(x+(length*barThickness),y,length*barProcentage,(length*barThickness));
+    GE::Hitbox* u = GE::Hitbox::create(x+(length*barThickness),y,length*barProcentage,(length*barThickness),engin);
     u->setTag("WallUp");
-    GE::Hitbox* r = GE::Hitbox::create(x+length-(length*barThickness),y+(length*barThickness),(length*barThickness),length*barProcentage);
+    GE::Hitbox* r = GE::Hitbox::create(x+length-(length*barThickness),y+(length*barThickness),(length*barThickness),length*barProcentage,engin);
     r->setTag("WallRight");
-    GE::Hitbox* d = GE::Hitbox::create(x+(length*barThickness),y+length-(length*barThickness),length*barProcentage,(length*barThickness));
+    GE::Hitbox* d = GE::Hitbox::create(x+(length*barThickness),y+length-(length*barThickness),length*barProcentage,(length*barThickness),engin);
     d->setTag("WallDown");
-    GE::Hitbox* l = GE::Hitbox::create(x,y+(length*barThickness),(length*barThickness),length*barProcentage);
+    GE::Hitbox* l = GE::Hitbox::create(x,y+(length*barThickness),(length*barThickness),length*barProcentage, engin);
     l->setTag("WallLeft");
 
     hitboxes.push_back(d);
@@ -47,7 +47,7 @@ void Wall::setup(GE::GameEngine* engin){
     //hitbox->setTag("Wall");
     //engin->addComponent(hitbox);
 
-    sprite = GE::Sprite::create(x,y,0,0,constants::wall_image);
+    sprite = GE::Sprite::create(x,y,0,0,constants::wall_image,engin);
     
 }
 void Wall::update(){
