@@ -106,11 +106,14 @@ void GE::GameEngine::start() {
   }
 
   while (tick()) {
+    gameObjectCleanUp();
   }
 
   for(GameObject* go : gameObjects){
-    delete go;
+    go->setToDelete();
   }
+
+  gameObjectCleanUp();
 
   //std::cout<<components.size();
 
@@ -121,4 +124,15 @@ void GE::GameEngine::start() {
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
+}
+
+void GE::GameEngine::gameObjectCleanUp(){
+    gameObjects.erase(std::remove_if(gameObjects.begin(),gameObjects.end(),[](GameObject* go){
+      if(go->isDeleteable()){
+        delete go;
+        return true;
+      }
+      return false;
+    }),
+  gameObjects.end());
 }

@@ -9,14 +9,13 @@
 #include "WallDetection.h"
 #include <iostream>
 
-Enemy::Enemy(GE::GameObject* target, int x, int y, int speed, GameState &gs)
-    : GameObject(x, y), speed(speed), target(target), gameState_(gs) {
+Enemy::Enemy(GE::GameObject* target, int speed, GameState &gs,GE::GameEngine* ge):GameObject(ge), speed(speed), target(target), gameState_(gs) {
       //std::cout<<"Enemy::Enemy()\n";
-    }
+}
 
-Enemy *Enemy::create(GE::GameObject *target, int x, int y, int speed,
-                     GameState &gs) {
-  return new Enemy(target, x, y, speed, gs);
+
+Enemy *Enemy::create(GE::GameObject* target, int speed, GameState &gs,GE::GameEngine* ge) {
+  return new Enemy(target, speed, gs,ge);
 }
 
 Enemy::~Enemy(){

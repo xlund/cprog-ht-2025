@@ -7,10 +7,9 @@
 #include "Game.h"
 #include "Health.h"
 
-
 class Enemy : public GE::GameObject {
 public:
-  static Enemy *create(GE::GameObject*, int, int, int, GameState &);
+  static Enemy *create(GE::GameObject*, int, GameState &,GE::GameEngine*);
   ~Enemy();
   void setup(GE::GameEngine *);
   void update();
@@ -18,7 +17,7 @@ public:
   Health getHealth();
 
 private:
-  Enemy(GE::GameObject*, int, int, int, GameState &);
+  Enemy(GE::GameObject*, int, GameState &, GE::GameEngine*);
   Health hp;
   int speed;
   int targetX;

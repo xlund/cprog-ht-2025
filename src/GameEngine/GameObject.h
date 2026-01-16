@@ -11,14 +11,18 @@ public:
   virtual void update(){};
   void setPos(float, float);
   void getPos(float &, float &);
+  bool isDeleteable();
+  void setToDelete();
 
 protected:
-  GameObject();
-  GameObject(float, float);
+  GameObject(GameEngine*);
+  GameObject(GameEngine*,float, float);
   GameObject(const GameObject&) = delete;
   GameObject& operator=(const GameObject&)=delete;
+  GameEngine* gameEngine;
   float x;
   float y;
+  bool deleteable{false};
 };
 } // namespace GE
 
