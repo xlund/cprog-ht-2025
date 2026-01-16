@@ -10,6 +10,8 @@
 namespace GE {
   class Button : public Text{
     public:
+      ~Button();
+
       Button* create(std::string,int,int,int,int,GE::GameEngine*);
       void setOnClick(std::function<void()>);
       void update();
