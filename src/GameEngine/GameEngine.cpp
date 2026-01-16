@@ -37,6 +37,10 @@ GE::GameEngine::GameEngine(std::string windowName) {
   }
 }
 
+void GE::GameEngine::setBackgroundColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a){
+  backgroundColor = {r,g,b,a};
+}
+
 bool GE::GameEngine::tick() {
 
   if(GE::InputManager::isKeyPressed("l")){
@@ -46,7 +50,7 @@ bool GE::GameEngine::tick() {
   Uint64 nextTick = SDL_GetTicks() + this->tickInterval;
   GE::InputManager::fetchKeys();
 
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_SetRenderDrawColor(renderer, backgroundColor.r,backgroundColor.g,backgroundColor.b,backgroundColor.a);
   SDL_RenderClear(renderer);
 
   // Process events

@@ -11,6 +11,7 @@
 int main(int argc, char *argv[]) {
 
   GE::GameEngine engine("Nelda");
+  engine.setBackgroundColor(0,100,0,255);
 
   Game game = Game(engine);
 

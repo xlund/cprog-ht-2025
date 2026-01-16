@@ -27,6 +27,7 @@ public:
   void removeGameObject(GE::GameObject *);
   static SDL_Renderer *getRenderer();
   static void setRenderer(SDL_Renderer *r);
+  void setBackgroundColor(unsigned char, unsigned char, unsigned char, unsigned char);
 
 private:
   int fps{60};
@@ -36,6 +37,7 @@ private:
   std::vector<GE::Component *> components;
   std::vector<GE::GameObject *> gameObjects;
   void gameObjectCleanUp();
+  SDL_Color backgroundColor{0, 0, 0, 0};
 };
 
 } // namespace GE
