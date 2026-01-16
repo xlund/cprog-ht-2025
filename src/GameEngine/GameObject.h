@@ -9,6 +9,7 @@ public:
   virtual ~GameObject() = default;
   virtual void setup(GameEngine *){};
   virtual void update(){};
+  virtual void render(){};
   void setPos(float, float);
   void getPos(float &, float &);
   bool isDeleteable();
@@ -17,8 +18,8 @@ public:
 protected:
   GameObject();
   GameObject(float, float);
-  GameObject(const GameObject&) = delete;
-  GameObject& operator=(const GameObject&)=delete;
+  GameObject(const GameObject &) = delete;
+  GameObject &operator=(const GameObject &) = delete;
   float x;
   float y;
   bool deleteable{false};

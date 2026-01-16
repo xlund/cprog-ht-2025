@@ -1,6 +1,7 @@
 #include "Constants.h"
 #include "GameEngine/GameEngine.h"
 
+#include "GameEngine/InputManager.h"
 #include "Nelda/Enemy.h"
 #include "Nelda/Game.h"
 #include "Nelda/LevelCreator.h"
@@ -22,14 +23,17 @@ int main(int argc, char *argv[]) {
     return Goal::create(&game);});
 
 
-  level.setGameObject('p', [&game]() { return Player::create(game.state()); });
-  level.setGameObject('e', [&game]() {
-    return Enemy::create(nullptr, 1, game.state());
+  Player* player = Player::create(game.state());
+
+  level.setGameObject('p', [&player]() { return player;});
+  level.setGameObject('e', [&game,&player]() {
+    return Enemy::create(player, 1, game.state());
   });
 
   level.make(engine);
 
-  engine.start();
+  engine.run();
+  engine.shutdown();
 
   return 0;
 }

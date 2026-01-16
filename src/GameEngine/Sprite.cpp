@@ -4,25 +4,27 @@
 #include <SDL3_image/SDL_image.h>
 #include <iostream>
 
-GE::Sprite* GE::Sprite::create(int x, int y, int z, int r, std::string src,GE::GameEngine* ge){
-  GE::Sprite* s = new Sprite(x,y,z,r,src,ge);
+GE::Sprite *GE::Sprite::create(int x, int y, int z, int r, std::string src,
+                               GE::GameEngine *ge) {
+  GE::Sprite *s = new Sprite(x, y, z, r, src, ge);
   ge->addComponent(s);
   return s;
 }
 
-GE::Sprite::Sprite(int x, int y, int z, int r, std::string src,GE::GameEngine* ge)
+GE::Sprite::Sprite(int x, int y, int z, int r, std::string src,
+                   GE::GameEngine *ge)
     : Component(ge), x(x), y(y), z(z), rotation(r), srcPath(src) {
 
-  //std::cout << "Creating sprite: " << src << std::endl;
+  // std::cout << "Creating sprite: " << src << std::endl;
   SDL_Renderer *renderer = GE::GameEngine::getRenderer();
   if (!renderer) {
-    //std::cerr << "Renderer is null when creating sprite: " << src << "\n";
+    // std::cerr << "Renderer is null when creating sprite: " << src << "\n";
     texture = nullptr;
     return;
   }
   texture = IMG_LoadTexture(renderer, src.c_str());
   if (!texture) {
-    //std::cerr << "Failed to load texture: " << src << "\n";
+    // std::cerr << "Failed to load texture: " << src << "\n";
     return;
   }
 
@@ -38,22 +40,20 @@ GE::Sprite::~Sprite() {
   if (texture) {
     SDL_DestroyTexture(texture);
   }
-  //std::cout<<"GE::Sprite::~Sprite()"<<std::endl;
+  // std::cout<<"GE::Sprite::~Sprite()"<<std::endl;
   gameEngine->removeComponent(this);
-
 }
 
-void GE::Sprite::draw() {
+void GE::Sprite::render() {
   dstRect.x = static_cast<float>(x);
   dstRect.y = static_cast<float>(y);
   dstRect.w = static_cast<float>(spriteWidth);
   dstRect.h = static_cast<float>(spriteHeight);
 
-  SDL_Renderer *renderer = GE::GameEngine::getRenderer();
-  SDL_RenderTexture(renderer, texture, nullptr, &dstRect);
+  SDL_RenderTexture(GameEngine::getRenderer(), texture, nullptr, &dstRect);
 }
 
-void GE::Sprite::update() { draw(); }
+void GE::Sprite::update() {}
 
 void GE::Sprite::erase() {
   if (texture) {
