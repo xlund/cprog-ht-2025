@@ -10,18 +10,18 @@
 #include "WallDetection.h"
 #include <iostream>
 
-Enemy::Enemy(GE::GameObject* target, int x, int y, int speed, GameState &gs)
+Enemy::Enemy(GE::GameObject *target, int x, int y, int speed, GameState &gs)
     : GameObject(x, y), speed(speed), target(target), gameState_(gs) {
-      //std::cout<<"Enemy::Enemy()\n";
-    }
+  // std::cout<<"Enemy::Enemy()\n";
+}
 
 Enemy *Enemy::create(GE::GameObject *target, int x, int y, int speed,
                      GameState &gs) {
   return new Enemy(target, x, y, speed, gs);
 }
 
-Enemy::~Enemy(){
-  //std::cout<<"Enemy::~Enemy()\n";
+Enemy::~Enemy() {
+  // std::cout<<"Enemy::~Enemy()\n";
   delete sprite;
   delete hitbox;
 }
@@ -30,8 +30,8 @@ Health Enemy::getHealth() { return hp; }
 
 GE::Hitbox *Enemy::getHitbox() const { return hitbox; }
 void Enemy::setup(GE::GameEngine *engine) {
-  hitbox = GE::Hitbox::create(x,y,32,54,engine);
-  sprite = GE::Sprite::create(x,y,0,0,constants::enemy_image,engine);
+  hitbox = GE::Hitbox::create(x, y, 32, 54, engine);
+  sprite = GE::Sprite::create(x, y, 0, 0, constants::enemy_image, engine);
   hitbox->setOnEnter([this](GE::Hitbox *other) {
     // wallDetection(other);
     if (other->getTag() == "player") {
@@ -75,7 +75,10 @@ void Enemy::update() {
 
   hitbox->setPosition(x, y);
   wallDetection(*hitbox, "Wall", x, y);
+}
+
+void Enemy::render() {
   sprite->setX(x);
   sprite->setY(y);
-  sprite->draw();
+  sprite->render();
 }

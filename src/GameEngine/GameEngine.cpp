@@ -66,34 +66,62 @@ void GE::GameEngine::removeGameObject(GE::GameObject *object) {
 }
 
 void GE::GameEngine::run() {
-  bool running = true;
-  while (running) {
+  state_ = GameState::Running;
+  while (state_ != GameState::Stopped) {
     Uint64 frameStart = SDL_GetTicks();
-    running = !shouldQuit();
     GE::InputManager::fetchKeys();
+    handleGameKeys();
     update();
     render();
     capFrameRate(frameStart);
   }
 }
 
-void GE::GameEngine::update() {
-  for (GE::GameObject *object : gameObjects) {
-    object->update();
+void GE::GameEngine::handleGameKeys() {
+
+  if (GE::InputManager::isKeyPressed("p")) {
+    if (state_ == GameState::Paused)
+      resume();
+    else if (state_ == GameState::Running)
+      pause();
   }
 
-  for (GE::Component *component : components) {
-    component->update();
+  if (GE::InputManager::isKeyPressed("q")) {
+    state_ = GE::GameState::Stopped;
   }
+}
+
+void GE::GameEngine::update() {
+  if (state_ != GameState::Running)
+    return;
+  for (GE::GameObject *object : gameObjects)
+    object->update();
+
+  for (GE::Component *component : components)
+    component->update();
 }
 
 void GE::GameEngine::render() {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
   for (auto ge : gameObjects) {
-    ge->update();
+    ge->render();
   }
   SDL_RenderPresent(renderer);
+}
+
+void GE::GameEngine::pause() { state_ = GameState::Paused; }
+
+void GE::GameEngine::resume() { state_ = GameState::Running; }
+
+void GE::GameEngine::stop() { state_ = GameState::Stopped; }
+
+GE::GameState GE::GameEngine::state() const { return state_; }
+
+void GE::GameEngine::clearGameObjects() {
+  for (auto *obj : gameObjects)
+    delete obj;
+  gameObjects.clear();
 }
 
 void GE::GameEngine::capFrameRate(Uint64 frameStart) {
@@ -102,11 +130,6 @@ void GE::GameEngine::capFrameRate(Uint64 frameStart) {
     SDL_Delay(tickInterval - frameTime);
   }
 }
-
-bool GE::GameEngine::shouldQuit() {
-  return GE::InputManager::isKeyPressed("q");
-}
-
 void GE::GameEngine::shutdown() {
   for (GameObject *go : gameObjects) {
     delete go;

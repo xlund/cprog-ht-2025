@@ -13,6 +13,8 @@ class Component;
 
 namespace GE {
 
+enum class GameState { Running, Paused, Stopped };
+
 class GameEngine {
 public:
   GameEngine(int fps, std::string);
@@ -29,9 +31,15 @@ public:
   void removeGameObject(GE::GameObject *);
   static SDL_Renderer *getRenderer();
   static void setRenderer(SDL_Renderer *r);
+  void pause();
+  void resume();
+  void stop();
+  void clearGameObjects();
+  GameState state() const;
+  void handleGameKeys();
 
 private:
-  bool shouldQuit();
+  GameState state_{GameState::Stopped};
   void capFrameRate(Uint64 frame);
   void update();
   void render();

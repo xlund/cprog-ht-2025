@@ -10,22 +10,24 @@
 
 class Enemy : public GE::GameObject {
 public:
-  static Enemy *create(GE::GameObject*, int, int, int, GameState &);
+  static Enemy *create(GE::GameObject *, int, int, int, GameState &);
   ~Enemy();
-  void setup(GE::GameEngine *);
-  void update();
+  void setup(GE::GameEngine *) override;
+  void update() override;
+  void render() override;
+
   GE::Hitbox *getHitbox() const;
   Health getHealth();
 
 private:
-  Enemy(GE::GameObject*, int, int, int, GameState &);
+  Enemy(GE::GameObject *, int, int, int, GameState &);
   Health hp;
   int speed;
   int targetX;
   int targetY;
-  GE::GameObject* target;
+  GE::GameObject *target;
   GE::Hitbox *hitbox;
-  GE::Sprite* sprite;
+  GE::Sprite *sprite;
   // void wallDetection(GE::Hitbox*);
   GameState &gameState_;
 };
