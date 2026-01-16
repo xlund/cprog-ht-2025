@@ -109,6 +109,9 @@ void GE::GameEngine::start() {
   for(GameObject* go : gameObjects){
     delete go;
   }
+
+  //std::cout<<components.size();
+
   gameObjects.clear();
 
   // Shutdown

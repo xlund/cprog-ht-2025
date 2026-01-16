@@ -21,6 +21,7 @@ GE::Hitbox::Hitbox(float x, float y, float width, float height,GE::GameEngine* g
 }
 
 GE::Hitbox::~Hitbox(){
+    //std::cout<<"GE::Hitbox::~Hitbox()\n";
     auto i = std::find(allHitboxes.begin(), allHitboxes.end(), this);
     allHitboxes.erase(i);
     

@@ -38,7 +38,7 @@ GE::Sprite::~Sprite() {
   if (texture) {
     SDL_DestroyTexture(texture);
   }
-  std::cout<<"GE::Sprite::~Sprite()"<<std::endl;
+  //std::cout<<"GE::Sprite::~Sprite()"<<std::endl;
   gameEngine->removeComponent(this);
 
 }

@@ -12,6 +12,14 @@ Wall* Wall::create(float x,float y,float length){
     return new Wall(x,y,length);
 }
 
+Wall::~Wall(){
+    for(GE::Hitbox* h : hitboxes){
+        delete h;
+    }
+    delete sprite;
+}
+
+
 void Wall::setup(GE::GameEngine* engin){
     /*GE::Hitbox* d = new GE::Hitbox(x+(length/2),y,length/10,length);
     GE::Hitbox* u = new GE::Hitbox(x-(length/2),y,length/10,length);
@@ -35,9 +43,11 @@ void Wall::setup(GE::GameEngine* engin){
     GE::Hitbox* l = GE::Hitbox::create(x,y+(length*barThickness),(length*barThickness),length*barProcentage, engin);
     l->setTag("WallLeft");
 
-    //hitbox = new GE::Hitbox(x,y,1000,100);
-    //hitbox->setTag("Wall");
-    //engin->addComponent(hitbox);
+    hitboxes.push_back(u);
+    hitboxes.push_back(r);
+    hitboxes.push_back(d);
+    hitboxes.push_back(l);
+
 
     sprite = GE::Sprite::create(x,y,0,0,constants::wall_image,engin);
     

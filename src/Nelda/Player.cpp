@@ -12,7 +12,10 @@ constexpr int PLAYER_WORLD_HEIGHT = 64;
 Player::Player(GameState& gs)
     : GE::GameObject(0, 0), gameState_(gs), hp(100, 100) {}
 
-Player::~Player() {}
+Player::~Player() {
+    delete sprite;
+    delete hitbox;
+}
 
 Player* Player::create(GameState& gs) {
     return new Player(gs);

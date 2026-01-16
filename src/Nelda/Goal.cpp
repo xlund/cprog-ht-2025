@@ -6,7 +6,9 @@ Goal* Goal::create() {
 
 Goal::Goal() {}
 
-Goal::~Goal() {}
+Goal::~Goal() {
+  delete hitbox;
+}
 
 void Goal::setup(GE::GameEngine* ge) {
     x = 400.0f;
