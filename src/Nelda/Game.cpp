@@ -63,6 +63,7 @@ void Game::reset() {
 
   player_ = Player::create(*this);
   loadLevel(constants::labyrinth_level_path);
+  backgroundMusic_->play();
   engine_.run();
 }
 
