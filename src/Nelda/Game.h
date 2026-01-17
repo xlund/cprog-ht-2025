@@ -34,7 +34,8 @@ private:
   int targetScore_{1000};
   GameState state_;
 
-  GE::SoundPlayer *backgroundMusic_{nullptr};  // Bakgrundsljud
+  GE::SoundPlayer *backgroundMusic_{nullptr};  
+  GE::SoundPlayer* winSound_{nullptr};
 
   void checkWinCondition();
   void endGame();
