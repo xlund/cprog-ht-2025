@@ -64,14 +64,15 @@ void Game::reset() {
   loadLevel(constants::labyrinth_level_path);
   engine_.run();
 }
-void Game::winGame() {
+
+void Game::win() {
   backgroundMusic_->stop();   
 
   winSound_->play();          
 
-  state_.score->setText(
-    "You win! Press 'r' to play this amazing game again."
-  );
+ state_.display->setText(
+  "You win! Press 'r' to play this amazing game again."
+);
 
   state_.gameWon = true;
   engine_.pause();
