@@ -9,7 +9,7 @@ void Score::add(int score) {
   text_->setString("Score: " + std::to_string(score_));
 }
 
-void Score::reset() { score_ = 0; }
+void Score::reset() { score_ = 0; text_->setString("Score: " + std::to_string(score_)); }
 
 GE::Text *Score::getText() const { return text_; }
 

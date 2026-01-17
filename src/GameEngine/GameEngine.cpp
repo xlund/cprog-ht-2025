@@ -105,7 +105,6 @@ void GE::GameEngine::handleGameKeys() {
 
 void GE::GameEngine::clearAll() {
   clearGameObjects();
-  clearComponents();
 }
 
 SDL_FRect GE::GameEngine::createRect(float x, float y, float w, float h,
@@ -157,15 +156,9 @@ GE::GameState GE::GameEngine::state() const { return state_; }
 
 void GE::GameEngine::clearGameObjects() {
   for (auto *obj : gameObjects)
-    delete obj;
-  gameObjects.clear();
-}
+    obj->setToDelete();
 
-void GE::GameEngine::clearComponents() {
-  for (auto *comp : components)
-    delete comp;
-
-  components.clear();
+  gameObjectCleanUp();
 }
 
 void GE::GameEngine::capFrameRate(Uint64 frameStart) {
