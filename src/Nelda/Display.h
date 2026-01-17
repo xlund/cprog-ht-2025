@@ -4,18 +4,14 @@
 #include "../GameEngine/GameEngine.h"
 #include "../GameEngine/Text.h"
 
-class Score {
+class Display {
 public:
-  Score(GE::GameEngine &);
-  void add(int score);
-  int value() const;
+  Display(GE::GameEngine &);
   void reset();
-  GE::Text display();
   GE::Text *getText() const;
   void setText(const std::string& text);
 
 private:
-  int score_{0};
   GE::Text *text_;
 };
 
