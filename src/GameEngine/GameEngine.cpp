@@ -197,3 +197,7 @@ void GE::GameEngine::gameObjectCleanUp() {
                                    }),
                     gameObjects.end());
 }
+
+void GE::GameEngine::updateScreen(){
+  SDL_RenderPresent(renderer);
+}

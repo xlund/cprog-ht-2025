@@ -30,6 +30,8 @@ public:
   void setFontSize(int);
   void setWidth(int);
   void setHeight(int);
+  float getWidth() const;
+  float getHeight() const;
   void draw();
   void hide();
   void erase();

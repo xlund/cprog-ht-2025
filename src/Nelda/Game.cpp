@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Wall.h"
 #include <iostream>
+#include "StartScreen.h"
 
 Game::Game(GE::GameEngine &ge) : engine_(ge) {
   Score *score = new Score(ge);
@@ -33,6 +34,9 @@ void Game::loadLevel(const std::string &path) {
 }
 
 void Game::setup() {
+  
+  StartScreen* startScreen = StartScreen::create();
+  engine_.addGameObject(startScreen);
 
   loadLevel(constants::labyrinth_level_path);
   engine_.setInputCallback([this]() {
