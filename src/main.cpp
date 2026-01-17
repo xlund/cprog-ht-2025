@@ -8,6 +8,7 @@
 #include "Nelda/LevelCreator.h"
 #include "Nelda/Player.h"
 #include "Nelda/Wall.h"
+#include "Nelda/StartScreen.h"
 
 int main(int argc, char *argv[]) {
 
@@ -15,10 +16,15 @@ int main(int argc, char *argv[]) {
   engine.setBackgroundColor(0, 100, 0, 255);
 
   Game game(engine);
-  game.setup();
 
-  engine.run();
-  engine.shutdown();
+  game.setup();
+  StartScreen startScreen;
+  if(startScreen.show(&engine)){
+    engine.run();
+  }
+    engine.shutdown();
+  
+
 
   return 0;
 }

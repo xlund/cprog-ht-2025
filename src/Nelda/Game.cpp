@@ -35,9 +35,6 @@ void Game::loadLevel(const std::string &path) {
 
 void Game::setup() {
   
-  StartScreen* startScreen = StartScreen::create();
-  engine_.addGameObject(startScreen);
-
   loadLevel(constants::labyrinth_level_path);
   engine_.setInputCallback([this]() {
     if (GE::InputManager::isKeyPressed("r")) {

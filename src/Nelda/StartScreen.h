@@ -4,15 +4,16 @@
 #include "../GameEngine/Text.h"
 #include "../GameEngine/Button.h"
 #include "../GameEngine/GameObject.h"
-class StartScreen : public GE::GameObject{
+class StartScreen{
     public:
-        static StartScreen* create();
-        void setup(GE::GameEngine *);
-    private:
         StartScreen();
-        bool buttonPressed{false};
+        bool show(GE::GameEngine *);
+    private:
+        bool startButtonPressed{false};
+        bool quitButtonPressed{false};
         GE::Text* text;
-        GE::Button* button;
+        GE::Button* startButton;
+        GE::Button* quitButton;
 
 
 };
