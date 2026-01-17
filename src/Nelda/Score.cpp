@@ -15,14 +15,11 @@ GE::Text *Score::getText() const { return text_; }
 
 int Score::value() const { return score_; }
 
-void Score::setText(const std::string& text) {
-    text_->setString(text);
-}
+void Score::setText(const std::string &text) { text_->setString(text); }
 
 Score::Score(GE::GameEngine &ge) {
-  std::cout << "Create score display\n";
-  text_ = GE::Text::create("Score: " + std::to_string(score_), 10, 600, &ge);
+  text_ = GE::Text::create("", 10, 600,
+                           &ge); // Position at top
   text_->setColor(255, 255, 255, 255);
-  text_->draw();
-  ge.addComponent(text_);
+  text_->draw(); // This sets isSeen = true
 }

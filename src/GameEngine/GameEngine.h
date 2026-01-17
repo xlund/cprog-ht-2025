@@ -4,6 +4,7 @@
 #include "../include/Constants.h"
 #include "GameObject.h"
 #include <SDL3/SDL.h>
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -31,16 +32,23 @@ public:
   void removeGameObject(GE::GameObject *);
   static SDL_Renderer *getRenderer();
   static void setRenderer(SDL_Renderer *r);
-  void setBackgroundColor(unsigned char, unsigned char, unsigned char, unsigned char);
+  void setBackgroundColor(unsigned char, unsigned char, unsigned char,
+                          unsigned char);
   void pause();
   void resume();
   void stop();
   void clearGameObjects();
+  void clearComponents();
+  void clearAll();
+  static SDL_FRect createRect(float x, float y, float w, float h, Uint8 r,
+                              Uint8 g, Uint8 b, Uint8 a = 255);
   GameState state() const;
-  void handleGameKeys();
+  void setInputCallback(std::function<void()> cb);
 
 private:
   GameState state_{GameState::Stopped};
+  std::function<void()> inputCallback_;
+  void handleGameKeys();
   void capFrameRate(Uint64 frame);
   void update();
   void render();
