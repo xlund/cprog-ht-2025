@@ -1,8 +1,7 @@
 #include "Sprite.h"
 #include "GameEngine.h"
-#include "GameObject.h"
 #include <SDL3_image/SDL_image.h>
-#include <iostream>
+
 
 GE::Sprite *GE::Sprite::create(int x, int y, int z, int r, std::string src,
                                GE::GameEngine *ge) {

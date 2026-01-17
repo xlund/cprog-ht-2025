@@ -3,7 +3,6 @@
 
 #include "GameEngine.h"
 #include "Sprite.h"
-#include <utility>
 #include <vector>
 
 namespace GE {

@@ -1,14 +1,10 @@
 #include "GameEngine.h"
-#include "../include/Constants.h"
-#include "Hitbox.h"
 #include "InputManager.h"
-#include "Sprite.h"
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
-#include <algorithm>
 #include <iostream>
-#include <list>
 #include <vector>
+#include "Component.h"
 
 SDL_Renderer *GE::GameEngine::renderer = nullptr;
 
@@ -105,15 +101,6 @@ void GE::GameEngine::handleGameKeys() {
 
 void GE::GameEngine::clearAll() {
   clearGameObjects();
-}
-
-SDL_FRect GE::GameEngine::createRect(float x, float y, float w, float h,
-                                     Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
-  SDL_Renderer *renderer = getRenderer();
-  SDL_SetRenderDrawColor(renderer, r, g, b, a);
-  SDL_FRect rect{x, y, w, h};
-  SDL_RenderFillRect(renderer, &rect);
-  return rect;
 }
 
 void GE::GameEngine::update() {
