@@ -2,13 +2,15 @@
 #define GAME_H
 
 #include "../GameEngine/GameEngine.h"
+#include "../GameEngine/SoundPlayer.h"   
 #include "Display.h"
 
 class Player;
+
 struct GameState {
   Display *display;
   bool gameOver{false};
-  bool gameWon;
+  bool gameWon{false};
 };
 
 
@@ -31,6 +33,9 @@ private:
   Player *player_;
   int targetScore_{1000};
   GameState state_;
+
+  GE::SoundPlayer *backgroundMusic_{nullptr};  // Bakgrundsljud
+
   void checkWinCondition();
   void endGame();
 };

@@ -21,6 +21,10 @@ const std::string fancy_font{gResPath + "fonts/fancy_font.ttf"};
 const std::string player_sprite{gResPath + "images/Charachter.png"};
 
 const std::string sample_str{gResPath + "sounds/sample.wav"};
+//const std::string background_music{gResPath + "sounds/background.wav"}; //Bakgrundsljud
+const std::string background_music{
+    gResPath + "sounds/Cold_Breath.wav"
+};
 const std::string cool_link{gResPath + "images/sprite-link.jpg"};
 const std::string level_file{"./src/level.txt"};
 const std::string enemy_image{gResPath + "images/Enemy.png"};
