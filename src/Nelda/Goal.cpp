@@ -1,7 +1,6 @@
 #include "Goal.h"
 #include "../GameEngine/Rectangle.h"
 #include "Game.h"
-#include <iostream>
 
 Goal *Goal::create(Game *game) { return new Goal(game); }
 
@@ -20,4 +19,4 @@ void Goal::setup(GE::GameEngine *engine) {
 
 void Goal::update() { hitbox->setPosition(x, y); }
 
-bool Goal::isCollected() const { return collected; }
+

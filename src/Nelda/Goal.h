@@ -16,13 +16,11 @@ public:
 
   void update() override;
 
-  bool isCollected() const;
 
 private:
   Goal(Game *game);
 
   Game *game;
-  bool collected{false};
   GE::Hitbox *hitbox{nullptr};
   GE::Rectangle *rect_;
 };
