@@ -39,6 +39,10 @@ Make sure SDL3, SDL_image and SDL_ttf are installed.
 Build the project using make.
 Run the executable from the build directory.
 
+We have change the original make file. make sure to change SRC_FILES to this:
+
+SRC_FILES = src/main.cpp $(wildcard $(SRC_DIR)/**/*.cpp)
+
 
 Authors
 
