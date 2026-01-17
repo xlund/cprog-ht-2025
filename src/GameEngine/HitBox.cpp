@@ -1,11 +1,11 @@
 #include "Hitbox.h"
 #include "GameEngine.h"
 #include "InputManager.h"
-#include <algorithm>
 #include <functional>
-#include <iostream>
+#include <algorithm>
 #include <string>
-#include <vector>
+#include <vector>
+
 
 std::vector<GE::Hitbox *> GE::Hitbox::allHitboxes;
 
@@ -24,7 +24,7 @@ GE::Hitbox::Hitbox(float x, float y, float width, float height,
 }
 
 GE::Hitbox::~Hitbox() {
-  // std::cout<<"GE::Hitbox::~Hitbox()\n";
+ 
   auto i = std::find(allHitboxes.begin(), allHitboxes.end(), this);
   allHitboxes.erase(i);
 

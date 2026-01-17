@@ -33,7 +33,13 @@ const std::string wall_image{gResPath + "images/Wall.png"};
 
 const std::string labyrinth_level_path{gResPath + "levels/labyrinth.txt"};
 
+constexpr int PLAYER_SPRITE_WIDTH = 36;
+constexpr int PLAYER_SPRITE_HEIGHT = 63;
+constexpr int PLAYER_WORLD_HEIGHT = 64;
+
 const int clockSpeed{1000};
+
+const std::string game_name = "Nelda";
 
 } // namespace constants
 

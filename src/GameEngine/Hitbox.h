@@ -1,11 +1,11 @@
 #ifndef HITBOX_H
 #define HITBOX_H
 #include "GameEngine.h"
-#include "Sprite.h"
 #include <SDL3/SDL.h>
 #include <functional>
 #include <string>
 #include <vector>
+#include "Component.h"
 namespace GE {
 class Hitbox : public Component {
 public:

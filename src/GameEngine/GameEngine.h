@@ -40,8 +40,7 @@ public:
   void clearGameObjects();
   void clearComponents();
   void clearAll();
-  static SDL_FRect createRect(float x, float y, float w, float h, Uint8 r,
-                              Uint8 g, Uint8 b, Uint8 a = 255);
+
   GameState state() const;
   void setInputCallback(std::function<void()> cb);
 

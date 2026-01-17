@@ -1,16 +1,12 @@
 #include "Enemy.h"
 #include "../GameEngine/GameEngine.h"
 #include "../GameEngine/Hitbox.h"
-#include "../GameEngine/InputManager.h"
 #include "../GameEngine/Sprite.h"
 #include "Game.h"
 #include "Goal.h"
-#include "Health.h"
 #include "WallDetection.h"
-#include <iostream>
 
 Enemy::Enemy(GE::GameObject* target, int speed, Game &g) : speed(speed), target(target), game_(g) {
-      //std::cout<<"Enemy::Enemy()\n";
 }
 
 
@@ -19,7 +15,6 @@ Enemy *Enemy::create(GE::GameObject* target, int speed, Game &g) {
 }
 
 Enemy::~Enemy() {
-  // std::cout<<"Enemy::~Enemy()\n";
   delete sprite;
   delete hitbox;
 }
@@ -55,7 +50,7 @@ void Enemy::update() {
   }
 
   hitbox->setPosition(x, y);
-  wallDetection(*hitbox, "Wall", x, y);
+  wallDetection(*hitbox, x, y);
 }
 
 void Enemy::render() {

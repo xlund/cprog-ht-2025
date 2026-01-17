@@ -3,7 +3,6 @@
 #include "../GameEngine/GameEngine.h"
 #include "../GameEngine/Text.h"
 #include "../GameEngine/Button.h"
-#include "../GameEngine/GameObject.h"
 class StartScreen{
     public:
         StartScreen();

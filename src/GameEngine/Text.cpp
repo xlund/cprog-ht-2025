@@ -2,8 +2,6 @@
 #include "../include/Constants.h"
 #include "GameEngine.h"
 #include <algorithm>
-#include <iostream>
-#include <ostream>
 #include <stdexcept>
 
 GE::Text *GE::Text::create(std::string text, int x, int y, GE::GameEngine *ge) {

@@ -1,8 +1,6 @@
 
 #include "Display.h"
 #include "../GameEngine/Text.h"
-#include <algorithm>
-#include <iostream>
 #include <string>
 
 void Display::reset() { text_->erase(); }

@@ -5,10 +5,6 @@
 
 #include <cmath>
 
-constexpr int PLAYER_SPRITE_WIDTH = 36;
-constexpr int PLAYER_SPRITE_HEIGHT = 63;
-constexpr int PLAYER_WORLD_HEIGHT = 64;
-
 Player::Player(Game& g)
     : game_(g) {}
 
@@ -21,10 +17,10 @@ Player *Player::create(Game &g) { return new Player(g); }
 
 void Player::setup(GE::GameEngine *engine) {
 
-  float scale = static_cast<float>(PLAYER_WORLD_HEIGHT) / PLAYER_SPRITE_HEIGHT;
+  float scale = static_cast<float>(constants::PLAYER_WORLD_HEIGHT) / constants::PLAYER_SPRITE_HEIGHT;
 
-  spriteWidth = static_cast<int>(std::round(PLAYER_SPRITE_WIDTH * scale));
-  spriteHeight = static_cast<int>(std::round(PLAYER_SPRITE_HEIGHT * scale));
+  spriteWidth = static_cast<int>(std::round(constants::PLAYER_SPRITE_WIDTH * scale));
+  spriteHeight = static_cast<int>(std::round(constants::PLAYER_SPRITE_HEIGHT * scale));
 
   sprite = GE::Sprite::create(x, y, spriteWidth, spriteHeight,
                               constants::player_sprite, engine);
@@ -52,7 +48,7 @@ void Player::update() {
 
   hitbox->setPosition(x, y);
 
-  wallDetection(*hitbox, "Wall", x, y);
+  wallDetection(*hitbox, x, y);
 }
 
 void Player::render() {
