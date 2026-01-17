@@ -2,14 +2,17 @@
 #define GAME_H
 
 #include "../GameEngine/GameEngine.h"
-#include "Score.h"
+#include "../GameEngine/SoundPlayer.h"   
+#include "Display.h"
 
 class Player;
+
 struct GameState {
-  Score *score;
+  Display *display;
   bool gameOver{false};
-  bool gameWon;
+  bool gameWon{false};
 };
+
 
 class Game {
 public:
@@ -17,18 +20,23 @@ public:
   GameState &state();
   void addScore(int points);
   bool isOver() const;
-  void winGame();
+  void win();
   void loadLevel(const std::string &path);
   void start();
   void reset();
   Player *player();
   void setup();
+  void lose();
 
 private:
   GE::GameEngine &engine_;
   Player *player_;
   int targetScore_{1000};
   GameState state_;
+
+  GE::SoundPlayer *backgroundMusic_{nullptr};  
+  GE::SoundPlayer* winSound_{nullptr};
+
   void checkWinCondition();
   void endGame();
 };

@@ -9,15 +9,15 @@ constexpr int PLAYER_SPRITE_WIDTH = 36;
 constexpr int PLAYER_SPRITE_HEIGHT = 63;
 constexpr int PLAYER_WORLD_HEIGHT = 64;
 
-Player::Player(GameState& gs)
-    : gameState_(gs), hp(100, 100) {}
+Player::Player(Game& g)
+    : game_(g) {}
 
 Player::~Player() {
   delete sprite;
   delete hitbox;
 }
 
-Player *Player::create(GameState &gs) { return new Player(gs); }
+Player *Player::create(Game &g) { return new Player(g); }
 
 void Player::setup(GE::GameEngine *engine) {
 
@@ -32,6 +32,11 @@ void Player::setup(GE::GameEngine *engine) {
   hitbox = GE::Hitbox::create(x, y, spriteWidth, spriteHeight, engine);
 
   hitbox->setTag("player");
+  hitbox->setOnEnter([this](GE::Hitbox *other) {
+    if (other->getTag() == "goal") {
+      game_.win();
+    }
+  });
 }
 
 void Player::update() {

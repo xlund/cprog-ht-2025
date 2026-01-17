@@ -9,13 +9,13 @@
 #include "WallDetection.h"
 #include <iostream>
 
-Enemy::Enemy(GE::GameObject* target, int speed, GameState &gs) : speed(speed), target(target), gameState_(gs) {
+Enemy::Enemy(GE::GameObject* target, int speed, Game &g) : speed(speed), target(target), game_(g) {
       //std::cout<<"Enemy::Enemy()\n";
 }
 
 
-Enemy *Enemy::create(GE::GameObject* target, int speed, GameState &gs) {
-  return new Enemy(target, speed, gs);
+Enemy *Enemy::create(GE::GameObject* target, int speed, Game &g) {
+  return new Enemy(target, speed, g);
 }
 
 Enemy::~Enemy() {
@@ -31,16 +31,11 @@ void Enemy::setup(GE::GameEngine *engine) {
   hitbox = GE::Hitbox::create(x, y, 32, 54, engine);
   sprite = GE::Sprite::create(x, y, 0, 0, constants::enemy_image, engine);
   hitbox->setOnEnter([this](GE::Hitbox *other) {
-    // wallDetection(other);
     if (other->getTag() == "player") {
-      this->hp.current -= 50;
-      if (this->hp.isDead()) {
-        gameState_.score->add(100);
-        setToDelete();
-      }
+      game_.lose();
     }
   });
-  speed = 1;
+  speed = 3;
 }
 
 void Enemy::update() {

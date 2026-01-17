@@ -14,14 +14,8 @@ void Goal::setup(GE::GameEngine *engine) {
   rect_ = GE::Rectangle::create(x, y, 64, 64, 255, 215, 0, 255, engine);
   
 
-  hitbox->setTag("Goal");
+  hitbox->setTag("goal");
 
-  hitbox->setOnEnter([this](GE::Hitbox *other) {
-    if (other->getTag() == "player" && !collected) {
-      collected = true;
-      game->winGame();
-    }
-  });
 }
 
 void Goal::update() { hitbox->setPosition(x, y); }
