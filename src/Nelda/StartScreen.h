@@ -11,6 +11,7 @@ class StartScreen : public GE::GameObject{
     private:
         StartScreen();
         bool buttonPressed{false};
+        GE::Text* text;
         GE::Button* button;
 
 
