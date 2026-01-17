@@ -34,7 +34,15 @@ void Game::loadLevel(const std::string &path) {
 
 void Game::setup() {
 
+  // Starta bakgrundsmusik
+  backgroundMusic_ = new GE::SoundPlayer(
+    constants::background_music,
+    true
+);
+backgroundMusic_->play();
+
   loadLevel(constants::labyrinth_level_path);
+
   engine_.setInputCallback([this]() {
     if (GE::InputManager::isKeyPressed("r")) {
       if (state_.gameWon) {
@@ -43,6 +51,7 @@ void Game::setup() {
     }
   });
 }
+
 
 void Game::reset() {
   engine_.clearAll();
