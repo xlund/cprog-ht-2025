@@ -34,12 +34,15 @@ void Game::loadLevel(const std::string &path) {
 
 void Game::setup() {
 
-  // Starta bakgrundsmusik
+
   backgroundMusic_ = new GE::SoundPlayer(
     constants::background_music,
-    true
-);
-backgroundMusic_->play();
+    true);
+  backgroundMusic_->play();
+
+  winSound_ = new GE::SoundPlayer(
+    constants::win_sound,
+    false);
 
   loadLevel(constants::labyrinth_level_path);
 
@@ -68,7 +71,14 @@ void Game::addScore(int points) {
   checkWinCondition();
 }
 void Game::winGame() {
-  state_.score->setText("You win! Press 'r' to play this amazing game again.");
+  backgroundMusic_->stop();   
+
+  winSound_->play();          
+
+  state_.score->setText(
+    "You win! Press 'r' to play this amazing game again."
+  );
+
   state_.gameWon = true;
   engine_.pause();
 }

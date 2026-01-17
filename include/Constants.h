@@ -21,7 +21,8 @@ const std::string fancy_font{gResPath + "fonts/fancy_font.ttf"};
 const std::string player_sprite{gResPath + "images/Charachter.png"};
 
 const std::string sample_str{gResPath + "sounds/sample.wav"};
-//const std::string background_music{gResPath + "sounds/background.wav"}; //Bakgrundsljud
+const std::string win_sound{
+    gResPath + "sounds/Victory.wav"};
 const std::string background_music{
     gResPath + "sounds/Cold_Breath.wav"
 };
