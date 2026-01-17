@@ -12,7 +12,7 @@ class Button : public Text {
 public:
   ~Button();
 
-  Button *create(std::string, int, int, int, int, GE::GameEngine *);
+  static Button *create(std::string, int, int, int, int, GE::GameEngine *);
   void setOnClick(std::function<void()>);
   void update();
   void render();

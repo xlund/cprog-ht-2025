@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Wall.h"
 #include <iostream>
+#include "StartScreen.h"
 
 Game::Game(GE::GameEngine &ge) : engine_(ge) {
   Display *score = new Display(ge);

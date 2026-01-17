@@ -62,7 +62,15 @@ void GE::Text::setFontSize(int size) {
   font = TTF_OpenFont(fontPath.c_str(), size);
 }
 
+float GE::Text::getWidth() const{
+  return width;
+}
+
 void GE::Text::setWidth(int w) { width = w; }
+
+float GE::Text::getHeight() const{
+  return height;
+}
 
 void GE::Text::setHeight(int h) { height = h; }
 

@@ -45,6 +45,8 @@ public:
   GameState state() const;
   void setInputCallback(std::function<void()> cb);
 
+  void updateScreen();
+
 private:
   GameState state_{GameState::Stopped};
   std::function<void()> inputCallback_;
