@@ -10,7 +10,7 @@
 
 class Player : public GE::GameObject {
 public:
-  static Player *create(GameState &);
+  static Player *create(Game&);
 
   ~Player();
 
@@ -19,12 +19,11 @@ public:
   void render() override;
 
 private:
-  Player(GameState &);
+  Player(Game &);
 
-  GameState &gameState_;
+  Game &game_;
 
-  Health hp;
-  float speed{3.0f};
+  float speed{4.0f};
 
   GE::Sprite *sprite{nullptr};
   int spriteWidth{0};

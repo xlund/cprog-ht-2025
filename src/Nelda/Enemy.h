@@ -9,7 +9,7 @@
 
 class Enemy : public GE::GameObject {
 public:
-  static Enemy *create(GE::GameObject*, int, GameState &);
+  static Enemy *create(GE::GameObject*, int, Game &);
   ~Enemy();
   void setup(GE::GameEngine *) override;
   void update() override;
@@ -19,7 +19,7 @@ public:
   Health getHealth();
 
 private:
-  Enemy(GE::GameObject*, int, GameState &);
+  Enemy(GE::GameObject*, int, Game &);
   Health hp;
   int speed;
   float targetX;
@@ -28,7 +28,7 @@ private:
   GE::Hitbox *hitbox;
   GE::Sprite *sprite;
   // void wallDetection(GE::Hitbox*);
-  GameState &gameState_;
+  Game &game_;
 };
 
 #endif
