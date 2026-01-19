@@ -14,7 +14,7 @@ Controls
 
 W A S D – Move the player
 R – Restart after winning or losing
-
+Q - Quit game
 
 Technical Overview
 
